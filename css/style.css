@@ -1,0 +1,208 @@
+@charset "utf-8";
+
+body {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 64px;
+  margin-right: 64px;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  object-fit: cover;
+  position: relative;
+}
+
+header {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  background: #3cb371;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+video {
+  margin-top: 32px;
+  width: 100%;
+}
+
+#b,
+#c,
+#d,
+#e,
+#f,
+#g,
+#h,
+#i,
+#j,
+#k,
+#l,
+#m,
+#n,
+#o,
+#p {
+  display: none;
+} 
+
+.test {
+  text-align: center;
+}
+
+#a1,
+#b2,
+#c3,
+#d4,
+#e5,
+#f6,
+#g7,
+#h8,
+#i9,
+#j10,
+#k11,
+#l12,
+#m13,
+#n14,
+#o15,
+#p16,
+#q17,
+#b2a1,
+#c3a1,
+#d4a1,
+#e5a1,
+#f6a1,
+#f6b2,
+#h8c3,
+#i9c3,
+#j10d4 {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+}
+
+#b2 {
+  z-index: 9999;
+}
+
+/* 上段のAグループ */
+#b2,
+#j10 {
+  top: 11.6%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+} 
+
+/* 2段目のBグループ */
+#c3,
+#k11 {
+  top: 28.1%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+/* 3段目のCグループ */
+#d4,
+#l12 {
+  top: 44.5%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+/* 4段目のDグループ */
+#e5,
+#d4a1 {
+  top: 61.3%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+#f6,
+#h8,
+#m13,
+#o15 {
+  top: 24%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+#g7,
+#i9,
+#n14,
+#p16 {
+  top: 41%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+#b2a1,
+#c3a1,
+#h8c3,
+#i9c3 {
+  top: 58%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+#q17 {
+  top: 11.8%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+#e5a1,
+#f6a1 {
+  top: 28.4%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}
+
+#f6b2,
+#j10d4 {
+  top: 45.4%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+}

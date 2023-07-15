@@ -24,7 +24,6 @@
   const p = document.getElementById('p');
 
   // ボタンの取得
-  // const a1 = document.getElementById('a1');
   const b2 = document.getElementById('b2');
   const c3 = document.getElementById('c3');
   const d4 = document.getElementById('d4');
@@ -167,6 +166,8 @@
     }
 
   });
+
+  
 
   // id="b"
   b.addEventListener('timeupdate', () => {

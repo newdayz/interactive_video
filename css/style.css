@@ -10,6 +10,8 @@ body {
   align-items: center;
   height: 100vh;
   width: 100%;
+  top: 50%;
+  bottom: 50%;
 }
 
 .hero {
@@ -17,11 +19,6 @@ body {
   height: 100%;
   margin: 0 auto;
   object-fit: cover;
-  top: 50%;
-  bottom: 50%;
-}
-
-.box {
   position: relative;
 }
 
@@ -116,7 +113,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -128,7 +125,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -140,7 +137,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -152,7 +149,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -165,7 +162,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -178,7 +175,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -192,7 +189,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -214,7 +211,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -233,7 +230,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }
@@ -251,7 +248,7 @@ video {
   left: 6.8%;
   width: 42.5%;
   height: 15%;
-  opacity: 0;
+  opacity: 0.5;
   border: 0;
   padding: 0;
 }

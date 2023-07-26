@@ -1,36 +1,36 @@
 @charset "utf-8";
 
 body {
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 64px;
-  margin-right: 64px;
+  margin: 0 auto;
 }
 
-main {
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.hero {
   width: 100%;
   height: 100%;
   margin: 0 auto;
   object-fit: cover;
+  top: 50%;
+  bottom: 50%;
+}
+
+.box {
   position: relative;
 }
 
-header {
-  padding-top: 32px;
-  padding-bottom: 32px;
-  background: #3cb371;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
-
 video {
-  margin-top: 32px;
   width: 100%;
+  height: auto;
 }
 
+/* video id */
 #b,
 #c,
 #d,
@@ -47,45 +47,66 @@ video {
 #o,
 #p {
   display: none;
-} 
+}
 
 .test {
   text-align: center;
 }
 
-#a1,
+/* ボタン */
 #b2,
+#ba,
 #c3,
+#ca,
 #d4,
+#da,
 #e5,
+#eq17,
+#ea,
 #f6,
+#fq17,
+#fa,
+#fb,
 #g7,
+#gq17,
+#ga,
+#gb,
 #h8,
+#hc,
 #i9,
+#ic,
 #j10,
+#jq17,
+#ja,
+#jd,
 #k11,
+#kq17,
+#ka,
+#kd,
 #l12,
+#lq17,
+#la,
+#ld,
 #m13,
+#mq17,
+#ma,
+#mh,
 #n14,
+#nq17,
+#na,
+#nh,
 #o15,
+#oq17,
+#oa,
+#oi,
 #p16,
-#q17,
-#b2a1,
-#c3a1,
-#d4a1,
-#e5a1,
-#f6a1,
-#f6b2,
-#h8c3,
-#i9c3,
-#j10d4 {
+#pq17,
+#pa,
+#pi,
+#q17 {
   display: none;
   cursor: pointer;
   position: absolute;
-}
-
-#b2 {
-  z-index: 9999;
 }
 
 /* 上段のAグループ */
@@ -98,7 +119,7 @@ video {
   opacity: 0;
   border: 0;
   padding: 0;
-} 
+}
 
 /* 2段目のBグループ */
 #c3,
@@ -126,7 +147,7 @@ video {
 
 /* 4段目のDグループ */
 #e5,
-#d4a1 {
+#da {
   top: 61.3%;
   left: 6.8%;
   width: 42.5%;
@@ -162,10 +183,11 @@ video {
   padding: 0;
 }
 
-#b2a1,
-#c3a1,
-#h8c3,
-#i9c3 {
+/* 3つ配列している3番目 */
+#ba,
+#ca,
+#hc,
+#ic {
   top: 58%;
   left: 6.8%;
   width: 42.5%;
@@ -175,6 +197,18 @@ video {
   padding: 0;
 }
 
+/* 相談する */
+
+#eq17,
+#fq17,
+#gq17,
+#jq17,
+#kq17,
+#lq17,
+#mq17,
+#nq17,
+#oq17,
+#pq17,
 #q17 {
   top: 11.8%;
   left: 6.8%;
@@ -185,8 +219,16 @@ video {
   padding: 0;
 }
 
-#e5a1,
-#f6a1 {
+#ea,
+#fa,
+#ga,
+#ja,
+#ka,
+#la,
+#ma,
+#na,
+#oa,
+#pa {
   top: 28.4%;
   left: 6.8%;
   width: 42.5%;
@@ -196,8 +238,15 @@ video {
   padding: 0;
 }
 
-#f6b2,
-#j10d4 {
+#fb,
+#gb,
+#jd,
+#kd,
+#ld,
+#mh,
+#nh,
+#oi,
+#pi {
   top: 45.4%;
   left: 6.8%;
   width: 42.5%;
@@ -206,3 +255,5 @@ video {
   border: 0;
   padding: 0;
 }
+
+/* スマホの位置 */

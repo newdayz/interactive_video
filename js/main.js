@@ -25,30 +25,55 @@
 
   // ボタンの取得
   const b2 = document.getElementById('b2');
+  const ba = document.getElementById('ba');
   const c3 = document.getElementById('c3');
+  const ca = document.getElementById('ca');
   const d4 = document.getElementById('d4');
+  const da = document.getElementById('da');
   const e5 = document.getElementById('e5');
+  const eq17 = document.getElementById('eq17');
+  const ea = document.getElementById('ea');
   const f6 = document.getElementById('f6');
+  const fq17 = document.getElementById('fq17');
+  const fa = document.getElementById('fa');
+  const fb = document.getElementById('fb');
   const g7 = document.getElementById('g7');
+  const gq17 = document.getElementById('gq17');
+  const ga = document.getElementById('ga');
+  const gb = document.getElementById('gb');
   const h8 = document.getElementById('h8');
+  const hc = document.getElementById('hc');
   const i9 = document.getElementById('i9');
+  const ic = document.getElementById('ic');
   const j10 = document.getElementById('j10');
+  const jq17 = document.getElementById('jq17');
+  const ja = document.getElementById('ja');
+  const jd = document.getElementById('jd');
   const k11 = document.getElementById('k11');
+  const kq17 = document.getElementById('kq17');
+  const ka = document.getElementById('ka');
+  const kd = document.getElementById('kd');
   const l12 = document.getElementById('l12');
+  const lq17 = document.getElementById('lq17');
+  const la = document.getElementById('la');
+  const ld = document.getElementById('ld');
   const m13 = document.getElementById('m13');
+  const mq17 = document.getElementById('mq17');
+  const ma = document.getElementById('ma');
+  const mh = document.getElementById('mh');
   const n14 = document.getElementById('n14');
+  const nq17 = document.getElementById('nq17');
+  const na = document.getElementById('na');
+  const nh = document.getElementById('nh');
   const o15 = document.getElementById('o15');
+  const oq17 = document.getElementById('oq17');
+  const oa = document.getElementById('oa');
+  const oi = document.getElementById('oi');
   const p16 = document.getElementById('p16');
+  const pq17 = document.getElementById('oq17');
+  const pa = document.getElementById('pa');
+  const pi = document.getElementById('pi');
   const q17 = document.getElementById('q17');
-  const b2a1 = document.getElementById('b2a1');
-  const c3a1 = document.getElementById('c3a1');
-  const d4a1 = document.getElementById('d4a1');
-  const e5a1 = document.getElementById('e5a1');
-  const f6a1 = document.getElementById('f6a1');
-  const f6b2 = document.getElementById('f6b2');
-  const h8c3 = document.getElementById('h8c3');
-  const i9c3 = document.getElementById('i9c3');
-  const j10d4 = document.getElementById('j10d4');
 
   function handleWindowFocusChange() {
     if (document.hidden) {
@@ -94,80 +119,52 @@
     }
 
     b2.addEventListener('click', () => {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-      a.style.display = 'none';
       a.pause();
+      a.style.display = 'none';
       b.style.display = 'block';
       b.load();
     });
 
-    if (b.style.display === 'block') {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-    }
-
     c3.addEventListener('click', () => {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-      a.style.display = 'none';
       a.pause();
+      a.style.display = 'none';
       c.style.display = 'block';
       c.load();
     });
 
-    if (c.style.display === 'block') {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-    }
-
     d4.addEventListener('click', () => {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-      a.style.display = 'none';
       a.pause();
+      a.style.display = 'none';
       d.style.display = 'block';
       d.load();
     });
 
-    if (d.style.display === 'block') {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-    }
-
     e5.addEventListener('click', () => {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-      a.style.display = 'none';
       a.pause();
+      a.style.display = 'none';
       e.style.display = 'block';
       e.load();
     });
 
-    if (e.style.display === 'block') {
+    if (a.style.display === 'none') {
       b2.style.display = 'none';
       c3.style.display = 'none';
       d4.style.display = 'none';
       e5.style.display = 'none';
     }
 
-  });
+    // let timeupdate = new Event('timeupdate');
 
-  
+    // 全画面表示のイベントを追加
+    // a.addEventListener('fullscreenchange', () => {
+    //   if (document.fullscreenElement || document.webkitFullscreenElement) {
+    //     // フルスクリーンになったら、timeupdateイベントを手動で発火させる
+    //     a.dispatchEvent(new Event('timeupdate'));
+    //     console.log(ok);
+    //   }
+    // });
+
+  });
 
   // id="b"
   b.addEventListener('timeupdate', () => {
@@ -186,9 +183,9 @@
     }
 
     if (currentTime >= 164) {
-      b2a1.style.display = 'block';
+      ba.style.display = 'block';
     } else {
-      b2a1.style.display = 'none';
+      ba.style.display = 'none';
     }
 
     if (currentTime >= 183) {
@@ -198,49 +195,37 @@
     f6.addEventListener('click', () => {
       f6.style.display = 'none';
       g7.style.display = 'none';
-      b2a1.style.display = 'none';
+      ba.style.display = 'none';
       b.style.display = 'none';
       b.pause();
       f.style.display = 'block';
       f.load();
     });
 
-    if (f.style.display === 'block') {
-      f6.style.display = 'none';
-      g7.style.display = 'none';
-      b2a1.style.display = 'none';
-    }
-
     g7.addEventListener('click', () => {
       f6.style.display = 'none';
       g7.style.display = 'none';
-      b2a1.style.display = 'none';
+      ba.style.display = 'none';
       b.style.display = 'none';
       b.pause();
       g.style.display = 'block';
       g.load();
     });
 
-    if (g.style.display === 'block') {
+    ba.addEventListener('click', () => {
       f6.style.display = 'none';
       g7.style.display = 'none';
-      b2a1.style.display = 'none';
-    }
-
-    b2a1.addEventListener('click', () => {
-      f6.style.display = 'none';
-      g7.style.display = 'none';
-      b2a1.style.display = 'none';
+      ba.style.display = 'none';
       b.style.display = 'none';
       b.pause();
       a.style.display = 'block';
       a.load();
     });
 
-    if (a.style.display === 'block') {
+    if (b.style.display === 'none') {
       f6.style.display = 'none';
       g7.style.display = 'none';
-      b2a1.style.display = 'none';
+      ba.style.display = 'none';
     }
 
   });
@@ -262,9 +247,9 @@
     }
 
     if (currentTime >= 89) {
-      c3a1.style.display = 'block';
+      ca.style.display = 'block';
     } else {
-      c3a1.style.display = 'none';
+      ca.style.display = 'none';
     }
 
     if (currentTime >= 107) {
@@ -274,49 +259,37 @@
     h8.addEventListener('click', () => {
       h8.style.display = 'none';
       i9.style.display = 'none';
-      c3a1.style.display = 'none';
+      ca.style.display = 'none';
       c.style.display = 'none';
       c.pause();
       h.style.display = 'block';
       h.load();
     });
 
-    if (h.style.display === 'block') {
-      h8.style.display = 'none';
-      i9.style.display = 'none';
-      c3a1.style.display = 'none';
-    }
-
     i9.addEventListener('click', () => {
       h8.style.display = 'none';
       i9.style.display = 'none';
-      c3a1.style.display = 'none';
+      ca.style.display = 'none';
       c.style.display = 'none';
       c.pause();
       i.style.display = 'block';
       i.load();
     });
 
-    if (i.style.display === 'block') {
+    ca.addEventListener('click', () => {
       h8.style.display = 'none';
       i9.style.display = 'none';
-      c3a1.style.display = 'none';
-    }
-
-    c3a1.addEventListener('click', () => {
-      h8.style.display = 'none';
-      i9.style.display = 'none';
-      c3a1.style.display = 'none';
+      ca.style.display = 'none';
       c.style.display = 'none';
       c.pause();
       a.style.display = 'block';
       a.load();
     });
 
-    if (a.style.display === 'block') {
+    if (c.style.display === 'none') {
       h8.style.display = 'none';
       i9.style.display = 'none';
-      c3a1.style.display = 'none';
+      ca.style.display = 'none';
     }
 
   });
@@ -344,9 +317,9 @@
     }
 
     if (currentTime >= 92) {
-      d4a1.style.display = 'block';
+      da.style.display = 'block';
     } else {
-      d4a1.style.display = 'none';
+      da.style.display = 'none';
     }
 
     if (currentTime >= 110) {
@@ -357,72 +330,51 @@
       j10.style.display = 'none';
       k11.style.display = 'none';
       l12.style.display = 'none';
-      d4a1.style.display = 'none';
+      da.style.display = 'none';
       d.style.display = 'none';
       d.pause();
       j.style.display = 'block';
       j.load();
     });
 
-    if (j.style.display === 'block') {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      d4a1.style.display = 'none';
-    }
-
     k11.addEventListener('click', () => {
       j10.style.display = 'none';
       k11.style.display = 'none';
       l12.style.display = 'none';
-      d4a1.style.display = 'none';
+      da.style.display = 'none';
       d.style.display = 'none';
       d.pause();
       k.style.display = 'block';
       k.load();
     });
 
-    if (k.style.display === 'block') {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      d4a1.style.display = 'none';
-    }
-
     l12.addEventListener('click', () => {
       j10.style.display = 'none';
       k11.style.display = 'none';
       l12.style.display = 'none';
-      d4a1.style.display = 'none';
+      da.style.display = 'none';
       d.style.display = 'none';
       d.pause();
       l.style.display = 'block';
       l.load();
     });
 
-    if (l.style.display === 'block') {
+    da.addEventListener('click', () => {
       j10.style.display = 'none';
       k11.style.display = 'none';
       l12.style.display = 'none';
-      d4a1.style.display = 'none';
-    }
-
-    d4a1.addEventListener('click', () => {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      d4a1.style.display = 'none';
+      da.style.display = 'none';
       d.style.display = 'none';
       d.pause();
       a.style.display = 'block';
       a.load();
     });
 
-    if (a.style.display === 'block') {
+    if (d.style.display === 'none') {
       j10.style.display = 'none';
       k11.style.display = 'none';
       l12.style.display = 'none';
-      d4a1.style.display = 'none';
+      da.style.display = 'none';
     }
 
   });
@@ -432,36 +384,31 @@
     const currentTime = e.currentTime;
 
     if (currentTime >= 256) {
-      q17.style.display = 'block';
+      eq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      eq17.style.display = 'none';
     }
 
     if (currentTime >= 256) {
-      f6a1.style.display = 'block';
+      ea.style.display = 'block';
     } else {
-      f6a1.style.display = 'none';
+      ea.style.display = 'none';
     }
 
     if (currentTime >= 273) {
       e.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
+    eq17.addEventListener('click', () => {
+      eq17.style.display = 'none';
+      ea.style.display = 'none';
       e.style.display = 'none';
       e.pause();
     });
 
-    if (e.style.display === 'none') {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
-    }
-
-    f6a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
+    ea.addEventListener('click', () => {
+      eq17.style.display = 'none';
+      ea.style.display = 'none';
       e.style.display = 'none';
       e.pause();
       a.style.display = 'block';
@@ -469,8 +416,8 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
+      eq17.style.display = 'none';
+      ea.style.display = 'none';
     }
 
   });
@@ -486,15 +433,15 @@
     }
 
     if (currentTime >= 338) {
-      f6a1.style.display = 'block';
+      fa.style.display = 'block';
     } else {
-      f6a1.style.display = 'none';
+      fa.style.display = 'none';
     }
 
     if (currentTime >= 338) {
-      f6b2.style.display = 'block';
+      fb.style.display = 'block';
     } else {
-      f6b2.style.display = 'none';
+      fb.style.display = 'none';
     }
 
     if (currentTime >= 356) {
@@ -502,50 +449,35 @@
     }
 
     q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
-      f6b2.style.display = 'none';
-      f.style.display = 'none';
       f.pause();
     });
 
-    if (f.style.display === 'none') {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
-      f6b2.style.display = 'none';
-    }
-
-    f6a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
-      f6b2.style.display = 'none';
+    fa.addEventListener('click', () => {
+      // q17.style.display = 'none';
+      fa.style.display = 'none';
+      fb.style.display = 'none';
       f.style.display = 'none';
       f.pause();
       a.style.display = 'block';
       a.load();
     });
 
-    if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
-      f6b2.style.display = 'none';
-    }
-
-    f6b2.addEventListener('click', () => {
-      q17.style.display = 'none';
-      f6a1.style.display = 'none';
-      f6b2.style.display = 'none';
-      f.style.display = 'none';
+    fb.addEventListener('click', () => {
+      // q17.style.display = 'none';
+      fa.style.display = 'none';
+      fb.style.display = 'none';
       f.pause();
+      f.style.display = 'none';
       b.style.display = 'block';
       b.load();
     });
 
-    if (b.style.display === 'block') {
+    if (f.style.display === 'none') {
       q17.style.display = 'none';
-      f6a1.style.display = 'none';
-      f6b2.style.display = 'none';
+      fa.style.display = 'none';
+      fb.style.display = 'none';
     }
+
   });
 
   // id="g"
@@ -553,45 +485,45 @@
     const currentTime = g.currentTime;
 
     if (currentTime >= 183) {
-      q17.style.display = 'block';
+      gq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      gq17.style.display = 'none';
     }
 
     if (currentTime >= 183) {
-      e5a1.style.display = 'block';
+      ga.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      ga.style.display = 'none';
     }
 
     if (currentTime >= 183) {
-      f6b2.style.display = 'block';
+      gb.style.display = 'block';
     } else {
-      f6b2.style.display = 'none';
+      gb.style.display = 'none';
     }
 
     if (currentTime >= 201) {
       g.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      f6b2.style.display = 'none';
+    gq17.addEventListener('click', () => {
+      gq17.style.display = 'none';
+      ga.style.display = 'none';
+      gb.style.display = 'none';
       g.style.display = 'none';
       g.pause();
     });
 
     if (g.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      f6b2.style.display = 'none';
+      gq17.style.display = 'none';
+      ga.style.display = 'none';
+      gb.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      f6b2.style.display = 'none';
+    ga.addEventListener('click', () => {
+      gq17.style.display = 'none';
+      ga.style.display = 'none';
+      gb.style.display = 'none';
       g.style.display = 'none';
       g.pause();
       a.style.display = 'block';
@@ -599,15 +531,15 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      f6b2.style.display = 'none';
+      gq17.style.display = 'none';
+      ga.style.display = 'none';
+      gb.style.display = 'none';
     }
 
-    f6b2.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      f6b2.style.display = 'none';
+    gb.addEventListener('click', () => {
+      gq17.style.display = 'none';
+      ga.style.display = 'none';
+      gb.style.display = 'none';
       g.style.display = 'none';
       g.pause();
       b.style.display = 'block';
@@ -615,9 +547,9 @@
     });
 
     if (b.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      f6b2.style.display = 'none';
+      gq17.style.display = 'none';
+      ga.style.display = 'none';
+      gb.style.display = 'none';
     }
   });
 
@@ -638,9 +570,9 @@
     }
 
     if (currentTime >= 33) {
-      h8c3.style.display = 'block';
+      hc.style.display = 'block';
     } else {
-      h8c3.style.display = 'none';
+      hc.style.display = 'none';
     }
 
     if (currentTime >= 52) {
@@ -650,49 +582,37 @@
     m13.addEventListener('click', () => {
       m13.style.display = 'none';
       n14.style.display = 'none';
-      h8c3.style.display = 'none';
+      hc.style.display = 'none';
       h.style.display = 'none';
       h.pause();
       m.style.display = 'block';
       m.load();
     });
 
-    if (m.style.display === 'block') {
-      m13.style.display = 'none';
-      n14.style.display = 'none';
-      h8c3.style.display = 'none';
-    }
-
     n14.addEventListener('click', () => {
       m13.style.display = 'none';
       n14.style.display = 'none';
-      h8c3.style.display = 'none';
+      hc.style.display = 'none';
       h.style.display = 'none';
       h.pause();
       n.style.display = 'block';
       n.load();
     });
 
-    if (n.style.display === 'block') {
+    hc.addEventListener('click', () => {
       m13.style.display = 'none';
       n14.style.display = 'none';
-      h8c3.style.display = 'none';
-    }
-
-    h8c3.addEventListener('click', () => {
-      m13.style.display = 'none';
-      n14.style.display = 'none';
-      h8c3.style.display = 'none';
+      hc.style.display = 'none';
       h.style.display = 'none';
       h.pause();
       c.style.display = 'block';
       c.load();
     });
 
-    if (c.style.display === 'block') {
+    if (h.style.display === 'none') {
       m13.style.display = 'none';
       n14.style.display = 'none';
-      h8c3.style.display = 'none';
+      hc.style.display = 'none';
     }
 
   });
@@ -714,9 +634,9 @@
     }
 
     if (currentTime >= 68) {
-      i9c3.style.display = 'block';
+      ic.style.display = 'block';
     } else {
-      i9c3.style.display = 'none';
+      ic.style.display = 'none';
     }
 
     if (currentTime >= 83) {
@@ -726,49 +646,37 @@
     o15.addEventListener('click', () => {
       o15.style.display = 'none';
       p16.style.display = 'none';
-      i9c3.style.display = 'none';
+      ic.style.display = 'none';
       i.style.display = 'none';
       i.pause();
       o.style.display = 'block';
       o.load();
     });
 
-    if (o.style.display === 'block') {
-      o15.style.display = 'none';
-      p16.style.display = 'none';
-      i9c3.style.display = 'none';
-    }
-
     p16.addEventListener('click', () => {
       o15.style.display = 'none';
       p16.style.display = 'none';
-      i9c3.style.display = 'none';
+      ic.style.display = 'none';
       i.style.display = 'none';
       i.pause();
       p.style.display = 'block';
       p.load();
     });
 
-    if (p.style.display === 'block') {
+    ic.addEventListener('click', () => {
       o15.style.display = 'none';
       p16.style.display = 'none';
-      i9c3.style.display = 'none';
-    }
-
-    i9c3.addEventListener('click', () => {
-      o15.style.display = 'none';
-      p16.style.display = 'none';
-      i9c3.style.display = 'none';
+      ic.style.display = 'none';
       i.style.display = 'none';
       i.pause();
       c.style.display = 'block';
       c.load();
     });
 
-    if (c.style.display === 'block') {
+    if (i.style.display === 'none') {
       o15.style.display = 'none';
       p16.style.display = 'none';
-      i9c3.style.display = 'none';
+      ic.style.display = 'none';
     }
   });
 
@@ -777,45 +685,45 @@
     const currentTime = j.currentTime;
 
     if (currentTime >= 186) {
-      q17.style.display = 'block';
+      jq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      jq17.style.display = 'none';
     }
 
     if (currentTime >= 186) {
-      e5a1.style.display = 'block';
+      ja.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      ja.style.display = 'none';
     }
 
     if (currentTime >= 186) {
-      j10d4.style.display = 'block';
+      jd.style.display = 'block';
     } else {
-      j10d4.style.display = 'none';
+      jd.style.display = 'none';
     }
 
     if (currentTime >= 203) {
       j.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    jq17.addEventListener('click', () => {
+      jq17.style.display = 'none';
+      ja.style.display = 'none';
+      jd.style.display = 'none';
       j.style.display = 'none';
       j.pause();
     });
 
     if (j.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      jq17.style.display = 'none';
+      ja.style.display = 'none';
+      jd.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    ja.addEventListener('click', () => {
+      jq17.style.display = 'none';
+      ja.style.display = 'none';
+      jd.style.display = 'none';
       j.style.display = 'none';
       j.pause();
       a.style.display = 'block';
@@ -823,15 +731,15 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      jq17.style.display = 'none';
+      ja.style.display = 'none';
+      jd.style.display = 'none';
     }
 
-    j10d4.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    jd.addEventListener('click', () => {
+      jq17.style.display = 'none';
+      ja.style.display = 'none';
+      jd.style.display = 'none';
       j.style.display = 'none';
       j.pause();
       d.style.display = 'block';
@@ -839,9 +747,9 @@
     });
 
     if (d.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      jq17.style.display = 'none';
+      ja.style.display = 'none';
+      jd.style.display = 'none';
     }
   });
 
@@ -850,61 +758,62 @@
     const currentTime = k.currentTime;
 
     if (currentTime >= 152) {
-      q17.style.display = 'block';
+      kq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      kq17.style.display = 'none';
     }
 
     if (currentTime >= 152) {
-      e5a1.style.display = 'block';
+      ka.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      ka.style.display = 'none';
     }
 
     if (currentTime >= 152) {
-      j10d4.style.display = 'block';
+      kd.style.display = 'block';
     } else {
-      j10d4.style.display = 'none';
+      kd.style.display = 'none';
     }
 
     if (currentTime >= 169) {
       k.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    kq17.addEventListener('click', () => {
+      kq17.style.display = 'none';
+      ka.style.display = 'none';
+      kd.style.display = 'none';
       k.style.display = 'none';
       k.pause();
     });
 
     if (k.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      kq17.style.display = 'none';
+      ka.style.display = 'none';
+      kd.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
-      k.style.display = 'none';
+    ka.addEventListener('click', () => {
       k.pause();
+      k.style.display = 'none';
+      kq17.style.display = 'none';
+      ka.style.display = 'none';
+      kd.style.display = 'none';
+
       a.style.display = 'block';
       a.load();
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      kq17.style.display = 'none';
+      ka.style.display = 'none';
+      kd.style.display = 'none';
     }
 
-    j10d4.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    kd.addEventListener('click', () => {
+      kq17.style.display = 'none';
+      ka.style.display = 'none';
+      kd.style.display = 'none';
       k.style.display = 'none';
       k.pause();
       d.style.display = 'block';
@@ -912,9 +821,9 @@
     });
 
     if (d.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      kq17.style.display = 'none';
+      ka.style.display = 'none';
+      kd.style.display = 'none';
     }
   });
 
@@ -923,45 +832,45 @@
     const currentTime = l.currentTime;
 
     if (currentTime >= 172) {
-      q17.style.display = 'block';
+      lq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      lq17.style.display = 'none';
     }
 
     if (currentTime >= 172) {
-      e5a1.style.display = 'block';
+      la.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      la.style.display = 'none';
     }
 
     if (currentTime >= 172) {
-      j10d4.style.display = 'block';
+      ld.style.display = 'block';
     } else {
-      j10d4.style.display = 'none';
+      ld.style.display = 'none';
     }
 
     if (currentTime >= 189) {
       l.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    lq17.addEventListener('click', () => {
+      lq17.style.display = 'none';
+      la.style.display = 'none';
+      ld.style.display = 'none';
       l.style.display = 'none';
       l.pause();
     });
 
     if (l.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      lq17.style.display = 'none';
+      la.style.display = 'none';
+      ld.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    la.addEventListener('click', () => {
+      lq17.style.display = 'none';
+      la.style.display = 'none';
+      ld.style.display = 'none';
       l.style.display = 'none';
       l.pause();
       a.style.display = 'block';
@@ -969,15 +878,15 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      lq17.style.display = 'none';
+      la.style.display = 'none';
+      ld.style.display = 'none';
     }
 
-    j10d4.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    ld.addEventListener('click', () => {
+      lq17.style.display = 'none';
+      la.style.display = 'none';
+      ld.style.display = 'none';
       l.style.display = 'none';
       l.pause();
       d.style.display = 'block';
@@ -985,9 +894,9 @@
     });
 
     if (d.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      lq17.style.display = 'none';
+      la.style.display = 'none';
+      ld.style.display = 'none';
     }
   });
 
@@ -996,45 +905,45 @@
     const currentTime = m.currentTime;
 
     if (currentTime >= 267) {
-      q17.style.display = 'block';
+      mq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      mq17.style.display = 'none';
     }
 
     if (currentTime >= 267) {
-      e5a1.style.display = 'block';
+      ma.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      ma.style.display = 'none';
     }
 
     if (currentTime >= 267) {
-      j10d4.style.display = 'block';
+      mh.style.display = 'block';
     } else {
-      j10d4.style.display = 'none';
+      mh.style.display = 'none';
     }
 
     if (currentTime >= 284) {
       m.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    mq17.addEventListener('click', () => {
+      mq17.style.display = 'none';
+      ma.style.display = 'none';
+      mh.style.display = 'none';
       m.style.display = 'none';
       m.pause();
     });
 
     if (m.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      mq17.style.display = 'none';
+      ma.style.display = 'none';
+      mh.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    ma.addEventListener('click', () => {
+      mq17.style.display = 'none';
+      ma.style.display = 'none';
+      mh.style.display = 'none';
       m.style.display = 'none';
       m.pause();
       a.style.display = 'block';
@@ -1042,25 +951,25 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      mq17.style.display = 'none';
+      ma.style.display = 'none';
+      mh.style.display = 'none';
     }
 
-    j10d4.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    mh.addEventListener('click', () => {
+      mq17.style.display = 'none';
+      ma.style.display = 'none';
+      mh.style.display = 'none';
       m.style.display = 'none';
       m.pause();
       h.style.display = 'block';
       h.load();
     });
 
-    if (d.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    if (h.style.display === 'block') {
+      mq17.style.display = 'none';
+      ma.style.display = 'none';
+      mh.style.display = 'none';
     }
   });
 
@@ -1069,45 +978,45 @@
     const currentTime = n.currentTime;
 
     if (currentTime >= 278) {
-      q17.style.display = 'block';
+      nq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      nq17.style.display = 'none';
     }
 
     if (currentTime >= 278) {
-      e5a1.style.display = 'block';
+      na.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      na.style.display = 'none';
     }
 
     if (currentTime >= 278) {
-      j10d4.style.display = 'block';
+      nh.style.display = 'block';
     } else {
-      j10d4.style.display = 'none';
+      nh.style.display = 'none';
     }
 
     if (currentTime >= 295) {
       n.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    nq17.addEventListener('click', () => {
+      nq17.style.display = 'none';
+      na.style.display = 'none';
+      nh.style.display = 'none';
       n.style.display = 'none';
       n.pause();
     });
 
     if (n.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      nq17.style.display = 'none';
+      na.style.display = 'none';
+      nh.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    na.addEventListener('click', () => {
+      nq17.style.display = 'none';
+      na.style.display = 'none';
+      nh.style.display = 'none';
       n.style.display = 'none';
       n.pause();
       a.style.display = 'block';
@@ -1115,25 +1024,25 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      nq17.style.display = 'none';
+      na.style.display = 'none';
+      nh.style.display = 'none';
     }
 
-    j10d4.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    nh.addEventListener('click', () => {
+      nq17.style.display = 'none';
+      na.style.display = 'none';
+      nh.style.display = 'none';
       n.style.display = 'none';
       n.pause();
       h.style.display = 'block';
       h.load();
     });
 
-    if (d.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    if (h.style.display === 'block') {
+      nq17.style.display = 'none';
+      na.style.display = 'none';
+      nh.style.display = 'none';
     }
   });
 
@@ -1142,45 +1051,45 @@
     const currentTime = o.currentTime;
 
     if (currentTime >= 146) {
-      q17.style.display = 'block';
+      oq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      oq17.style.display = 'none';
     }
 
     if (currentTime >= 146) {
-      e5a1.style.display = 'block';
+      oa.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      oa.style.display = 'none';
     }
 
     if (currentTime >= 146) {
-      j10d4.style.display = 'block';
+      oi.style.display = 'block';
     } else {
-      j10d4.style.display = 'none';
+      oi.style.display = 'none';
     }
 
     if (currentTime >= 163) {
       o.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    oq17.addEventListener('click', () => {
+      oq17.style.display = 'none';
+      oa.style.display = 'none';
+      oi.style.display = 'none';
       o.style.display = 'none';
       o.pause();
     });
 
     if (o.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      oq17.style.display = 'none';
+      oa.style.display = 'none';
+      oi.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    oa.addEventListener('click', () => {
+      oq17.style.display = 'none';
+      oa.style.display = 'none';
+      oi.style.display = 'none';
       o.style.display = 'none';
       o.pause();
       a.style.display = 'block';
@@ -1188,25 +1097,25 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      oq17.style.display = 'none';
+      oa.style.display = 'none';
+      oi.style.display = 'none';
     }
 
-    j10d4.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    oi.addEventListener('click', () => {
+      oq17.style.display = 'none';
+      oa.style.display = 'none';
+      oi.style.display = 'none';
       o.style.display = 'none';
       o.pause();
       i.style.display = 'block';
       i.load();
     });
 
-    if (d.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    if (i.style.display === 'block') {
+      oq17.style.display = 'none';
+      oa.style.display = 'none';
+      oi.style.display = 'none';
     }
   });
 
@@ -1215,45 +1124,45 @@
     const currentTime = p.currentTime;
 
     if (currentTime >= 240) {
-      q17.style.display = 'block';
+      pq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      pq17.style.display = 'none';
     }
 
     if (currentTime >= 240) {
-      e5a1.style.display = 'block';
+      pa.style.display = 'block';
     } else {
-      e5a1.style.display = 'none';
+      pa.style.display = 'none';
     }
 
     if (currentTime >= 240) {
-      j10d4.style.display = 'block';
+      pi.style.display = 'block';
     } else {
-      j10d4.style.display = 'none';
+      pi.style.display = 'none';
     }
 
     if (currentTime >= 256) {
       p.pause();
     }
 
-    q17.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    pq17.addEventListener('click', () => {
+      pq17.style.display = 'none';
+      pa.style.display = 'none';
+      pi.style.display = 'none';
       p.style.display = 'none';
       p.pause();
     });
 
     if (p.style.display === 'none') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      pq17.style.display = 'none';
+      pa.style.display = 'none';
+      pi.style.display = 'none';
     }
 
-    e5a1.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    pa.addEventListener('click', () => {
+      pq17.style.display = 'none';
+      pa.style.display = 'none';
+      pi.style.display = 'none';
       p.style.display = 'none';
       p.pause();
       a.style.display = 'block';
@@ -1261,25 +1170,25 @@
     });
 
     if (a.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+      pq17.style.display = 'none';
+      pa.style.display = 'none';
+      pi.style.display = 'none';
     }
 
-    j10d4.addEventListener('click', () => {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    pi.addEventListener('click', () => {
+      pq17.style.display = 'none';
+      pa.style.display = 'none';
+      pi.style.display = 'none';
       p.style.display = 'none';
       p.pause();
       i.style.display = 'block';
       i.load();
     });
 
-    if (d.style.display === 'block') {
-      q17.style.display = 'none';
-      e5a1.style.display = 'none';
-      j10d4.style.display = 'none';
+    if (i.style.display === 'block') {
+      pq17.style.display = 'none';
+      pa.style.display = 'none';
+      pi.style.display = 'none';
     }
   });
 

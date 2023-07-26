@@ -76,16 +76,16 @@
   const pi = document.getElementById('pi');
   const q17 = document.getElementById('q17');
 
-  function handleWindowFocusChange() {
-    if (document.hidden) {
-      box.pause(); // タブが非アクティブになったらビデオを一時停止
-    } else {
-      box.play(); // タブがアクティブになったらビデオを再生
-    }
-  }
+  // function handleWindowFocusChange() {
+  //   if (document.hidden) {
+  //     box.pause(); // タブが非アクティブになったらビデオを一時停止
+  //   } else {
+  //     box.play(); // タブがアクティブになったらビデオを再生
+  //   }
+  // }
 
-  // タブの可視性が変更された時にイベントハンドラを呼び出す
-  window.addEventListener('visibilitychange', handleWindowFocusChange);
+  // // タブの可視性が変更された時にイベントハンドラを呼び出す
+  // window.addEventListener('visibilitychange', handleWindowFocusChange);
 
   // id="a"
   a.addEventListener('timeupdate', () => {

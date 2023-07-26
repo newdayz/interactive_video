@@ -76,16 +76,16 @@
   const pi = document.getElementById('pi');
   const q17 = document.getElementById('q17');
 
-  // function handleWindowFocusChange() {
-  //   if (document.hidden) {
-  //     box.pause(); // タブが非アクティブになったらビデオを一時停止
-  //   } else {
-  //     box.play(); // タブがアクティブになったらビデオを再生
-  //   }
-  // }
+   function handleWindowFocusChange() {
+     if (document.hidden) {
+       box.pause(); // タブが非アクティブになったらビデオを一時停止
+     } else {
+       box.play(); // タブがアクティブになったらビデオを再生
+     }
+   }
 
-  // // タブの可視性が変更された時にイベントハンドラを呼び出す
-  // window.addEventListener('visibilitychange', handleWindowFocusChange);
+   // タブの可視性が変更された時にイベントハンドラを呼び出す
+   window.addEventListener('visibilitychange', handleWindowFocusChange);
 
   // id="a"
   a.addEventListener('timeupdate', () => {
@@ -124,6 +124,7 @@
       a.style.display = 'none';
       b.style.display = 'block';
       b.load();
+      b.play();
     });
 
     c3.addEventListener('click', () => {
@@ -131,6 +132,7 @@
       a.style.display = 'none';
       c.style.display = 'block';
       c.load();
+      c.play();
     });
 
     d4.addEventListener('click', () => {
@@ -138,6 +140,7 @@
       a.style.display = 'none';
       d.style.display = 'block';
       d.load();
+      d.play();
     });
 
     e5.addEventListener('click', () => {
@@ -145,6 +148,7 @@
       a.style.display = 'none';
       e.style.display = 'block';
       e.load();
+      e.play();
     });
 
     if (a.style.display === 'none') {
@@ -201,6 +205,7 @@
       b.pause();
       f.style.display = 'block';
       f.load();
+      f.play();
     });
 
     g7.addEventListener('click', () => {
@@ -211,6 +216,7 @@
       b.pause();
       g.style.display = 'block';
       g.load();
+      g.play();
     });
 
     ba.addEventListener('click', () => {
@@ -221,6 +227,7 @@
       b.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (b.style.display === 'none') {
@@ -265,6 +272,7 @@
       c.pause();
       h.style.display = 'block';
       h.load();
+      h.play();
     });
 
     i9.addEventListener('click', () => {
@@ -275,6 +283,7 @@
       c.pause();
       i.style.display = 'block';
       i.load();
+      i.play();
     });
 
     ca.addEventListener('click', () => {
@@ -285,6 +294,7 @@
       c.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (c.style.display === 'none') {
@@ -336,6 +346,7 @@
       d.pause();
       j.style.display = 'block';
       j.load();
+      j.play();
     });
 
     k11.addEventListener('click', () => {
@@ -347,6 +358,7 @@
       d.pause();
       k.style.display = 'block';
       k.load();
+      k.play();
     });
 
     l12.addEventListener('click', () => {
@@ -358,6 +370,7 @@
       d.pause();
       l.style.display = 'block';
       l.load();
+      l.play();
     });
 
     da.addEventListener('click', () => {
@@ -369,6 +382,7 @@
       d.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (d.style.display === 'none') {
@@ -414,6 +428,7 @@
       e.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -461,6 +476,7 @@
       f.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     fb.addEventListener('click', () => {
@@ -471,6 +487,7 @@
       f.style.display = 'none';
       b.style.display = 'block';
       b.load();
+      b.play();
     });
 
     if (f.style.display === 'none') {
@@ -529,6 +546,7 @@
       g.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -545,6 +563,7 @@
       g.pause();
       b.style.display = 'block';
       b.load();
+      b.play();
     });
 
     if (b.style.display === 'block') {
@@ -588,6 +607,7 @@
       h.pause();
       m.style.display = 'block';
       m.load();
+      m.play();
     });
 
     n14.addEventListener('click', () => {
@@ -598,6 +618,7 @@
       h.pause();
       n.style.display = 'block';
       n.load();
+      n.play();
     });
 
     hc.addEventListener('click', () => {
@@ -608,6 +629,7 @@
       h.pause();
       c.style.display = 'block';
       c.load();
+      c.play();
     });
 
     if (h.style.display === 'none') {
@@ -652,6 +674,7 @@
       i.pause();
       o.style.display = 'block';
       o.load();
+      o.play();
     });
 
     p16.addEventListener('click', () => {
@@ -662,6 +685,7 @@
       i.pause();
       p.style.display = 'block';
       p.load();
+      p.play();
     });
 
     ic.addEventListener('click', () => {
@@ -672,6 +696,7 @@
       i.pause();
       c.style.display = 'block';
       c.load();
+      c.play();
     });
 
     if (i.style.display === 'none') {
@@ -729,6 +754,7 @@
       j.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -745,6 +771,7 @@
       j.pause();
       d.style.display = 'block';
       d.load();
+      d.play();
     });
 
     if (d.style.display === 'block') {
@@ -800,9 +827,9 @@
       kq17.style.display = 'none';
       ka.style.display = 'none';
       kd.style.display = 'none';
-
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -819,6 +846,7 @@
       k.pause();
       d.style.display = 'block';
       d.load();
+      d.play();
     });
 
     if (d.style.display === 'block') {
@@ -876,6 +904,7 @@
       l.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -892,6 +921,7 @@
       l.pause();
       d.style.display = 'block';
       d.load();
+      d.play();
     });
 
     if (d.style.display === 'block') {
@@ -949,6 +979,7 @@
       m.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -965,6 +996,7 @@
       m.pause();
       h.style.display = 'block';
       h.load();
+      h.play();
     });
 
     if (h.style.display === 'block') {
@@ -1022,6 +1054,7 @@
       n.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -1038,6 +1071,7 @@
       n.pause();
       h.style.display = 'block';
       h.load();
+      h.play();
     });
 
     if (h.style.display === 'block') {
@@ -1095,6 +1129,7 @@
       o.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -1111,6 +1146,7 @@
       o.pause();
       i.style.display = 'block';
       i.load();
+      i.play();
     });
 
     if (i.style.display === 'block') {
@@ -1168,6 +1204,7 @@
       p.pause();
       a.style.display = 'block';
       a.load();
+      a.play();
     });
 
     if (a.style.display === 'block') {
@@ -1184,6 +1221,7 @@
       p.pause();
       i.style.display = 'block';
       i.load();
+      i.play();
     });
 
     if (i.style.display === 'block') {

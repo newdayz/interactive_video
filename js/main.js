@@ -3,7 +3,8 @@
 {
 
   // videosの取得
-  const videos = document.querySelector('.videos');
+  // const videos = document.querySelector('.videos');
+  const box = document.querySelector('.box');
 
   // videoidの取得
   const a = document.getElementById('a');
@@ -77,9 +78,9 @@
 
   function handleWindowFocusChange() {
     if (document.hidden) {
-      videos.pause(); // タブが非アクティブになったらビデオを一時停止
+      box.pause(); // タブが非アクティブになったらビデオを一時停止
     } else {
-      videos.play(); // タブがアクティブになったらビデオを再生
+      box.play(); // タブがアクティブになったらビデオを再生
     }
   }
 

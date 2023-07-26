@@ -17,9 +17,12 @@ body {
   height: 100%;
   margin: 0 auto;
   object-fit: cover;
-  position: relative;
   top: 50%;
   bottom: 50%;
+}
+
+.box {
+  position: relative;
 }
 
 video {

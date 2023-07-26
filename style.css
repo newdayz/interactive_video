@@ -1,0 +1,256 @@
+@charset "utf-8";
+
+body {
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.hero {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  object-fit: cover;
+  position: relative;
+  top: 50%;
+  bottom: 50%;
+}
+
+video {
+  width: 100%;
+  height: auto;
+}
+
+/* video id */
+#b,
+#c,
+#d,
+#e,
+#f,
+#g,
+#h,
+#i,
+#j,
+#k,
+#l,
+#m,
+#n,
+#o,
+#p {
+  display: none;
+}
+
+.test {
+  text-align: center;
+}
+
+/* ボタン */
+#b2,
+#ba,
+#c3,
+#ca,
+#d4,
+#da,
+#e5,
+#eq17,
+#ea,
+#f6,
+#fq17,
+#fa,
+#fb,
+#g7,
+#gq17,
+#ga,
+#gb,
+#h8,
+#hc,
+#i9,
+#ic,
+#j10,
+#jq17,
+#ja,
+#jd,
+#k11,
+#kq17,
+#ka,
+#kd,
+#l12,
+#lq17,
+#la,
+#ld,
+#m13,
+#mq17,
+#ma,
+#mh,
+#n14,
+#nq17,
+#na,
+#nh,
+#o15,
+#oq17,
+#oa,
+#oi,
+#p16,
+#pq17,
+#pa,
+#pi,
+#q17 {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+}
+
+/* 上段のAグループ */
+#b2,
+#j10 {
+  top: 11.6%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+/* 2段目のBグループ */
+#c3,
+#k11 {
+  top: 28.1%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+/* 3段目のCグループ */
+#d4,
+#l12 {
+  top: 44.5%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+/* 4段目のDグループ */
+#e5,
+#da {
+  top: 61.3%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+#f6,
+#h8,
+#m13,
+#o15 {
+  top: 24%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+#g7,
+#i9,
+#n14,
+#p16 {
+  top: 41%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+/* 3つ配列している3番目 */
+#ba,
+#ca,
+#hc,
+#ic {
+  top: 58%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+/* 相談する */
+
+#eq17,
+#fq17,
+#gq17,
+#jq17,
+#kq17,
+#lq17,
+#mq17,
+#nq17,
+#oq17,
+#pq17,
+#q17 {
+  top: 11.8%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+#ea,
+#fa,
+#ga,
+#ja,
+#ka,
+#la,
+#ma,
+#na,
+#oa,
+#pa {
+  top: 28.4%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+#fb,
+#gb,
+#jd,
+#kd,
+#ld,
+#mh,
+#nh,
+#oi,
+#pi {
+  top: 45.4%;
+  left: 6.8%;
+  width: 42.5%;
+  height: 15%;
+  opacity: 0.6;
+  border: 0;
+  padding: 0;
+}
+
+/* スマホの位置 */

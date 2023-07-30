@@ -46,11 +46,12 @@ video {
   display: none;
 }
 
-.test {
-  text-align: center;
-}
 
 /* ボタン */
+.box2 {
+  display: none;
+}
+
 #b2,
 #ba,
 #c3,
@@ -205,8 +206,7 @@ video {
 #mq17,
 #nq17,
 #oq17,
-#pq17,
-#q17 {
+#pq17 {
   top: 11.8%;
   left: 6.8%;
   width: 42.5%;

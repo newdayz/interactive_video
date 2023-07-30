@@ -3,8 +3,7 @@
 {
 
   // videosの取得
-  // const videos = document.querySelector('.videos');
-  const box = document.querySelector('.box');
+  const videos = document.querySelectorAll(".videos");
 
   // videoidの取得
   const a = document.getElementById('a');
@@ -25,6 +24,26 @@
   const p = document.getElementById('p');
 
   // ボタンの取得
+
+  const box2 = document.querySelector(".box2");
+
+  const video1 = document.getElementById('video1');
+  const video2 = document.getElementById('video2');
+  const video3 = document.getElementById('video3');
+  const video4 = document.getElementById('video4');
+  const video5 = document.getElementById('video5');
+  const video6 = document.getElementById('video6');
+  const video7 = document.getElementById('video7');
+  const video8 = document.getElementById('video8');
+  const video9 = document.getElementById('video9');
+  const video10 = document.getElementById('video10');
+  const video11 = document.getElementById('video11');
+  const video12 = document.getElementById('video12');
+  const video13 = document.getElementById('video13');
+  const video14 = document.getElementById('video14');
+  const video15 = document.getElementById('video15');
+  const video16 = document.getElementById('video16');
+
   const b2 = document.getElementById('b2');
   const ba = document.getElementById('ba');
   const c3 = document.getElementById('c3');
@@ -74,26 +93,16 @@
   const pq17 = document.getElementById('oq17');
   const pa = document.getElementById('pa');
   const pi = document.getElementById('pi');
-  const q17 = document.getElementById('q17');
-
-   function handleWindowFocusChange() {
-     if (document.hidden) {
-       box.pause(); // タブが非アクティブになったらビデオを一時停止
-     } else {
-       box.play(); // タブがアクティブになったらビデオを再生
-     }
-   }
-
-   // タブの可視性が変更された時にイベントハンドラを呼び出す
-   window.addEventListener('visibilitychange', handleWindowFocusChange);
 
   // id="a"
   a.addEventListener('timeupdate', () => {
     const currentTime = a.currentTime;
 
     if (currentTime >= 88) {
+      box2.style.display = 'block';
       b2.style.display = 'block';
     } else {
+      box2.style.display = 'none';
       b2.style.display = 'none';
     }
 
@@ -120,43 +129,36 @@
     }
 
     b2.addEventListener('click', () => {
+      a.currentTime = 0;
       a.pause();
       a.style.display = 'none';
       b.style.display = 'block';
-      b.load();
       b.play();
     });
 
     c3.addEventListener('click', () => {
+      a.currentTime = 0;
       a.pause();
       a.style.display = 'none';
       c.style.display = 'block';
-      c.load();
       c.play();
     });
 
     d4.addEventListener('click', () => {
+      a.currentTime = 0;
       a.pause();
       a.style.display = 'none';
       d.style.display = 'block';
-      d.load();
       d.play();
     });
 
     e5.addEventListener('click', () => {
+      a.currentTime = 0;
       a.pause();
       a.style.display = 'none';
       e.style.display = 'block';
-      e.load();
       e.play();
     });
-
-    if (a.style.display === 'none') {
-      b2.style.display = 'none';
-      c3.style.display = 'none';
-      d4.style.display = 'none';
-      e5.style.display = 'none';
-    }
 
     // let timeupdate = new Event('timeupdate');
 
@@ -176,9 +178,11 @@
     const currentTime = b.currentTime;
 
     if (currentTime >= 150) {
+      box2.style.display = 'block';
       f6.style.display = 'block';
     } else {
       f6.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 154) {
@@ -198,43 +202,28 @@
     }
 
     f6.addEventListener('click', () => {
-      f6.style.display = 'none';
-      g7.style.display = 'none';
-      ba.style.display = 'none';
-      b.style.display = 'none';
+      b.currentTime = 0;
       b.pause();
+      b.style.display = 'none';
       f.style.display = 'block';
-      f.load();
       f.play();
     });
 
     g7.addEventListener('click', () => {
-      f6.style.display = 'none';
-      g7.style.display = 'none';
-      ba.style.display = 'none';
-      b.style.display = 'none';
+      b.currentTime = 0;
       b.pause();
+      b.style.display = 'none';
       g.style.display = 'block';
-      g.load();
       g.play();
     });
 
     ba.addEventListener('click', () => {
-      f6.style.display = 'none';
-      g7.style.display = 'none';
-      ba.style.display = 'none';
-      b.style.display = 'none';
+      b.currentTime = 0;
       b.pause();
+      b.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
-
-    if (b.style.display === 'none') {
-      f6.style.display = 'none';
-      g7.style.display = 'none';
-      ba.style.display = 'none';
-    }
 
   });
 
@@ -243,9 +232,11 @@
     const currentTime = c.currentTime;
 
     if (currentTime >= 72) {
+      box2.style.display = 'block';
       h8.style.display = 'block';
     } else {
       h8.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 78) {
@@ -265,43 +256,28 @@
     }
 
     h8.addEventListener('click', () => {
-      h8.style.display = 'none';
-      i9.style.display = 'none';
-      ca.style.display = 'none';
-      c.style.display = 'none';
+      c.currentTime = 0;
       c.pause();
+      c.style.display = 'none';
       h.style.display = 'block';
-      h.load();
       h.play();
     });
 
     i9.addEventListener('click', () => {
-      h8.style.display = 'none';
-      i9.style.display = 'none';
-      ca.style.display = 'none';
-      c.style.display = 'none';
+      c.currentTime = 0;
       c.pause();
+      c.style.display = 'none';
       i.style.display = 'block';
-      i.load();
       i.play();
     });
 
     ca.addEventListener('click', () => {
-      h8.style.display = 'none';
-      i9.style.display = 'none';
-      ca.style.display = 'none';
-      c.style.display = 'none';
+      c.currentTime = 0;
       c.pause();
+      c.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
-
-    if (c.style.display === 'none') {
-      h8.style.display = 'none';
-      i9.style.display = 'none';
-      ca.style.display = 'none';
-    }
 
   });
 
@@ -310,9 +286,11 @@
     const currentTime = d.currentTime;
 
     if (currentTime >= 70) {
+      box2.style.display = 'block';
       j10.style.display = 'block';
     } else {
       j10.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 75) {
@@ -338,59 +316,36 @@
     }
 
     j10.addEventListener('click', () => {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      da.style.display = 'none';
-      d.style.display = 'none';
+      d.currentTime = 0;
       d.pause();
+      d.style.display = 'none';
       j.style.display = 'block';
-      j.load();
       j.play();
     });
 
     k11.addEventListener('click', () => {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      da.style.display = 'none';
-      d.style.display = 'none';
+      d.currentTime = 0;
       d.pause();
+      d.style.display = 'none';
       k.style.display = 'block';
-      k.load();
       k.play();
     });
 
     l12.addEventListener('click', () => {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      da.style.display = 'none';
-      d.style.display = 'none';
+      d.currentTime = 0;
       d.pause();
+      d.style.display = 'none';
       l.style.display = 'block';
-      l.load();
       l.play();
     });
 
     da.addEventListener('click', () => {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      da.style.display = 'none';
-      d.style.display = 'none';
+      d.currentTime = 0;
       d.pause();
+      d.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
-
-    if (d.style.display === 'none') {
-      j10.style.display = 'none';
-      k11.style.display = 'none';
-      l12.style.display = 'none';
-      da.style.display = 'none';
-    }
 
   });
 
@@ -399,9 +354,11 @@
     const currentTime = e.currentTime;
 
     if (currentTime >= 256) {
+      box2.style.display = 'block';
       eq17.style.display = 'block';
     } else {
       eq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 256) {
@@ -415,26 +372,16 @@
     }
 
     eq17.addEventListener('click', () => {
-      eq17.style.display = 'none';
-      ea.style.display = 'none';
-      e.style.display = 'none';
       e.pause();
     });
 
     ea.addEventListener('click', () => {
-      eq17.style.display = 'none';
-      ea.style.display = 'none';
-      e.style.display = 'none';
+      e.currentTime = 0;
       e.pause();
+      e.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
-
-    if (a.style.display === 'block') {
-      eq17.style.display = 'none';
-      ea.style.display = 'none';
-    }
 
   });
 
@@ -443,9 +390,11 @@
     const currentTime = f.currentTime;
 
     if (currentTime >= 338) {
-      q17.style.display = 'block';
+      box2.style.display = 'block';
+      fq17.style.display = 'block';
     } else {
-      q17.style.display = 'none';
+      fq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 338) {
@@ -464,37 +413,25 @@
       f.pause();
     }
 
-    q17.addEventListener('click', () => {
+    fq17.addEventListener('click', () => {
       f.pause();
     });
 
     fa.addEventListener('click', () => {
-      // q17.style.display = 'none';
-      fa.style.display = 'none';
-      fb.style.display = 'none';
-      f.style.display = 'none';
+      f.currentTime = 0;
       f.pause();
+      f.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
     fb.addEventListener('click', () => {
-      // q17.style.display = 'none';
-      fa.style.display = 'none';
-      fb.style.display = 'none';
+      f.currentTime = 0;
       f.pause();
       f.style.display = 'none';
       b.style.display = 'block';
-      b.load();
       b.play();
     });
-
-    if (f.style.display === 'none') {
-      q17.style.display = 'none';
-      fa.style.display = 'none';
-      fb.style.display = 'none';
-    }
 
   });
 
@@ -503,9 +440,11 @@
     const currentTime = g.currentTime;
 
     if (currentTime >= 183) {
+      box2.style.display = 'block';
       gq17.style.display = 'block';
     } else {
       gq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 183) {
@@ -525,52 +464,25 @@
     }
 
     gq17.addEventListener('click', () => {
-      gq17.style.display = 'none';
-      ga.style.display = 'none';
-      gb.style.display = 'none';
-      g.style.display = 'none';
       g.pause();
     });
 
-    if (g.style.display === 'none') {
-      gq17.style.display = 'none';
-      ga.style.display = 'none';
-      gb.style.display = 'none';
-    }
-
     ga.addEventListener('click', () => {
-      gq17.style.display = 'none';
-      ga.style.display = 'none';
-      gb.style.display = 'none';
-      g.style.display = 'none';
+      g.currentTime = 0;
       g.pause();
+      g.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      gq17.style.display = 'none';
-      ga.style.display = 'none';
-      gb.style.display = 'none';
-    }
-
     gb.addEventListener('click', () => {
-      gq17.style.display = 'none';
-      ga.style.display = 'none';
-      gb.style.display = 'none';
-      g.style.display = 'none';
+      g.currentTime = 0;
       g.pause();
+      g.style.display = 'none';
       b.style.display = 'block';
-      b.load();
       b.play();
     });
 
-    if (b.style.display === 'block') {
-      gq17.style.display = 'none';
-      ga.style.display = 'none';
-      gb.style.display = 'none';
-    }
   });
 
   // id="h"
@@ -578,9 +490,11 @@
     const currentTime = h.currentTime;
 
     if (currentTime >= 21) {
+      box2.style.display = 'block';
       m13.style.display = 'block';
     } else {
       m13.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 24) {
@@ -600,43 +514,28 @@
     }
 
     m13.addEventListener('click', () => {
-      m13.style.display = 'none';
-      n14.style.display = 'none';
-      hc.style.display = 'none';
+      h.currentTime = 0;
       h.style.display = 'none';
       h.pause();
       m.style.display = 'block';
-      m.load();
       m.play();
     });
 
     n14.addEventListener('click', () => {
-      m13.style.display = 'none';
-      n14.style.display = 'none';
-      hc.style.display = 'none';
+      h.currentTime = 0;
       h.style.display = 'none';
       h.pause();
       n.style.display = 'block';
-      n.load();
       n.play();
     });
 
     hc.addEventListener('click', () => {
-      m13.style.display = 'none';
-      n14.style.display = 'none';
-      hc.style.display = 'none';
+      h.currentTime = 0;
       h.style.display = 'none';
       h.pause();
       c.style.display = 'block';
-      c.load();
       c.play();
     });
-
-    if (h.style.display === 'none') {
-      m13.style.display = 'none';
-      n14.style.display = 'none';
-      hc.style.display = 'none';
-    }
 
   });
 
@@ -645,9 +544,11 @@
     const currentTime = i.currentTime;
 
     if (currentTime >= 68) {
+      box2.style.display = 'block';
       o15.style.display = 'block';
     } else {
       o15.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 68) {
@@ -667,43 +568,29 @@
     }
 
     o15.addEventListener('click', () => {
-      o15.style.display = 'none';
-      p16.style.display = 'none';
-      ic.style.display = 'none';
+      i.currentTime = 0;
       i.style.display = 'none';
       i.pause();
       o.style.display = 'block';
-      o.load();
       o.play();
     });
 
     p16.addEventListener('click', () => {
-      o15.style.display = 'none';
-      p16.style.display = 'none';
-      ic.style.display = 'none';
+      i.currentTime = 0;
       i.style.display = 'none';
       i.pause();
       p.style.display = 'block';
-      p.load();
       p.play();
     });
 
     ic.addEventListener('click', () => {
-      o15.style.display = 'none';
-      p16.style.display = 'none';
-      ic.style.display = 'none';
+      i.currentTime = 0;
       i.style.display = 'none';
       i.pause();
       c.style.display = 'block';
-      c.load();
       c.play();
     });
 
-    if (i.style.display === 'none') {
-      o15.style.display = 'none';
-      p16.style.display = 'none';
-      ic.style.display = 'none';
-    }
   });
 
   // id="j"
@@ -711,9 +598,11 @@
     const currentTime = j.currentTime;
 
     if (currentTime >= 186) {
+      box2.style.display = 'block';
       jq17.style.display = 'block';
     } else {
       jq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 186) {
@@ -733,52 +622,25 @@
     }
 
     jq17.addEventListener('click', () => {
-      jq17.style.display = 'none';
-      ja.style.display = 'none';
-      jd.style.display = 'none';
-      j.style.display = 'none';
       j.pause();
     });
 
-    if (j.style.display === 'none') {
-      jq17.style.display = 'none';
-      ja.style.display = 'none';
-      jd.style.display = 'none';
-    }
-
     ja.addEventListener('click', () => {
-      jq17.style.display = 'none';
-      ja.style.display = 'none';
-      jd.style.display = 'none';
-      j.style.display = 'none';
+      j.currentTime = 0;
       j.pause();
+      j.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      jq17.style.display = 'none';
-      ja.style.display = 'none';
-      jd.style.display = 'none';
-    }
-
     jd.addEventListener('click', () => {
-      jq17.style.display = 'none';
-      ja.style.display = 'none';
-      jd.style.display = 'none';
-      j.style.display = 'none';
+      j.currentTime = 0;
       j.pause();
+      j.style.display = 'none';
       d.style.display = 'block';
-      d.load();
       d.play();
     });
 
-    if (d.style.display === 'block') {
-      jq17.style.display = 'none';
-      ja.style.display = 'none';
-      jd.style.display = 'none';
-    }
   });
 
   // id="k"
@@ -786,9 +648,11 @@
     const currentTime = k.currentTime;
 
     if (currentTime >= 152) {
+      box2.style.display = 'block';
       kq17.style.display = 'block';
     } else {
       kq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 152) {
@@ -808,52 +672,25 @@
     }
 
     kq17.addEventListener('click', () => {
-      kq17.style.display = 'none';
-      ka.style.display = 'none';
-      kd.style.display = 'none';
-      k.style.display = 'none';
       k.pause();
     });
 
-    if (k.style.display === 'none') {
-      kq17.style.display = 'none';
-      ka.style.display = 'none';
-      kd.style.display = 'none';
-    }
-
     ka.addEventListener('click', () => {
+      k.currentTime = 0;
       k.pause();
       k.style.display = 'none';
-      kq17.style.display = 'none';
-      ka.style.display = 'none';
-      kd.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      kq17.style.display = 'none';
-      ka.style.display = 'none';
-      kd.style.display = 'none';
-    }
-
     kd.addEventListener('click', () => {
-      kq17.style.display = 'none';
-      ka.style.display = 'none';
-      kd.style.display = 'none';
-      k.style.display = 'none';
+      k.currentTime = 0;
       k.pause();
+      k.style.display = 'none';
       d.style.display = 'block';
-      d.load();
       d.play();
     });
 
-    if (d.style.display === 'block') {
-      kq17.style.display = 'none';
-      ka.style.display = 'none';
-      kd.style.display = 'none';
-    }
   });
 
   // id="l"
@@ -861,9 +698,11 @@
     const currentTime = l.currentTime;
 
     if (currentTime >= 172) {
+      box2.style.display = 'block';
       lq17.style.display = 'block';
     } else {
       lq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 172) {
@@ -883,52 +722,25 @@
     }
 
     lq17.addEventListener('click', () => {
-      lq17.style.display = 'none';
-      la.style.display = 'none';
-      ld.style.display = 'none';
-      l.style.display = 'none';
       l.pause();
     });
 
-    if (l.style.display === 'none') {
-      lq17.style.display = 'none';
-      la.style.display = 'none';
-      ld.style.display = 'none';
-    }
-
     la.addEventListener('click', () => {
-      lq17.style.display = 'none';
-      la.style.display = 'none';
-      ld.style.display = 'none';
-      l.style.display = 'none';
+      l.currentTime = 0;
       l.pause();
+      l.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      lq17.style.display = 'none';
-      la.style.display = 'none';
-      ld.style.display = 'none';
-    }
-
     ld.addEventListener('click', () => {
-      lq17.style.display = 'none';
-      la.style.display = 'none';
-      ld.style.display = 'none';
-      l.style.display = 'none';
+      l.currentTime = 0;
       l.pause();
+      l.style.display = 'none';
       d.style.display = 'block';
-      d.load();
       d.play();
     });
 
-    if (d.style.display === 'block') {
-      lq17.style.display = 'none';
-      la.style.display = 'none';
-      ld.style.display = 'none';
-    }
   });
 
   // id="m"
@@ -936,9 +748,11 @@
     const currentTime = m.currentTime;
 
     if (currentTime >= 267) {
+      box2.style.display = 'block';
       mq17.style.display = 'block';
     } else {
       mq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 267) {
@@ -958,52 +772,25 @@
     }
 
     mq17.addEventListener('click', () => {
-      mq17.style.display = 'none';
-      ma.style.display = 'none';
-      mh.style.display = 'none';
-      m.style.display = 'none';
       m.pause();
     });
 
-    if (m.style.display === 'none') {
-      mq17.style.display = 'none';
-      ma.style.display = 'none';
-      mh.style.display = 'none';
-    }
-
     ma.addEventListener('click', () => {
-      mq17.style.display = 'none';
-      ma.style.display = 'none';
-      mh.style.display = 'none';
-      m.style.display = 'none';
+      m.currentTime = 0;
       m.pause();
+      m.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      mq17.style.display = 'none';
-      ma.style.display = 'none';
-      mh.style.display = 'none';
-    }
-
     mh.addEventListener('click', () => {
-      mq17.style.display = 'none';
-      ma.style.display = 'none';
-      mh.style.display = 'none';
-      m.style.display = 'none';
+      m.currentTime = 0;
       m.pause();
+      m.style.display = 'none';
       h.style.display = 'block';
-      h.load();
       h.play();
     });
 
-    if (h.style.display === 'block') {
-      mq17.style.display = 'none';
-      ma.style.display = 'none';
-      mh.style.display = 'none';
-    }
   });
 
   // id="n"
@@ -1011,9 +798,11 @@
     const currentTime = n.currentTime;
 
     if (currentTime >= 278) {
+      box2.style.display = 'block';
       nq17.style.display = 'block';
     } else {
       nq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 278) {
@@ -1033,52 +822,25 @@
     }
 
     nq17.addEventListener('click', () => {
-      nq17.style.display = 'none';
-      na.style.display = 'none';
-      nh.style.display = 'none';
-      n.style.display = 'none';
       n.pause();
     });
 
-    if (n.style.display === 'none') {
-      nq17.style.display = 'none';
-      na.style.display = 'none';
-      nh.style.display = 'none';
-    }
-
     na.addEventListener('click', () => {
-      nq17.style.display = 'none';
-      na.style.display = 'none';
-      nh.style.display = 'none';
-      n.style.display = 'none';
+      n.currentTime = 0;
       n.pause();
+      n.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      nq17.style.display = 'none';
-      na.style.display = 'none';
-      nh.style.display = 'none';
-    }
-
     nh.addEventListener('click', () => {
-      nq17.style.display = 'none';
-      na.style.display = 'none';
-      nh.style.display = 'none';
-      n.style.display = 'none';
+      n.currentTime = 0;
       n.pause();
+      n.style.display = 'none';
       h.style.display = 'block';
-      h.load();
       h.play();
     });
 
-    if (h.style.display === 'block') {
-      nq17.style.display = 'none';
-      na.style.display = 'none';
-      nh.style.display = 'none';
-    }
   });
 
   // id="o"
@@ -1086,9 +848,11 @@
     const currentTime = o.currentTime;
 
     if (currentTime >= 146) {
+      box2.style.display = 'block';
       oq17.style.display = 'block';
     } else {
       oq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 146) {
@@ -1108,52 +872,25 @@
     }
 
     oq17.addEventListener('click', () => {
-      oq17.style.display = 'none';
-      oa.style.display = 'none';
-      oi.style.display = 'none';
-      o.style.display = 'none';
       o.pause();
     });
 
-    if (o.style.display === 'none') {
-      oq17.style.display = 'none';
-      oa.style.display = 'none';
-      oi.style.display = 'none';
-    }
-
     oa.addEventListener('click', () => {
-      oq17.style.display = 'none';
-      oa.style.display = 'none';
-      oi.style.display = 'none';
-      o.style.display = 'none';
+      o.currentTime = 0;
       o.pause();
+      o.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      oq17.style.display = 'none';
-      oa.style.display = 'none';
-      oi.style.display = 'none';
-    }
-
     oi.addEventListener('click', () => {
-      oq17.style.display = 'none';
-      oa.style.display = 'none';
-      oi.style.display = 'none';
-      o.style.display = 'none';
+      o.currentTime = 0;
       o.pause();
+      o.style.display = 'none';
       i.style.display = 'block';
-      i.load();
       i.play();
     });
 
-    if (i.style.display === 'block') {
-      oq17.style.display = 'none';
-      oa.style.display = 'none';
-      oi.style.display = 'none';
-    }
   });
 
   // id="p"
@@ -1161,9 +898,11 @@
     const currentTime = p.currentTime;
 
     if (currentTime >= 240) {
+      box2.style.display = 'block';
       pq17.style.display = 'block';
     } else {
       pq17.style.display = 'none';
+      box2.style.display = 'none';
     }
 
     if (currentTime >= 240) {
@@ -1183,52 +922,25 @@
     }
 
     pq17.addEventListener('click', () => {
-      pq17.style.display = 'none';
-      pa.style.display = 'none';
-      pi.style.display = 'none';
-      p.style.display = 'none';
       p.pause();
     });
 
-    if (p.style.display === 'none') {
-      pq17.style.display = 'none';
-      pa.style.display = 'none';
-      pi.style.display = 'none';
-    }
-
     pa.addEventListener('click', () => {
-      pq17.style.display = 'none';
-      pa.style.display = 'none';
-      pi.style.display = 'none';
-      p.style.display = 'none';
+      p.currentTime = 0;
       p.pause();
+      p.style.display = 'none';
       a.style.display = 'block';
-      a.load();
       a.play();
     });
 
-    if (a.style.display === 'block') {
-      pq17.style.display = 'none';
-      pa.style.display = 'none';
-      pi.style.display = 'none';
-    }
-
     pi.addEventListener('click', () => {
-      pq17.style.display = 'none';
-      pa.style.display = 'none';
-      pi.style.display = 'none';
-      p.style.display = 'none';
+      p.currentTime = 0;
       p.pause();
+      p.style.display = 'none';
       i.style.display = 'block';
-      i.load();
       i.play();
     });
 
-    if (i.style.display === 'block') {
-      pq17.style.display = 'none';
-      pa.style.display = 'none';
-      pi.style.display = 'none';
-    }
   });
 
 }

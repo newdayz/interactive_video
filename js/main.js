@@ -25,7 +25,7 @@
 
   // ボタンの取得
 
-  const box2 = document.querySelector(".box2");
+  const box2 = document.getElementById("box2");
 
   const video1 = document.getElementById('video1');
   const video2 = document.getElementById('video2');
@@ -94,15 +94,224 @@
   const pa = document.getElementById('pa');
   const pi = document.getElementById('pi');
 
+  let focuse1 = false;
+  let focuse2 = false;
+  let focuse3 = false;
+  let focuse4 = false;
+  let focuse5 = false;
+  let focuse6 = false;
+  let focuse7 = false;
+  let focuse8 = false;
+  let focuse9 = false;
+  let focuse10 = false;
+  let focuse11 = false;
+  let focuse12 = false;
+  let focuse13 = false;
+  let focuse14 = false;
+  let focuse15 = false;
+  let focuse16 = false;
+
+  // ビデオ要素が読み込まれたら表示する
+  a.addEventListener('loadeddata', () => {
+    a.style.display = 'block';
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse1) {
+      a.play();
+    }
+  });
+
+  window.addEventListener('blur', () => {
+    if (focuse1) {
+      a.pause();
+    }
+  });
+
+   window.addEventListener('focus', () => {
+     if (focuse2) {
+       b.play();
+     }
+   });
+
+   window.addEventListener('blur', () => {
+     if (focuse2) {
+       b.pause();
+     }
+   });
+
+  window.addEventListener('focus', () => {
+    if (focuse3) {
+      c.play();
+    }
+  });
+
+  window.addEventListener('blur', () => {
+    if (focuse3) {
+      c.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse4) {
+      d.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse4) {
+      d.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse5) {
+      e.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse5) {
+      e.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse6) {
+      f.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse6) {
+      f.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse7) {
+      g.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse7) {
+      g.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse8) {
+      h.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse8) {
+      h.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse9) {
+      i.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse9) {
+      i.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse10) {
+      j.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse10) {
+      j.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse11) {
+      k.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse11) {
+      k.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse12) {
+      l.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse12) {
+      l.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse13) {
+      m.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse13) {
+      m.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse14) {
+      n.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse14) {
+      n.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse15) {
+      o.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse15) {
+      o.pause();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (focuse16) {
+      p.play();
+    }
+  });
+  window.addEventListener('blur', () => {
+    if (focuse16) {
+      p.pause();
+    }
+  });
+
   // id="a"
   a.addEventListener('timeupdate', () => {
     const currentTime = a.currentTime;
+
+    if (a.style.display === 'block') {
+      focuse1 = true;
+    } else {
+      focuse1 = false;
+      a.currentTime = 0;
+      a.pause();
+    }
 
     if (currentTime >= 88) {
       box2.style.display = 'block';
       b2.style.display = 'block';
     } else {
-      box2.style.display = 'none';
+      // box2.style.display = 'none';
       b2.style.display = 'none';
     }
 
@@ -160,22 +369,18 @@
       e.play();
     });
 
-    // let timeupdate = new Event('timeupdate');
-
-    // 全画面表示のイベントを追加
-    // a.addEventListener('fullscreenchange', () => {
-    //   if (document.fullscreenElement || document.webkitFullscreenElement) {
-    //     // フルスクリーンになったら、timeupdateイベントを手動で発火させる
-    //     a.dispatchEvent(new Event('timeupdate'));
-    //     console.log(ok);
-    //   }
-    // });
-
   });
 
   // id="b"
   b.addEventListener('timeupdate', () => {
     const currentTime = b.currentTime;
+
+      if (b.style.display === 'block') {
+        focuse2 = true;
+      } else {
+        focuse2 = false;
+        b.pause();
+      }
 
     if (currentTime >= 150) {
       box2.style.display = 'block';
@@ -231,6 +436,13 @@
   c.addEventListener('timeupdate', () => {
     const currentTime = c.currentTime;
 
+    if (c.style.display === 'block') {
+      focuse3 = true;
+    } else {
+      focuse3 = false;
+      c.pause();
+    }
+
     if (currentTime >= 72) {
       box2.style.display = 'block';
       h8.style.display = 'block';
@@ -284,6 +496,13 @@
   // id="d"
   d.addEventListener('timeupdate', () => {
     const currentTime = d.currentTime;
+
+    if (d.style.display === 'block') {
+      focuse4 = true;
+    } else {
+      focuse4 = false;
+      d.pause();
+    }
 
     if (currentTime >= 70) {
       box2.style.display = 'block';
@@ -353,6 +572,13 @@
   e.addEventListener('timeupdate', () => {
     const currentTime = e.currentTime;
 
+    if (e.style.display === 'block') {
+      focuse5 = true;
+    } else {
+      focuse5 = false;
+      e.pause();
+    }
+
     if (currentTime >= 256) {
       box2.style.display = 'block';
       eq17.style.display = 'block';
@@ -388,6 +614,13 @@
   // id="f"
   f.addEventListener('timeupdate', () => {
     const currentTime = f.currentTime;
+
+    if (f.style.display === 'block') {
+      focuse6 = true;
+    } else {
+      focuse6 = false;
+      f.pause();
+    }
 
     if (currentTime >= 338) {
       box2.style.display = 'block';
@@ -439,6 +672,13 @@
   g.addEventListener('timeupdate', () => {
     const currentTime = g.currentTime;
 
+    if (g.style.display === 'block') {
+      focuse7 = true;
+    } else {
+      focuse7 = false;
+      g.pause();
+    }
+
     if (currentTime >= 183) {
       box2.style.display = 'block';
       gq17.style.display = 'block';
@@ -488,6 +728,13 @@
   // id="h"
   h.addEventListener('timeupdate', () => {
     const currentTime = h.currentTime;
+
+    if (h.style.display === 'block') {
+      focuse8 = true;
+    } else {
+      focuse8 = false;
+      h.pause();
+    }
 
     if (currentTime >= 21) {
       box2.style.display = 'block';
@@ -543,6 +790,13 @@
   i.addEventListener('timeupdate', () => {
     const currentTime = i.currentTime;
 
+    if (i.style.display === 'block') {
+      focuse9 = true;
+    } else {
+      focuse9 = false;
+      i.pause();
+    }
+
     if (currentTime >= 68) {
       box2.style.display = 'block';
       o15.style.display = 'block';
@@ -556,7 +810,7 @@
     } else {
       p16.style.display = 'none';
     }
-
+9
     if (currentTime >= 68) {
       ic.style.display = 'block';
     } else {
@@ -596,6 +850,13 @@
   // id="j"
   j.addEventListener('timeupdate', () => {
     const currentTime = j.currentTime;
+
+    if (j.style.display === 'block') {
+      focuse10 = true;
+    } else {
+      focuse10 = false;
+      j.pause();
+    }
 
     if (currentTime >= 186) {
       box2.style.display = 'block';
@@ -647,6 +908,13 @@
   k.addEventListener('timeupdate', () => {
     const currentTime = k.currentTime;
 
+    if (k.style.display === 'block') {
+      focuse11 = true;
+    } else {
+      focuse11 = false;
+      k.pause();
+    }
+
     if (currentTime >= 152) {
       box2.style.display = 'block';
       kq17.style.display = 'block';
@@ -696,6 +964,13 @@
   // id="l"
   l.addEventListener('timeupdate', () => {
     const currentTime = l.currentTime;
+
+    if (l.style.display === 'block') {
+      focuse12 = true;
+    } else {
+      focuse12 = false;
+      l.pause();
+    }
 
     if (currentTime >= 172) {
       box2.style.display = 'block';
@@ -747,6 +1022,13 @@
   m.addEventListener('timeupdate', () => {
     const currentTime = m.currentTime;
 
+    if (m.style.display === 'block') {
+      focuse13 = true;
+    } else {
+      focuse13 = false;
+      m.pause();
+    }
+
     if (currentTime >= 267) {
       box2.style.display = 'block';
       mq17.style.display = 'block';
@@ -796,6 +1078,13 @@
   // id="n"
   n.addEventListener('timeupdate', () => {
     const currentTime = n.currentTime;
+
+    if (n.style.display === 'block') {
+      focuse14 = true;
+    } else {
+      focuse14 = false;
+      n.pause();
+    }
 
     if (currentTime >= 278) {
       box2.style.display = 'block';
@@ -847,6 +1136,13 @@
   o.addEventListener('timeupdate', () => {
     const currentTime = o.currentTime;
 
+    if (o.style.display === 'block') {
+      focuse15 = true;
+    } else {
+      focuse15 = false;
+      o.pause();
+    }
+
     if (currentTime >= 146) {
       box2.style.display = 'block';
       oq17.style.display = 'block';
@@ -896,6 +1192,13 @@
   // id="p"
   p.addEventListener('timeupdate', () => {
     const currentTime = p.currentTime;
+
+    if (p.style.display === 'block') {
+      focuse16 = true;
+    } else {
+      focuse16 = false;
+      p.pause();
+    }
 
     if (currentTime >= 240) {
       box2.style.display = 'block';

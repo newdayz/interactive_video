@@ -253,4 +253,10 @@ video {
   padding: 0;
 }
 
+/* コントロール */
+#controls {
+  list-style-type: none;
+  cursor: pointer;
+}
+
 /* スマホの位置 */

@@ -51,8 +51,8 @@ const Container = document.querySelector(".container");
 const ProgressBar = document.getElementById("progress_bar");
 
 const ProgressP_A = document.getElementById("progress_p_a");
-const play_position = document.getElementById('play_position');
-const progress_bar = document.getElementById('progress');
+const PlayTimeA = document.getElementById('play_position');
+const ProgressA = document.getElementById('progress');
 const end_position = document.getElementById('end_position');
 
 const btn_mute = document.getElementById('mute');
@@ -124,10 +124,6 @@ const opening_P_A = document.getElementById('button_p_a');
 const back_P_I = document.getElementById('button_p_i');
 
 
-VideoAElement.muted = true;
-VideoAElement.play();
-
-
 const convertTime = (time_position) => {
   time_position = Math.floor(time_position);
   let res = null;
@@ -140,6 +136,26 @@ const convertTime = (time_position) => {
   return res;
 };
 
+ClassA.style.display = "block";
+VideoAElement.muted = true;
+VideoAElement.play();
+
+let playtimer = null;
+
+const startTimer = () => {
+  playtimer = setInterval(() => {
+    const currentTimeA = VideoAElement.currentTime;
+    const durationA = VideoAElement.duration;
+
+    if (!isNaN(currentTimeA) && !isNaN(durationA)) {
+      const progressBarAValue = (currentTimeA / durationA) * 100;
+      PlayTimeA.textContent = convertTime(currentTimeA);
+      ProgressA.value = progressBarAValue;
+    }
+
+  }, 100);
+  console.log('startTimer');
+};
 
 let isVideoABox = true;
 
@@ -149,16 +165,6 @@ if (isVideoABox) {
 
     const formattedDuration = convertTime(maxDuration);
     end_position.textContent = `${formattedDuration}`;
-
-    let playtimer = null;
-
-    const startTimer = () => {
-      playtimer = setInterval(() => {
-        play_position.textContent = convertTime(VideoAElement.currentTime);
-        progress_bar.value = Math.floor((VideoAElement.currentTime / VideoAElement.duration) * VideoAElement.duration);
-      }, 100);
-      console.log('startTimerを読み取りました');
-    };
 
     btn_pause.addEventListener('click', () => {
       VideoAElement.pause();
@@ -201,7 +207,16 @@ if (isVideoABox) {
       console.log('stopTimer一時停止');
     };
 
-    progress_bar.addEventListener('change', () => {
+    ProgressA.addEventListener('input', () => {
+      stopTimer();
+      const seekTime = calculateSeekTime(ProgressA.value);
+      if (!isNaN(seekTime) && isFinite(seekTime) && seekTime >= 0 && seekTime <= VideoAElement.duration) {
+        VideoAElement.currentTime = seekTime;
+        console.log('Aプログレスバーを操作しました');
+      }
+    });
+
+    ProgressA.addEventListener('change', () => {
       startTimer();
       console.log('Aプログレスバーの操作が完了しました');
     });
@@ -210,26 +225,13 @@ if (isVideoABox) {
       return (progressValue / 100) * VideoAElement.duration;
     };
 
-    progress_bar.addEventListener('input', () => {
-      stopTimer();
-      const seekTime = calculateSeekTime(progress_bar.value);
-      if (!isNaN(seekTime) && isFinite(seekTime) && seekTime >= 0 && seekTime <= VideoAElement.duration) {
-        VideoAElement.currentTime = seekTime;
-        console.log('Aプログレスバーを操作しました');
-      }
-    });
-
-
-
+    const isVideoVisible = true;
 
     VideoAElement.addEventListener('timeupdate', () => {
       const currentTimeA = VideoAElement.currentTime;
 
-      play_position.textContent = convertTime(currentTimeA);
+      PlayTimeA.textContent = convertTime(currentTimeA);
       end_position.textContent = convertTime(VideoAElement.duration);
-
-
-      const isVideoVisible = true;
 
       if (currentTimeA >= 88) {
         buttonB.style.display = 'block';
@@ -250,14 +252,6 @@ if (isVideoABox) {
         });
       } else {
         buttonB.style.display = 'none';
-      }
-
-      if (ClassA.style.zIndex === "29") {
-        if (isVideoABox) {
-          isVideoABox = false;
-
-          console.log("VideoABox非表示");
-        }
       }
 
       if (currentTimeA >= 93) {
@@ -281,14 +275,6 @@ if (isVideoABox) {
         buttonC.style.display = 'none';
       }
 
-      if (ClassA.style.zIndex === "29") {
-        if (isVideoABox) {
-          isVideoABox = false;
-
-          console.log("VideoABox非表示");
-        }
-      }
-
       if (currentTimeA >= 99) {
         buttonD.style.display = 'block';
         buttonD.addEventListener("click", () => {
@@ -308,14 +294,6 @@ if (isVideoABox) {
         });
       } else {
         buttonD.style.display = 'none';
-
-        if (ClassA.style.zIndex === "29") {
-          if (isVideoABox) {
-            isVideoABox = false;
-
-            console.log("VideoABox非表示");
-          }
-        }
 
 
       } if (currentTimeA >= 103) {
@@ -340,21 +318,11 @@ if (isVideoABox) {
         buttonE.style.display = 'none';
       }
 
-      if (ClassA.style.zIndex === "29") {
-        if (isVideoABox) {
-          isVideoABox = false;
-
-          console.log("VideoABox非表示");
-        }
-      }
-
       if (currentTimeA >= 132) {
         VideoAElement.pause();
       }
-
       console.log('TimeUpDateA');
     });
-
     console.log('loadeddataA');
   });
 }
@@ -402,10 +370,17 @@ let playtimerB = null;
 
 const startTimerB = () => {
   playtimerB = setInterval(() => {
-    PlayTimeB.textContent = convertTime(VideoBElement.currentTime);
-    ProgressB.value = Math.floor((VideoBElement.currentTime / VideoBElement.duration) * VideoBElement.duration);
+    const currentTimeB = VideoBElement.currentTime;
+    const durationB = VideoBElement.duration;
+
+    if (!isNaN(currentTimeB) && !isNaN(durationB)) {
+      const progressBarBValue = (currentTimeB / durationB) * 100;
+      PlayTimeB.textContent = convertTime(currentTimeB);
+      ProgressB.value = progressBarBValue;
+    }
+
   }, 100);
-  console.log('startTimerBが呼び出されました');
+  console.log('startTimerB');
 };
 
 let isVideoBBox = true;
@@ -613,15 +588,20 @@ UnmuteBtnC.id = "unmute_c";
 
 let playtimerC = null;
 
-
 const startTimerC = () => {
   playtimerC = setInterval(() => {
-    PlayTimeC.textContent = convertTime(VideoCElement.currentTime);
-    ProgressC.value = Math.floor((VideoCElement.currentTime / VideoCElement.duration) * VideoCElement.duration);
+    const currentTimeC = VideoCElement.currentTime;
+    const durationC = VideoCElement.duration;
+
+    if (!isNaN(currentTimeC) && !isNaN(durationC)) {
+      const progressBarCValue = (currentTimeC / durationC) * 100;
+      PlayTimeC.textContent = convertTime(currentTimeC);
+      ProgressC.value = progressBarCValue;
+    }
+
   }, 100);
   console.log('startTimerC');
 };
-
 
 VideoCElement.addEventListener('loadeddata', () => {
   const maxDurationC = VideoCElement.duration;
@@ -820,8 +800,15 @@ let playtimerD = null;
 
 const startTimerD = () => {
   playtimerD = setInterval(() => {
-    PlayTimeD.textContent = convertTime(VideoDElement.currentTime);
-    ProgressD.value = Math.floor((VideoDElement.currentTime / VideoDElement.duration) * VideoDElement.duration);
+    const currentTimeD = VideoDElement.currentTime;
+    const durationD = VideoDElement.duration;
+
+    if (!isNaN(currentTimeD) && !isNaN(durationD)) {
+      const progressBarDValue = (currentTimeD / durationD) * 100;
+      PlayTimeD.textContent = convertTime(currentTimeD);
+      ProgressD.value = progressBarDValue;
+    }
+
   }, 100);
   console.log('startTimerD');
 };
@@ -1038,8 +1025,15 @@ let playtimerE = null;
 
 const startTimerE = () => {
   playtimerE = setInterval(() => {
-    PlayTimeE.textContent = convertTime(VideoEElement.currentTime);
-    ProgressE.value = Math.floor((VideoEElement.currentTime / VideoEElement.duration) * VideoEElement.duration);
+    const currentTimeE = VideoEElement.currentTime;
+    const durationE = VideoEElement.duration;
+
+    if (!isNaN(currentTimeE) && !isNaN(durationE)) {
+      const progressBarEValue = (currentTimeE / durationE) * 100;
+      PlayTimeE.textContent = convertTime(currentTimeE);
+      ProgressE.value = progressBarEValue;
+    }
+
   }, 100);
   console.log('startTimerE');
 };
@@ -1176,7 +1170,7 @@ if (isVideoBoxE) {
   });
 }
 
-// Insurance E
+// Insurance F
 
 let ProgressBarF = ProgressBar.cloneNode(true);
 ProgressBarF.id = "progress_bar_e";
@@ -1220,8 +1214,15 @@ let playtimerF = null;
 
 const startTimerF = () => {
   playtimerF = setInterval(() => {
-    PlayTimeF.textContent = convertTime(VideoFElement.currentTime);
-    ProgressF.value = Math.floor((VideoFElement.currentTime / VideoFElement.duration) * VideoFElement.duration);
+    const currentTimeF = VideoFElement.currentTime;
+    const durationF = VideoFElement.duration;
+
+    if (!isNaN(currentTimeF) && !isNaN(durationF)) {
+      const progressBarFValue = (currentTimeF / durationF) * 100;
+      PlayTimeF.textContent = convertTime(currentTimeF);
+      ProgressF.value = progressBarFValue;
+    }
+
   }, 100);
   console.log('startTimerF');
 };
@@ -1307,7 +1308,6 @@ if (isVideoBoxF) {
 
       PlayTimeF.textContent = convertTime(VideoFElement.currentTime);
       EndTimeF.textContent = convertTime(VideoFElement.duration);
-
 
       if (currentTimeF >= 338) {
         buttonF_Info.style.display = 'block';
@@ -1425,8 +1425,15 @@ let playtimerG = null;
 
 const startTimerG = () => {
   playtimerG = setInterval(() => {
-    PlayTimeG.textContent = convertTime(VideoGElement.currentTime);
-    ProgressG.value = Math.floor((VideoGElement.currentTime / VideoGElement.duration) * VideoGElement.duration);
+    const currentTimeG = VideoGElement.currentTime;
+    const durationG = VideoGElement.duration;
+
+    if (!isNaN(currentTimeG) && !isNaN(durationG)) {
+      const progressBarGValue = (currentTimeG / durationG) * 100;
+      PlayTimeG.textContent = convertTime(currentTimeG);
+      ProgressG.value = progressBarGValue;
+    }
+
   }, 100);
   console.log('startTimerG');
 };
@@ -1628,10 +1635,17 @@ let playtimerH = null;
 
 const startTimerH = () => {
   playtimerH = setInterval(() => {
-    PlayTimeH.textContent = convertTime(VideoHElement.currentTime);
-    ProgressH.value = Math.floor((VideoHElement.currentTime / VideoHElement.duration) * VideoHElement.duration);
+    const currentTimeH = VideoHElement.currentTime;
+    const durationH = VideoHElement.duration;
+
+    if (!isNaN(currentTimeH) && !isNaN(durationH)) {
+      const progressBarHValue = (currentTimeH / durationH) * 100;
+      PlayTimeH.textContent = convertTime(currentTimeH);
+      ProgressH.value = progressBarHValue;
+    }
+
   }, 100);
-  console.log('startTimerHが呼び出されました');
+  console.log('startTimerH');
 };
 
 let isVideoBoxH = true;
@@ -1834,8 +1848,15 @@ let playtimerI = null;
 
 const startTimerI = () => {
   playtimerI = setInterval(() => {
-    PlayTimeI.textContent = convertTime(VideoIElement.currentTime);
-    ProgressI.value = Math.floor((VideoIElement.currentTime / VideoIElement.duration) * VideoIElement.duration);
+    const currentTimeI = VideoIElement.currentTime;
+    const durationI = VideoIElement.duration;
+
+    if (!isNaN(currentTimeI) && !isNaN(durationI)) {
+      const progressBarIValue = (currentTimeI / durationI) * 100;
+      PlayTimeI.textContent = convertTime(currentTimeI);
+      ProgressI.value = progressBarIValue;
+    }
+
   }, 100);
   console.log('startTimerI');
 };
@@ -2039,10 +2060,17 @@ let playtimerJ = null;
 
 const startTimerJ = () => {
   playtimerJ = setInterval(() => {
-    PlayTimeJ.textContent = convertTime(VideoJElement.currentTime);
-    ProgressJ.value = Math.floor((VideoJElement.currentTime / VideoJElement.duration) * VideoJElement.duration);
+    const currentTimeJ = VideoJElement.currentTime;
+    const durationJ = VideoJElement.duration;
+
+    if (!isNaN(currentTimeJ) && !isNaN(durationJ)) {
+      const progressBarJValue = (currentTimeJ / durationJ) * 100;
+      PlayTimeJ.textContent = convertTime(currentTimeJ);
+      ProgressJ.value = progressBarJValue;
+    }
+
   }, 100);
-  console.log('startTimerE');
+  console.log('startTimerJ');
 };
 
 let isVideoBoxJ = true;
@@ -2241,8 +2269,15 @@ let playtimerK = null;
 
 const startTimerK = () => {
   playtimerK = setInterval(() => {
-    PlayTimeK.textContent = convertTime(VideoKElement.currentTime);
-    ProgressK.value = Math.floor((VideoKElement.currentTime / VideoKElement.duration) * VideoKElement.duration);
+    const currentTimeK = VideoKElement.currentTime;
+    const durationK = VideoKElement.duration;
+
+    if (!isNaN(currentTimeK) && !isNaN(durationK)) {
+      const progressBarKValue = (currentTimeK / durationK) * 100;
+      PlayTimeK.textContent = convertTime(currentTimeK);
+      ProgressK.value = progressBarKValue;
+    }
+
   }, 100);
   console.log('startTimerK');
 };
@@ -2443,8 +2478,15 @@ let playtimerL = null;
 
 const startTimerL = () => {
   playtimerL = setInterval(() => {
-    PlayTimeL.textContent = convertTime(VideoLElement.currentTime);
-    ProgressL.value = Math.floor((VideoLElement.currentTime / VideoLElement.duration) * VideoLElement.duration);
+    const currentTimeL = VideoLElement.currentTime;
+    const durationL = VideoLElement.duration;
+
+    if (!isNaN(currentTimeL) && !isNaN(durationL)) {
+      const progressBarLValue = (currentTimeL / durationL) * 100;
+      PlayTimeL.textContent = convertTime(currentTimeL);
+      ProgressL.value = progressBarLValue;
+    }
+
   }, 100);
   console.log('startTimerL');
 };
@@ -2645,8 +2687,15 @@ let playtimerM = null;
 
 const startTimerM = () => {
   playtimerM = setInterval(() => {
-    PlayTimeM.textContent = convertTime(VideoMElement.currentTime);
-    ProgressM.value = Math.floor((VideoMElement.currentTime / VideoMElement.duration) * VideoMElement.duration);
+    const currentTimeM = VideoMElement.currentTime;
+    const durationM = VideoMElement.duration;
+
+    if (!isNaN(currentTimeM) && !isNaN(durationM)) {
+      const progressBarMValue = (currentTimeM / durationM) * 100;
+      PlayTimeM.textContent = convertTime(currentTimeM);
+      ProgressM.value = progressBarMValue;
+    }
+
   }, 100);
   console.log('startTimerM');
 };
@@ -2847,8 +2896,15 @@ let playtimerN = null;
 
 const startTimerN = () => {
   playtimerN = setInterval(() => {
-    PlayTimeN.textContent = convertTime(VideoNElement.currentTime);
-    ProgressN.value = Math.floor((VideoNElement.currentTime / VideoNElement.duration) * VideoNElement.duration);
+    const currentTimeN = VideoNElement.currentTime;
+    const durationN = VideoNElement.duration;
+
+    if (!isNaN(currentTimeN) && !isNaN(durationN)) {
+      const progressBarNValue = (currentTimeN / durationN) * 100;
+      PlayTimeN.textContent = convertTime(currentTimeN);
+      ProgressN.value = progressBarNValue;
+    }
+
   }, 100);
   console.log('startTimerN');
 };
@@ -3049,8 +3105,15 @@ let playtimerO = null;
 
 const startTimerO = () => {
   playtimerO = setInterval(() => {
-    PlayTimeO.textContent = convertTime(VideoOElement.currentTime);
-    ProgressO.value = Math.floor((VideoOElement.currentTime / VideoOElement.duration) * VideoOElement.duration);
+    const currentTimeO = VideoOElement.currentTime;
+    const durationO = VideoOElement.duration;
+
+    if (!isNaN(currentTimeO) && !isNaN(durationO)) {
+      const progressBarOValue = (currentTimeO / durationO) * 100;
+      PlayTimeO.textContent = convertTime(currentTimeO);
+      ProgressO.value = progressBarOValue;
+    }
+
   }, 100);
   console.log('startTimerO');
 };
@@ -3251,8 +3314,15 @@ let playtimerP = null;
 
 const startTimerP = () => {
   playtimerP = setInterval(() => {
-    PlayTimeP.textContent = convertTime(VideoPElement.currentTime);
-    ProgressP.value = Math.floor((VideoPElement.currentTime / VideoPElement.duration) * VideoPElement.duration);
+    const currentTimeP = VideoPElement.currentTime;
+    const durationP = VideoPElement.duration;
+
+    if (!isNaN(currentTimeP) && !isNaN(durationP)) {
+      const progressBarPValue = (currentTimeP / durationP) * 100;
+      PlayTimeP.textContent = convertTime(currentTimeP);
+      ProgressP.value = progressBarPValue;
+    }
+
   }, 100);
   console.log('startTimerP');
 };

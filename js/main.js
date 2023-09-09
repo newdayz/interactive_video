@@ -320,6 +320,8 @@ if (isVideoABox) {
 
       if (currentTimeA >= 132) {
         VideoAElement.pause();
+        btn_pause.style.display = "none";
+        btn_play.style.display = "block";
       }
       console.log('TimeUpDateA');
     });
@@ -396,7 +398,6 @@ if (isVideoBBox) {
       startTimerB();
     }
 
-    if (PauseBtnB) {
       PauseBtnB.addEventListener('click', () => {
         VideoBElement.pause();
         stopTimerB();
@@ -404,9 +405,7 @@ if (isVideoBBox) {
         PlayBtnB.style.display = 'block';
         console.log('B一時停止をクリックしました');
       });
-    }
 
-    if (PlayBtnB) {
       PlayBtnB.addEventListener('click', () => {
         startTimerB();
         VideoBElement.play();
@@ -414,8 +413,6 @@ if (isVideoBBox) {
         PauseBtnB.style.display = 'block';
         console.log('再生Bアイコンをクリックしました');
       });
-
-    }
 
     MuteBtnB.addEventListener('click', () => {
       if (VideoBElement.muted) {
@@ -520,11 +517,8 @@ if (isVideoBBox) {
             VideoBElement.currentTime = 0;
             VideoBElement.pause();
             ProgressBarB.style.zIndex = "-28";
-
-            VideoAElement.muted = false;
+            
             VideoAElement.play();
-            btn_unmute.style.display = "block";
-            btn_mute.style.display = "none";
             ClassA.style.zIndex = "290";
             ProgressBar.style.zIndex = "1";
             ProgressBar.style.display = "block";
@@ -537,6 +531,8 @@ if (isVideoBBox) {
       }
       if (currentTimeB >= 182) {
         VideoBElement.pause();
+        PauseBtnB.style.display = "none";
+        PlayBtnB.style.display = "block";
       }
 
       console.log('TimeUpDateBが発生しました');
@@ -607,10 +603,6 @@ VideoCElement.addEventListener('loadeddata', () => {
   const maxDurationC = VideoCElement.duration;
   const formattedDurationC = convertTime(maxDurationC);
   EndTimeC.textContent = `${formattedDurationC}`;
-
-  if (ClassA.style.zIndex = "29") {
-    startTimerC();
-  }
 
   PauseBtnC.addEventListener('click', () => {
     VideoCElement.pause();
@@ -747,6 +739,8 @@ VideoCElement.addEventListener('loadeddata', () => {
     }
 
     if (currentTimeC >= 106) {
+      PauseBtnC.style.display = "none";
+      PlayBtnC.style.display = "block";
       VideoCElement.pause();
     }
 
@@ -756,6 +750,7 @@ VideoCElement.addEventListener('loadeddata', () => {
   console.log('loadeddataC');
 });
 
+// Insurance D
 
 let ProgressBarD = ProgressBar.cloneNode(true);
 ProgressBarD.id = "progress_bar_d";
@@ -973,6 +968,8 @@ VideoDElement.addEventListener('loadeddata', () => {
     }
 
     if (currentTimeD >= 109) {
+      PauseBtnD.style.display = "none";
+      PlayBtnD.style.display = "block";
       VideoDElement.pause();
     }
 
@@ -1160,6 +1157,8 @@ if (isVideoBoxE) {
       }
 
       if (currentTimeE >= 272) {
+        PauseBtnE.style.display = "none";
+        PlayBtnE.style.display = "block";
         VideoEElement.pause();
       }
 
@@ -1371,7 +1370,9 @@ if (isVideoBoxF) {
         back_F_B.style.display = 'none';
       }
       if (currentTimeF >= 355) {
-        VideoBElement.pause();
+        PauseBtnF.style.display = "none";
+        PlayBtnF.style.display = "block";
+        VideoFElement.pause();
       }
 
       console.log('TimeUpDateF');
@@ -1582,7 +1583,9 @@ if (isVideoBoxG) {
         back_G_B.style.display = 'none';
       }
       if (currentTimeG >= 200) {
-        VideoBElement.pause();
+        PauseBtnG.style.display = "none";
+        PlayBtnG.style.display = "block";
+        VideoGElement.pause();
       }
 
       console.log('TimeUpDateG');
@@ -1795,6 +1798,8 @@ if (isVideoBoxH) {
         back_H_C.style.display = 'none';
       }
       if (currentTimeH >= 51) {
+        PauseBtnH.style.display = "none";
+        PlayBtnH.style.display = "block";
         VideoHElement.pause();
       }
 
@@ -2007,6 +2012,8 @@ if (isVideoBoxI) {
         back_I_C.style.display = 'none';
       }
       if (currentTimeI >= 82) {
+        PauseBtnI.style.display = "none";
+        PlayBtnI.style.display = "block";
         VideoIElement.pause();
       }
 
@@ -2216,6 +2223,8 @@ if (isVideoBoxJ) {
       }
 
       if (currentTimeJ >= 202) {
+        PauseBtnJ.style.display = "none";
+        PauseBtnJ.style.display = "block";
         VideoJElement.pause();
       }
 
@@ -2425,6 +2434,8 @@ if (isVideoBoxK) {
       }
 
       if (currentTimeK >= 168) {
+        PauseBtnK.style.display = "none";
+        PlayBtnK.style.display = "block";
         VideoKElement.pause();
       }
 
@@ -2634,6 +2645,8 @@ if (isVideoBoxL) {
       }
 
       if (currentTimeL >= 188) {
+        PauseBtnL.style.display = "none";
+        PlayBtnL.style.display = "block";
         VideoLElement.pause();
       }
 
@@ -2843,6 +2856,8 @@ if (isVideoBoxM) {
       }
 
       if (currentTimeM >= 283) {
+        PauseBtnM.style.display = "none";
+        PlayBtnM.style.display = "block";
         VideoMElement.pause();
       }
 
@@ -3052,6 +3067,8 @@ if (isVideoBoxN) {
       }
 
       if (currentTimeN >= 294) {
+        PauseBtnN.style.display = "none";
+        PlayBtnN.style.display = "block";
         VideoNElement.pause();
       }
 
@@ -3261,6 +3278,8 @@ if (isVideoBoxO) {
       }
 
       if (currentTimeO >= 162) {
+        PauseBtnO.style.display = "none";
+        PlayBtnO.style.display = "block";
         VideoOElement.pause();
       }
 
@@ -3470,6 +3489,8 @@ if (isVideoBoxP) {
       }
 
       if (currentTimeP >= 255) {
+        PauseBtnP.style.display = "none";
+        PlayBtnP.style.display = "block";
         VideoPElement.pause();
       }
 

@@ -555,6 +555,25 @@ img {
 #play_o,
 #play_p,
 #unmute,
+#unmute_b,
+#unmute_c,
+#unmute_d,
+#unmute_e,
+#unmute_f,
+#unmute_g,
+#unmute_h,
+#unmute_i,
+#unmute_j,
+#unmute_k,
+#unmute_l,
+#unmute_m,
+#unmute_n,
+#unmute_o,
+#unmute_p {
+  display: none;
+}
+
+#mute,
 #mute_b,
 #mute_c,
 #mute_d,
@@ -570,7 +589,7 @@ img {
 #mute_n,
 #mute_o,
 #mute_p {
-  display: none;
+  display: block;
 }
 
 #progress,
@@ -591,4 +610,5 @@ img {
 #progress_p {
   margin: 0;
   width: 100%;
+  cursor: pointer;
 }

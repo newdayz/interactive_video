@@ -157,6 +157,8 @@ const startTimer = () => {
   console.log('startTimer');
 };
 
+startTimer();
+
 let isVideoABox = true;
 
 if (isVideoABox) {
@@ -244,6 +246,8 @@ if (isVideoABox) {
             VideoAElement.currentTime = 0;
             VideoAElement.pause();
             ProgressBar.style.zIndex = "-29";
+            ProgressBar.style.display = "none";
+
 
             if (VideoAElement.muted) {
               VideoBElement.muted = true;
@@ -275,6 +279,8 @@ if (isVideoABox) {
             VideoAElement.currentTime = 0;
             VideoAElement.pause();
             ProgressBar.style.zIndex = "-29";
+            ProgressBar.style.display = "none";
+
 
             if (VideoAElement.muted) {
               VideoCElement.muted = true;
@@ -306,6 +312,8 @@ if (isVideoABox) {
             VideoAElement.currentTime = 0;
             VideoAElement.pause();
             ProgressBar.style.zIndex = "-29";
+            ProgressBar.style.display = "none";
+
 
             VideoDElement.play();
             ClassD.style.zIndex = "290";
@@ -337,6 +345,7 @@ if (isVideoABox) {
             VideoAElement.currentTime = 0;
             VideoAElement.pause();
             ProgressBar.style.zIndex = "-29";
+            ProgressBar.style.display = "none";
 
 
             VideoEElement.play();
@@ -518,6 +527,7 @@ if (isVideoBBox) {
             VideoBElement.currentTime = 0;
             VideoBElement.pause();
             ProgressBarB.style.zIndex = "-28";
+            ProgressBarB.style.display = "none";
 
             VideoFElement.play();
             ClassF.style.zIndex = "290";
@@ -549,6 +559,8 @@ if (isVideoBBox) {
             VideoBElement.currentTime = 0;
             VideoBElement.pause();
             ProgressBarB.style.zIndex = "-28";
+            ProgressBarB.style.display = "none";
+
 
             VideoGElement.play();
             ClassG.style.zIndex = "290";
@@ -580,6 +592,8 @@ if (isVideoBBox) {
             VideoBElement.currentTime = 0;
             VideoBElement.pause();
             ProgressBarB.style.zIndex = "-28";
+            ProgressBarB.style.display = "none";
+
 
             if (VideoBElement.muted) {
               VideoAElement.muted = true;
@@ -759,6 +773,8 @@ VideoCElement.addEventListener('loadeddata', () => {
           VideoCElement.currentTime = 0;
           VideoCElement.pause();
           ProgressBarC.style.zIndex = "-27";
+          ProgressBarC.style.display = "none";
+
 
           if (VideoCElement.muted) {
             VideoHElement.muted = true;
@@ -790,6 +806,8 @@ VideoCElement.addEventListener('loadeddata', () => {
           VideoCElement.currentTime = 0;
           VideoCElement.pause();
           ProgressBarC.style.zIndex = "-27";
+          ProgressBarC.style.display = "none";
+
 
           if (VideoCElement.muted) {
             VideoIElement.muted = true;
@@ -821,6 +839,8 @@ VideoCElement.addEventListener('loadeddata', () => {
           VideoCElement.currentTime = 0;
           VideoCElement.pause();
           ProgressBarC.style.zIndex = "-27";
+          ProgressBarC.style.display = "none";
+
 
           if (VideoCElement.muted) {
             VideoAElement.muted = true;
@@ -998,6 +1018,8 @@ VideoDElement.addEventListener('loadeddata', () => {
           VideoDElement.currentTime = 0;
           VideoDElement.pause();
           ProgressBarD.style.zIndex = "-26";
+          ProgressBarD.style.display = "none";
+
 
           if (VideoDElement.muted) {
             VideoJElement.muted = true;
@@ -1029,6 +1051,8 @@ VideoDElement.addEventListener('loadeddata', () => {
           VideoDElement.currentTime = 0;
           VideoDElement.pause();
           ProgressBarD.style.zIndex = "-26";
+          ProgressBarD.style.display = "none";
+
 
           if (VideoDElement.muted) {
             VideoKElement.muted = true;
@@ -1060,6 +1084,8 @@ VideoDElement.addEventListener('loadeddata', () => {
           VideoDElement.currentTime = 0;
           VideoDElement.pause();
           ProgressBarD.style.zIndex = "-26";
+          ProgressBarD.style.display = "none";
+
 
           if (VideoDElement.muted) {
             VideoLElement.muted = true;
@@ -1091,6 +1117,8 @@ VideoDElement.addEventListener('loadeddata', () => {
           VideoDElement.currentTime = 0;
           VideoDElement.pause();
           ProgressBarD.style.zIndex = "-26";
+          ProgressBarD.style.display = "none";
+
 
           if (VideoDElement.muted) {
             VideoAElement.muted = true;
@@ -1288,6 +1316,8 @@ if (isVideoBoxE) {
             VideoEElement.currentTime = 0;
             VideoEElement.pause();
             ProgressBarE.style.zIndex = "-25";
+            ProgressBarE.style.display = "none";
+
 
             if (VideoEElement.muted) {
               VideoAElement.muted = true;
@@ -1492,6 +1522,8 @@ if (isVideoBoxF) {
             VideoFElement.currentTime = 0;
             VideoFElement.pause();
             ProgressBarF.style.zIndex = "-24";
+            ProgressBarF.style.display = "none";
+
 
             if (VideoFElement.muted) {
               VideoAElement.muted = true;
@@ -1523,6 +1555,8 @@ if (isVideoBoxF) {
             VideoFElement.currentTime = 0;
             VideoFElement.pause();
             ProgressBarF.style.zIndex = "-24";
+            ProgressBarF.style.display = "none";
+
 
             if (VideoFElement.muted) {
               VideoBElement.muted = true;
@@ -1729,6 +1763,8 @@ if (isVideoBoxG) {
             VideoGElement.currentTime = 0;
             VideoGElement.pause();
             ProgressBarG.style.zIndex = "-23";
+            ProgressBarG.style.display = "none";
+
 
             if (VideoGElement.muted) {
               VideoAElement.muted = true;
@@ -1760,6 +1796,8 @@ if (isVideoBoxG) {
             VideoGElement.currentTime = 0;
             VideoGElement.pause();
             ProgressBarG.style.zIndex = "-23";
+            ProgressBarG.style.display = "none";
+
 
             if (VideoGElement.muted) {
               VideoBElement.muted = true;
@@ -1943,6 +1981,8 @@ if (isVideoBoxH) {
             VideoHElement.currentTime = 0;
             VideoHElement.pause();
             ProgressBarH.style.zIndex = "-22";
+            ProgressBarH.style.display = "none";
+
 
             if (VideoHElement.muted) {
               VideoMElement.muted = true;
@@ -1974,6 +2014,8 @@ if (isVideoBoxH) {
             VideoHElement.currentTime = 0;
             VideoHElement.pause();
             ProgressBarH.style.zIndex = "-22";
+            ProgressBarH.style.display = "none";
+
 
             if (VideoHElement.muted) {
               VideoNElement.muted = true;
@@ -2005,6 +2047,8 @@ if (isVideoBoxH) {
             VideoHElement.currentTime = 0;
             VideoHElement.pause();
             ProgressBarH.style.zIndex = "-22";
+            ProgressBarH.style.display = "none";
+
 
             if (VideoHElement.muted) {
               VideoCElement.muted = true;
@@ -2189,6 +2233,8 @@ if (isVideoBoxI) {
             VideoIElement.currentTime = 0;
             VideoIElement.pause();
             ProgressBarI.style.zIndex = "-21";
+            ProgressBarI.style.display = "none";
+
 
             if (VideoIElement.muted) {
               VideoOElement.muted = true;
@@ -2220,6 +2266,8 @@ if (isVideoBoxI) {
             VideoIElement.currentTime = 0;
             VideoIElement.pause();
             ProgressBarI.style.zIndex = "-21";
+            ProgressBarI.style.display = "none";
+
 
             if (VideoIElement.muted) {
               VideoPElement.muted = true;
@@ -2251,6 +2299,8 @@ if (isVideoBoxI) {
             VideoIElement.currentTime = 0;
             VideoIElement.pause();
             ProgressBarI.style.zIndex = "-21";
+            ProgressBarI.style.display = "none";
+
 
             if (VideoIElement.muted) {
               VideoCElement.muted = true;
@@ -2448,6 +2498,8 @@ if (isVideoBoxJ) {
             VideoJElement.currentTime = 0;
             VideoJElement.pause();
             ProgressBarJ.style.zIndex = "-20";
+            ProgressBarJ.style.display = "none";
+
 
             if (VideoJElement.muted) {
               VideoAElement.muted = true;
@@ -2479,6 +2531,8 @@ if (isVideoBoxJ) {
             VideoJElement.currentTime = 0;
             VideoJElement.pause();
             ProgressBarJ.style.zIndex = "-20";
+            ProgressBarJ.style.display = "none";
+
 
             if (VideoJElement.muted) {
               VideoDElement.muted = true;
@@ -2680,6 +2734,8 @@ if (isVideoBoxK) {
             VideoKElement.currentTime = 0;
             VideoKElement.pause();
             ProgressBarK.style.zIndex = "-19";
+            ProgressBarK.style.display = "none";
+
 
             if (VideoKElement.muted) {
               VideoAElement.muted = true;
@@ -2711,6 +2767,8 @@ if (isVideoBoxK) {
             VideoKElement.currentTime = 0;
             VideoKElement.pause();
             ProgressBarK.style.zIndex = "-19";
+            ProgressBarK.style.display = "none";
+
 
             if (VideoKElement.muted) {
               VideoDElement.muted = true;
@@ -2907,6 +2965,8 @@ if (isVideoBoxL) {
             VideoLElement.currentTime = 0;
             VideoLElement.pause();
             ProgressBarL.style.zIndex = "-18";
+            ProgressBarL.style.display = "none";
+
 
             if (VideoLElement.muted) {
               VideoAElement.muted = true;
@@ -2938,6 +2998,8 @@ if (isVideoBoxL) {
             VideoLElement.currentTime = 0;
             VideoLElement.pause();
             ProgressBarL.style.zIndex = "-18";
+            ProgressBarL.style.display = "none";
+
 
             if (VideoLElement.muted) {
               VideoDElement.muted = true;
@@ -3139,6 +3201,8 @@ if (isVideoBoxM) {
             VideoMElement.currentTime = 0;
             VideoMElement.pause();
             ProgressBarM.style.zIndex = "-17";
+            ProgressBarM.style.display = "none";
+
 
             if (VideoMElement.muted) {
               VideoAElement.muted = true;
@@ -3170,6 +3234,8 @@ if (isVideoBoxM) {
             VideoMElement.currentTime = 0;
             VideoMElement.pause();
             ProgressBarM.style.zIndex = "-17";
+            ProgressBarM.style.display = "none";
+
 
             if (VideoMElement.muted) {
               VideoHElement.muted = true;
@@ -3371,6 +3437,8 @@ if (isVideoBoxN) {
             VideoNElement.currentTime = 0;
             VideoNElement.pause();
             ProgressBarN.style.zIndex = "-16";
+            ProgressBarN.style.display = "none";
+
 
             if (VideoNElement.muted) {
               VideoAElement.muted = true;
@@ -3402,6 +3470,8 @@ if (isVideoBoxN) {
             VideoNElement.currentTime = 0;
             VideoNElement.pause();
             ProgressBarN.style.zIndex = "-16";
+            ProgressBarN.style.display = "none";
+
 
             if (VideoNElement.muted) {
               VideoHElement.muted = true;
@@ -3603,6 +3673,8 @@ if (isVideoBoxO) {
             VideoOElement.currentTime = 0;
             VideoOElement.pause();
             ProgressBarO.style.zIndex = "-15";
+            ProgressBarO.style.display = "none";
+
 
             if (VideoOElement.muted) {
               VideoAElement.muted = true;
@@ -3634,6 +3706,8 @@ if (isVideoBoxO) {
             VideoOElement.currentTime = 0;
             VideoOElement.pause();
             ProgressBarO.style.zIndex = "-15";
+            ProgressBarO.style.display = "none";
+
 
             if (VideoOElement.muted) {
               VideoIElement.muted = true;
@@ -3835,6 +3909,8 @@ if (isVideoBoxP) {
             VideoPElement.currentTime = 0;
             VideoPElement.pause();
             ProgressBarP.style.zIndex = "-14";
+            ProgressBarP.style.display = "none";
+
 
             if (VideoPElement.muted) {
               VideoAElement.muted = true;
@@ -3866,6 +3942,8 @@ if (isVideoBoxP) {
             VideoPElement.currentTime = 0;
             VideoPElement.pause();
             ProgressBarP.style.zIndex = "-14";
+            ProgressBarP.style.display = "none";
+
 
             if (VideoPElement.muted) {
               VideoIElement.muted = true;

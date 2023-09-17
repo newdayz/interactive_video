@@ -319,7 +319,37 @@ img {
 }
 
 #play_position,
-#end_position {
+#playtime_b,
+#playtime_c,
+#playtime_d,
+#playtime_e,
+#playtime_f,
+#playtime_g,
+#playtime_h,
+#playtime_i,
+#playtime_j,
+#playtime_k,
+#playtime_l,
+#playtime_m,
+#playtime_n,
+#playtime_o,
+#playtime_p,
+#end_position,
+#endtime_b,
+#playtime_c,
+#playtime_d,
+#playtime_e,
+#playtime_f,
+#playtime_g,
+#playtime_h,
+#playtime_i,
+#playtime_j,
+#playtime_k,
+#playtime_l,
+#playtime_m,
+#playtime_n,
+#playtime_o,
+#playtime_p {
   padding-left: 6px;
   padding-right: 6px;
 }

@@ -6,13 +6,16 @@ body {
 }
 
 .container {
-  max-width: 1280px;
-  width: 80%;
-  max-height: 840px;
-  height: 100%;
-  margin-top: 32px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  position: fixed;
+  top: 30%;
+  bottom: 30%;
+}
+
+header {
+  background: white;
 }
 
 .interactive_videos {
@@ -310,27 +313,17 @@ img {
   display: flex;
   align-items: center;
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   margin: 0;
-  width: 90%;
+  width: 100%;
 }
 
 #play_position,
-#play_b,
-#play_c,
-#play_d,
-#play_e,
-#play_f,
-#play_g,
-#play_h,
-#play_i,
-#play_j,
-#play_k,
-#play_l,
-#play_m,
-#play_n,
-#play_o,
-#play_p,
+#end_position {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 #play,
 #play_b,
 #play_c,
@@ -363,26 +356,9 @@ img {
 #pause_n,
 #pause_o,
 #pause_p {
-  padding-left: 8px;
-  padding-right: 4px;
+  padding-left: 6px;
 }
 
-#end_position,
-#end_b,
-#end_c,
-#end_d,
-#end_e,
-#end_f,
-#end_g,
-#end_h,
-#end_i,
-#end_j,
-#end_k,
-#end_l,
-#end_m,
-#end_n,
-#end_o,
-#end_p,
 #unmute,
 #unmute_b,
 #unmute_c,
@@ -415,8 +391,7 @@ img {
 #mute_n,
 #mute_o,
 #mute_p {
-  padding-left: 4px;
-  padding-right: 8px;
+  padding-right: 6px;
 }
 
 #play,
@@ -494,8 +469,64 @@ img {
   cursor: pointer;
 }
 
-@media (min-width: 1366px) {
+@media (min-width: 480px) {
   .container {
-    min-height: 100%;
+    top: 25%;
+    bottom: 25%;
+  }
+}
+
+@media (min-width: 667px) {
+  .container {
+    top: 20%;
+    bottom: 20%;
+  }
+}
+
+
+@media (orientation: landscape) and (max-width: 928px) {
+  .container {
+    width: 76%;
+    top: 0;
+    bottom: 0;
+    left: 6%;
+    right: 6%;
+  }
+}
+
+@media (min-width:928px) {
+  .container {
+    width: 100%;
+    top: 10%;
+    bottom: 10%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+@media (min-width:1024px) {
+  .container {
+    width: 100%;
+    top: 5%;
+    bottom: 5%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+@media (min-width:1080px) {
+  .container {
+    width: 80%;
+    left: 10%;
+    right: 10%;
+    top: 10%;
+    bottom: 10%;
+  }
+}
+
+@media (min-width:1280px) {
+  .container {
+    top: 0;
+    bottom: 0;
   }
 }

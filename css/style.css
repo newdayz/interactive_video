@@ -512,7 +512,7 @@ img {
 
 @media (orientation: landscape) and (max-width: 928px) {
   .container {
-    width: 76%;
+    width: 70%;
     top: 0;
     bottom: 0;
     left: 6%;
@@ -522,40 +522,12 @@ img {
 
 @media (min-width:928px) {
   .container {
-    width: 100%;
-    top: 10%;
-    bottom: 10%;
-    margin-right: 0;
-    margin-left: 0;
-  }
-}
-
-@media (min-width:1024px) {
-  .container {
-    width: 100%;
-    top: 5%;
-    bottom: 5%;
-    margin-right: 0;
-    margin-left: 0;
-  }
-}
-
-@media (min-width:1080px) {
-  .container {
-    width: 80%;
-    left: 10%;
-    right: 10%;
-    top: 10%;
-    bottom: 10%;
-  }
-}
-
-@media (min-width:1280px) {
-  .container {
     width: 70%;
     top: 0;
     bottom: 0;
     left: 15%;
     right: 15%;
+    margin-right: 0;
+    margin-left: 0;
   }
 }

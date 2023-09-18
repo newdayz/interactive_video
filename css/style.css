@@ -14,10 +14,6 @@ body {
   bottom: 30%;
 }
 
-header {
-  background: white;
-}
-
 .interactive_videos {
   position: relative;
   width: 100%;
@@ -556,7 +552,10 @@ img {
 
 @media (min-width:1280px) {
   .container {
+    width: 70%;
     top: 0;
     bottom: 0;
+    left: 15%;
+    right: 15%;
   }
 }

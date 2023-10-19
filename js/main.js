@@ -123,19 +123,62 @@ const buttonP_Info = document.getElementById('button_p_info');
 const opening_P_A = document.getElementById('button_p_a');
 const back_P_I = document.getElementById('button_p_i');
 
-VideoAElement.addEventListener("mouseover", () => {
-  ProgressBar.style.display = "block";
+ProgressBar.style.display = "block";
+
+let timer = null;
+
+VideoAElement.addEventListener("mousemove", () => {
+  if (!VideoAElement.paused) {
+    clearTimeout(timer);
+    ProgressBar.style.display = "block";
+    timer = setTimeout(() => {
+      ProgressBar.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timer);
+    ProgressBar.style.display = "block";
+  }
 });
 
-VideoAElement.addEventListener("mouseout", () => {
+btn_play.addEventListener("mouseover", () => {
+  if (VideoAElement.paused) {
+    ProgressBar.style.display = "block";
+    clearTimeout(timer);
+  } else {
+    ProgressBar.style.display = "none";
+  }
+});
+
+ProgressA.addEventListener("mouseover", () => {
+  if (!VideoAElement.paused) {
+    ProgressBar.style.display = "block";
+    clearTimeout(timer);
+  }
+});
+
+btn_mute.addEventListener("mouseover", () => {
+  if (VideoAElement.muted) {
+    clearTimeout(timer);
+    ProgressBar.style.display = "block";
+  } else {
+    ProgressBar.style.display = "none";
+  }
+});
+
+btn_mute.addEventListener("mouseout", () => {
   ProgressBar.style.display = "none";
 });
 
-ProgressBar.addEventListener("mouseover", () => {
-  ProgressBar.style.display = "block";
+btn_unmute.addEventListener("mouseover", () => {
+  if (!VideoAElement.muted) {
+    clearTimeout(timer);
+    ProgressBar.style.display = "block";
+  } else {
+    ProgressBar.style.display = "none";
+  }
 });
 
-ProgressBar.addEventListener("mouseout", () => {
+btn_unmute.addEventListener("mouseout", () => {
   ProgressBar.style.display = "none";
 });
 
@@ -171,73 +214,49 @@ buttonE.addEventListener("mouseout", () => {
   ProgressBar.style.display = "none";
 });
 
-let isTouchingprogressBar = false;
-let progressAtimeout;
-
-function setProgressBarTimeout() {
-  progressAtimeout = setTimeout(() => {
-    ProgressBar.style.display = "none";
-  }, 3000);
-}
+let touchTimer = null;
 
 VideoAElement.addEventListener("touchstart", () => {
+  if (!VideoAElement.paused) {
+    ProgressBar.style.display = "block";
+  } else {
+    clearTimeout(touchTimer);
+  }
+});
+
+btn_pause.addEventListener("touchstart", () => {
   ProgressBar.style.display = "block";
+  clearTimeout(touchTimer);
 });
 
-VideoAElement.addEventListener("touchend", () => {
-  setProgressBarTimeout();
-});
+function setProgressBarTimeout() {
+  ProgressBar.style.display = "none";
+}
 
-ProgressBar.style.display = "block";
+btn_play.addEventListener("touchstart", () => {
+  if (VideoAElement.paused) {
+    touchTimer = setTimeout(setProgressBarTimeout, 3000);
+  }
+});
 
 ProgressA.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressAtimeout);
-    progressAtimeout = null;
+  if (VideoAElement.paused) {
+    ProgressBar.style.display = "block";
+    clearTimeout(touchTimer);
   }
+});
+
+ProgressA.addEventListener("touchmove", () => {
+  ProgressBar.style.display = "block";
+  clearTimeout(touchTimer);
 });
 
 ProgressA.addEventListener("touchend", () => {
   if (VideoAElement.paused) {
     ProgressBar.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressAtimeout);
-      progressAtimeout = null;
-    }
+    clearTimeout(touchTimer);
   } else {
-    setProgressBarTimeout();
-    isTouchingprogressBar = false;
-  }
-});
-
-btn_pause.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressAtimeout);
-    progressAtimeout = null;
-  }
-});
-
-btn_play.addEventListener("touchstart", () => {
-  setProgressBarTimeout();
-  isTouchingprogressBar = false;
-});
-
-btn_mute.addEventListener("touchstart", () => {
-  setProgressBarTimeout();
-  isTouchingprogressBar = false;
-  if (VideoAElement.paused) {
-    ProgressBar.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressAtimeout);
-      progressAtimeout = null;
-    }
-  } else {
-    setProgressBarTimeout();
-    isTouchingprogressBar = false;
+    ProgressBar.style.display = "none";
   }
 });
 
@@ -287,10 +306,7 @@ if (isVideoABox) {
 
     function resizeFix() {
       const windowWidth = document.documentElement.clientWidth;
-      console.log(window.innerWidth);
-      console.log(windowWidth);
       const windowHeight = document.documentElement.clientHeight;
-      console.log(windowHeight);
 
       const aspectRatio = 16 / 9;
 
@@ -308,48 +324,48 @@ if (isVideoABox) {
     window.addEventListener("resize", resizeFix);
     resizeFix();
 
-
-    btn_pause.addEventListener('click', () => {
+    btn_pause.addEventListener("click", () => {
       if (!VideoAElement.paused) {
         VideoAElement.pause();
         stopTimer();
         btn_pause.style.display = 'none';
         btn_play.style.display = 'block';
-        console.log('A一時停止をクリックしました');
       }
     });
 
-    btn_play.addEventListener('click', () => {
+    btn_play.addEventListener("click", () => {
       if (VideoAElement.paused) {
         startTimer();
         VideoAElement.play();
         btn_play.style.display = 'none';
         btn_pause.style.display = 'block';
-        console.log('A再生アイコンをクリックしました');
+        ProgressBar.style.display = "none";
       }
     });
 
-    btn_mute.addEventListener('click', () => {
+    btn_mute.addEventListener("click", () => {
       if (VideoAElement.muted) {
         VideoAElement.muted = false;
         btn_mute.style.display = 'none';
         btn_unmute.style.display = 'block';
-        console.log('Aミュートを解除しました');
+        if (!VideoAElement.paused) {
+          ProgressBar.style.display = "none";
+        } else {
+          ProgressBar.style.display = "block";
+        }
       }
     });
 
-    btn_unmute.addEventListener('click', () => {
+    btn_unmute.addEventListener("click", () => {
       if (!VideoAElement.muted) {
         VideoAElement.muted = true;
         btn_unmute.style.display = 'none';
         btn_mute.style.display = 'block';
-        console.log('Aミュートをクリックしました');
       }
     });
 
     const stopTimer = () => {
       clearInterval(playtimer);
-      console.log('stopTimer一時停止');
     };
 
     ProgressA.addEventListener('input', () => {
@@ -357,8 +373,8 @@ if (isVideoABox) {
       const seekTime = calculateSeekTime(ProgressA.value);
       if (!isNaN(seekTime) && isFinite(seekTime) && seekTime >= 0 && seekTime <= VideoAElement.duration) {
         VideoAElement.currentTime = seekTime;
-        console.log('Aプログレスバーを操作しました');
       }
+      console.log('Aプログレスバーを操作しました');
     });
 
     ProgressA.addEventListener('change', () => {
@@ -406,15 +422,11 @@ if (isVideoABox) {
             console.log('button1をクリックしました');
           }
         };
-
         buttonB.addEventListener("click", clickHandler_b);
 
         buttonB.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_b();
-          setTimeout(() => {
-            ProgressBar.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonB.style.display = 'none';
@@ -453,9 +465,6 @@ if (isVideoABox) {
         buttonC.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_c();
-          setTimeout(() => {
-            ProgressBar.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonC.style.display = 'none';
@@ -493,9 +502,6 @@ if (isVideoABox) {
         buttonD.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_d();
-          setTimeout(() => {
-            ProgressBar.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonD.style.display = 'none';
@@ -534,9 +540,6 @@ if (isVideoABox) {
         buttonE.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_e();
-          setTimeout(() => {
-            ProgressBar.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonE.style.display = 'none';
@@ -593,19 +596,60 @@ let UnmuteBtnB = ContorolsSoundB.querySelector("#unmute");
 MuteBtnB.id = "mute_b";
 UnmuteBtnB.id = "unmute_b";
 
-VideoBElement.addEventListener("mouseover", () => {
-  ProgressBarB.style.display = "block";
+let timerB = null;
+
+VideoBElement.addEventListener("mousemove", () => {
+  if (!VideoBElement.paused) {
+    clearTimeout(timerB);
+    ProgressBarB.style.display = "block";
+    timerB = setTimeout(() => {
+      ProgressBarB.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerB);
+    ProgressBarB.style.display = "block";
+  }
 });
 
-VideoBElement.addEventListener("mouseout", () => {
+PlayBtnB.addEventListener("mouseover", () => {
+  if (VideoBElement.paused) {
+    ProgressBarB.style.display = "block";
+    clearTimeout(timerB);
+  } else {
+    ProgressBarB.style.display = "none";
+  }
+});
+
+ProgressB.addEventListener("mouseover", () => {
+  if (!VideoBElement.paused) {
+    ProgressBarB.style.display = "block";
+    clearTimeout(timerB);
+  }
+});
+
+MuteBtnB.addEventListener("mouseover", () => {
+  if (VideoBElement.muted) {
+    clearTimeout(timerB);
+    ProgressBarB.style.display = "block";
+  } else {
+    ProgressBarB.style.display = "none";
+  }
+});
+
+MuteBtnB.addEventListener("mouseout", () => {
   ProgressBarB.style.display = "none";
 });
 
-ProgressBarB.addEventListener("mouseover", () => {
-  ProgressBarB.style.display = "block";
+UnmuteBtnB.addEventListener("mouseover", () => {
+  if (!VideoBElement.muted) {
+    clearTimeout(timerB);
+    ProgressBarB.style.display = "block";
+  } else {
+    ProgressBarB.style.display = "none";
+  }
 });
 
-ProgressBarB.addEventListener("mouseout", () => {
+UnmuteBtnB.addEventListener("mouseout", () => {
   ProgressBarB.style.display = "none";
 });
 
@@ -633,56 +677,49 @@ back_B_A.addEventListener("mouseout", () => {
   ProgressBarB.style.display = "none";
 });
 
-let progressBtimeout;
-
 function setProgressBarBTimeout() {
-  progressBtimeout = setTimeout(() => {
-    ProgressBarB.style.display = "none";
-  }, 3000);
+  ProgressBarB.style.display = "none";
 }
+let touchTimerB = null;
 
 VideoBElement.addEventListener("touchstart", () => {
-  ProgressBarB.style.display = "block";
-});
-
-VideoBElement.addEventListener("touchend", () => {
-  setProgressBarBTimeout();
-});
-
-ProgressB.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressBtimeout);
-    progressBtimeout = null;
-  }
-});
-
-ProgressB.addEventListener("touchend", () => {
-  if (VideoBElement.paused) {
+  if (!VideoBElement.paused) {
     ProgressBarB.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressBtimeout);
-      progressBtimeout = null;
-    }
   } else {
-    setProgressBarBTimeout();
-    isTouchingprogressBar = false;
+    clearTimeout(touchTimerB);
   }
 });
 
 PauseBtnB.addEventListener("touchstart", () => {
   ProgressBarB.style.display = "block";
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressBtimeout);
-    progressBtimeout = null;
-  }
+  clearTimeout(touchTimerB);
 });
 
 PlayBtnB.addEventListener("touchstart", () => {
-  setProgressBarBTimeout();
-  isTouchingprogressBar = false;
+  if (VideoBElement.paused) {
+    touchTimerB = setTimeout(setProgressBarBTimeout, 3000);
+  }
+});
+
+ProgressB.addEventListener("touchstart", () => {
+  if (VideoBElement.paused) {
+    ProgressBarB.style.display = "block";
+    clearTimeout(touchTimerB);
+  }
+});
+
+ProgressB.addEventListener("touchmove", () => {
+  ProgressBarB.style.display = "block";
+  clearTimeout(touchTimerB);
+});
+
+ProgressB.addEventListener("touchend", () => {
+  if (VideoBElement.paused) {
+    ProgressBarB.style.display = "block";
+    clearTimeout(touchTimerB);
+  } else {
+    ProgressBarB.style.display = "none";
+  }
 });
 
 let playtimerB = null;
@@ -729,6 +766,7 @@ if (isVideoBBox) {
         VideoBElement.play();
         PlayBtnB.style.display = 'none';
         PauseBtnB.style.display = 'block';
+        ProgressBarB.style.display = "none";
         console.log('再生Bアイコンをクリックしました');
       }
     });
@@ -738,6 +776,11 @@ if (isVideoBBox) {
         VideoBElement.muted = false;
         MuteBtnB.style.display = 'none';
         UnmuteBtnB.style.display = 'block';
+        if (!VideoBElement.paused) {
+          ProgressBarB.style.display = "none";
+        } else {
+          ProgressBarB.style.display = "block";
+        }
         console.log('Bミュートを解除しました');
       }
     });
@@ -752,10 +795,8 @@ if (isVideoBBox) {
     });
 
     const stopTimerB = () => {
-      VideoBElement.addEventListener("pause", () => {
-        clearInterval(playtimerB);
-        console.log('stopTimerB一時停止');
-      });
+      clearInterval(playtimerB);
+      console.log('stopTimerB一時停止');
     };
 
     ProgressB.addEventListener('input', () => {
@@ -816,9 +857,6 @@ if (isVideoBBox) {
         buttonF.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_f();
-          setTimeout(() => {
-            ProgressBarB.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonF.style.display = 'none';
@@ -857,9 +895,6 @@ if (isVideoBBox) {
         buttonG.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_g();
-          setTimeout(() => {
-            ProgressBarB.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonG.style.display = 'none';
@@ -898,9 +933,6 @@ if (isVideoBBox) {
         back_B_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_b_a();
-          setTimeout(() => {
-            ProgressBarB.style.display = "none";
-          }, 3000);
         });
       } else {
         back_B_A.style.display = 'none';
@@ -957,19 +989,60 @@ let UnmuteBtnC = ContorolsSoundC.querySelector("#unmute");
 MuteBtnC.id = "mute_c";
 UnmuteBtnC.id = "unmute_c";
 
-VideoCElement.addEventListener("mouseover", () => {
-  ProgressBarC.style.display = "block";
+let timerC = null;
+
+VideoCElement.addEventListener("mousemove", () => {
+  if (!VideoCElement.paused) {
+    clearTimeout(timerC);
+    ProgressBarC.style.display = "block";
+    timerC = setTimeout(() => {
+      ProgressBaC.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerC);
+    ProgressBarC.style.display = "block";
+  }
 });
 
-VideoCElement.addEventListener("mouseout", () => {
+PlayBtnC.addEventListener("mouseover", () => {
+  if (VideoCElement.paused) {
+    ProgressBarC.style.display = "block";
+    clearTimeout(timerC);
+  } else {
+    ProgressBarC.style.display = "none";
+  }
+});
+
+ProgressC.addEventListener("mouseover", () => {
+  if (!VideoCElement.paused) {
+    ProgressBarC.style.display = "block";
+    clearTimeout(timerC);
+  }
+});
+
+MuteBtnC.addEventListener("mouseover", () => {
+  if (VideoCElement.muted) {
+    clearTimeout(timerC);
+    ProgressBarC.style.display = "block";
+  } else {
+    ProgressBarC.style.display = "none";
+  }
+});
+
+MuteBtnC.addEventListener("mouseout", () => {
   ProgressBarC.style.display = "none";
 });
 
-ProgressBarC.addEventListener("mouseover", () => {
-  ProgressBarC.style.display = "block";
+UnmuteBtnC.addEventListener("mouseover", () => {
+  if (!VideoCElement.muted) {
+    clearTimeout(timerC);
+    ProgressBarC.style.display = "block";
+  } else {
+    ProgressBarC.style.display = "none";
+  }
 });
 
-ProgressBarC.addEventListener("mouseout", () => {
+UnmuteBtnC.addEventListener("mouseout", () => {
   ProgressBarC.style.display = "none";
 });
 
@@ -997,55 +1070,49 @@ back_C_A.addEventListener("mouseout", () => {
   ProgressBarC.style.display = "none";
 });
 
-let progressCtimeout;
-
 function setProgressBarCTimeout() {
-  progressCtimeout = setTimeout(() => {
-    ProgressBarC.style.display = "none";
-  }, 3000);
+  ProgressBarC.style.display = "none";
 }
+let touchTimerC = null;
 
 VideoCElement.addEventListener("touchstart", () => {
-  ProgressBarC.style.display = "block";
+  if (!VideoCElement.paused) {
+    ProgressBarC.style.display = "block";
+  } else {
+    clearTimeout(touchTimerC);
+  }
 });
 
-VideoCElement.addEventListener("touchend", () => {
-  setProgressBarCTimeout();
+PauseBtnC.addEventListener("touchstart", () => {
+  ProgressBarC.style.display = "block";
+  clearTimeout(touchTimerC);
+});
+
+PlayBtnC.addEventListener("touchstart", () => {
+  if (VideoCElement.paused) {
+    touchTimerC = setTimeout(setProgressBarCTimeout, 3000);
+  }
 });
 
 ProgressC.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressCtimeout);
-    progressCtimeout = null;
+  if (VideoCElement.paused) {
+    ProgressBarC.style.display = "block";
+    clearTimeout(touchTimerC);
   }
+});
+
+ProgressC.addEventListener("touchmove", () => {
+  ProgressBarC.style.display = "block";
+  clearTimeout(touchTimerC);
 });
 
 ProgressC.addEventListener("touchend", () => {
   if (VideoCElement.paused) {
     ProgressBarC.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressCtimeout);
-      progressCtimeout = null;
-    }
+    clearTimeout(touchTimerC);
   } else {
-    setProgressBarCTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarC.style.display = "none";
   }
-});
-
-PauseBtnC.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressCtimeout);
-    progressCtimeout = null;
-  }
-});
-
-PlayBtnC.addEventListener("touchstart", () => {
-  setProgressBarCTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerC = null;
@@ -1078,8 +1145,8 @@ VideoCElement.addEventListener('loadeddata', () => {
       stopTimerC();
       PauseBtnC.style.display = 'none';
       PlayBtnC.style.display = 'block';
-      console.log('C一時停止をクリックしました');
     }
+    console.log('C一時停止をクリックしました');
   });
 
   PlayBtnC.addEventListener('click', () => {
@@ -1088,8 +1155,9 @@ VideoCElement.addEventListener('loadeddata', () => {
       VideoCElement.play();
       PlayBtnC.style.display = 'none';
       PauseBtnC.style.display = 'block';
-      console.log('C再生をクリック');
+      ProgressBarC.style.display = "none";
     }
+    console.log('C再生をクリック');
   });
 
   MuteBtnC.addEventListener('click', () => {
@@ -1097,8 +1165,13 @@ VideoCElement.addEventListener('loadeddata', () => {
       VideoCElement.muted = false;
       MuteBtnC.style.display = 'none';
       UnmuteBtnC.style.display = 'block';
-      console.log('Cミュートを解除しました');
+      if (!VideoAElement.paused) {
+        ProgressBar.style.display = "none";
+      } else {
+        ProgressBar.style.display = "block";
+      }
     }
+    console.log('Cミュートを解除しました');
   });
 
   UnmuteBtnC.addEventListener('click', () => {
@@ -1106,15 +1179,13 @@ VideoCElement.addEventListener('loadeddata', () => {
       VideoCElement.muted = true;
       UnmuteBtnC.style.display = 'none';
       MuteBtnC.style.display = 'block';
-      console.log('Cミュートをクリックしました');
     }
+    console.log('Cミュートをクリックしました');
   });
 
   const stopTimerC = () => {
-    VideoCElement.addEventListener("pause", () => {
-      clearInterval(playtimerC);
-      console.log('stopTimerC一時停止');
-    });
+    clearInterval(playtimerC);
+    console.log('stopTimerC一時停止');
   };
 
   ProgressC.addEventListener('input', () => {
@@ -1122,8 +1193,8 @@ VideoCElement.addEventListener('loadeddata', () => {
     const seekTimeC = calculateSeekTimeC(ProgressC.value);
     if (!isNaN(seekTimeC) && isFinite(seekTimeC) && seekTimeC >= 0 && seekTimeC <= VideoCElement.duration) {
       VideoCElement.currentTime = seekTimeC;
-      console.log('Cプログレスバーを操作しました');
     }
+    console.log('Cプログレスバーを操作しました');
   });
 
   ProgressC.addEventListener('change', () => {
@@ -1177,9 +1248,6 @@ VideoCElement.addEventListener('loadeddata', () => {
       buttonH.addEventListener("touchstart", (event) => {
         event.preventDefault();
         clickHandler_h();
-        setTimeout(() => {
-          ProgressBarC.style.display = "none";
-        }, 3000);
       });
     } else {
       buttonH.style.display = 'none';
@@ -1218,9 +1286,6 @@ VideoCElement.addEventListener('loadeddata', () => {
       buttonI.addEventListener("touchstart", (event) => {
         event.preventDefault();
         clickHandler_i();
-        setTimeout(() => {
-          ProgressBarC.style.display = "none";
-        }, 3000);
       });
     } else {
       buttonI.style.display = 'none';
@@ -1259,9 +1324,6 @@ VideoCElement.addEventListener('loadeddata', () => {
       back_C_A.addEventListener("touchstart", (event) => {
         event.preventDefault();
         clickHandler_back_c_a();
-        setTimeout(() => {
-          ProgressBarC.style.display = "none";
-        }, 3000);
       });
     } else {
       back_C_A.style.display = 'none';
@@ -1318,19 +1380,60 @@ let UnmuteBtnD = ContorolsSoundD.querySelector("#unmute");
 MuteBtnD.id = "mute_d";
 UnmuteBtnD.id = "unmute_d";
 
-VideoDElement.addEventListener("mouseover", () => {
-  ProgressBarD.style.display = "block";
+let timerD = null;
+
+VideoDElement.addEventListener("mousemove", () => {
+  if (!VideoDElement.paused) {
+    clearTimeout(timerD);
+    ProgressBarD.style.display = "block";
+    timerD = setTimeout(() => {
+      ProgressBarD.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerD);
+    ProgressBarD.style.display = "block";
+  }
 });
 
-VideoDElement.addEventListener("mouseout", () => {
+PlayBtnD.addEventListener("mouseover", () => {
+  if (VideoDElement.paused) {
+    ProgressBarD.style.display = "block";
+    clearTimeout(timerD);
+  } else {
+    ProgressBarD.style.display = "none";
+  }
+});
+
+ProgressD.addEventListener("mouseover", () => {
+  if (!VideoDElement.paused) {
+    ProgressBarD.style.display = "block";
+    clearTimeout(timerD);
+  }
+});
+
+MuteBtnD.addEventListener("mouseover", () => {
+  if (VideoDElement.muted) {
+    clearTimeout(timerD);
+    ProgressBarD.style.display = "block";
+  } else {
+    ProgressBarD.style.display = "none";
+  }
+});
+
+MuteBtnD.addEventListener("mouseout", () => {
   ProgressBarD.style.display = "none";
 });
 
-ProgressBarD.addEventListener("mouseover", () => {
-  ProgressBarD.style.display = "block";
+UnmuteBtnD.addEventListener("mouseover", () => {
+  if (!VideoDElement.muted) {
+    clearTimeout(timerD);
+    ProgressBarD.style.display = "block";
+  } else {
+    ProgressBarD.style.display = "none";
+  }
 });
 
-ProgressBarD.addEventListener("mouseout", () => {
+UnmuteBtnD.addEventListener("mouseout", () => {
   ProgressBarD.style.display = "none";
 });
 
@@ -1366,55 +1469,49 @@ back_D_A.addEventListener("mouseout", () => {
   ProgressBarD.style.display = "none";
 });
 
-let progressDtimeout;
-
 function setProgressBarDTimeout() {
-  progressDtimeout = setTimeout(() => {
-    ProgressBarD.style.display = "none";
-  }, 3000);
+  ProgressBarD.style.display = "none";
 }
+let touchTimerD = null;
 
 VideoDElement.addEventListener("touchstart", () => {
-  ProgressBarD.style.display = "block";
+  if (!VideoDElement.paused) {
+    ProgressBarD.style.display = "block";
+  } else {
+    clearTimeout(touchTimerD);
+  }
 });
 
-VideoDElement.addEventListener("touchend", () => {
-  setProgressBarDTimeout();
+PauseBtnD.addEventListener("touchstart", () => {
+  ProgressBarD.style.display = "block";
+  clearTimeout(touchTimerD);
+});
+
+PlayBtnD.addEventListener("touchstart", () => {
+  if (VideoDElement.paused) {
+    touchTimerD = setTimeout(setProgressBarDTimeout, 3000);
+  }
 });
 
 ProgressD.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressDtimeout);
-    progressDtimeout = null;
+  if (VideoDElement.paused) {
+    ProgressBarD.style.display = "block";
+    clearTimeout(touchTimerD);
   }
+});
+
+ProgressD.addEventListener("touchmove", () => {
+  ProgressBarD.style.display = "block";
+  clearTimeout(touchTimerD);
 });
 
 ProgressD.addEventListener("touchend", () => {
   if (VideoDElement.paused) {
     ProgressBarD.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressDtimeout);
-      progressDtimeout = null;
-    }
+    clearTimeout(touchTimerD);
   } else {
-    setProgressBarDTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarD.style.display = "none";
   }
-});
-
-PauseBtnD.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressDtimeout);
-    progressDtimeout = null;
-  }
-});
-
-PlayBtnD.addEventListener("touchstart", () => {
-  setProgressBarDTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerD = null;
@@ -1447,8 +1544,8 @@ VideoDElement.addEventListener('loadeddata', () => {
       stopTimerD();
       PauseBtnD.style.display = 'none';
       PlayBtnD.style.display = 'block';
-      console.log('D一時停止をクリックしました');
     }
+    console.log('D一時停止をクリックしました');
   });
 
   PlayBtnD.addEventListener('click', () => {
@@ -1457,8 +1554,9 @@ VideoDElement.addEventListener('loadeddata', () => {
       VideoDElement.play();
       PlayBtnD.style.display = 'none';
       PauseBtnD.style.display = 'block';
-      console.log('D再生をクリックしました');
+      ProgressBarD.style.display = "none";
     }
+    console.log('D再生をクリックしました');
   });
 
   MuteBtnD.addEventListener('click', () => {
@@ -1466,8 +1564,13 @@ VideoDElement.addEventListener('loadeddata', () => {
       VideoDElement.muted = false;
       MuteBtnD.style.display = 'none';
       UnmuteBtnD.style.display = 'block';
-      console.log('Dミュートを解除しました');
+      if (!VideoDElement.paused) {
+        ProgressBarD.style.display = "none";
+      } else {
+        ProgressBarD.style.display = "block";
+      }
     }
+    console.log('Dミュートを解除しました');
   });
 
   UnmuteBtnD.addEventListener('click', () => {
@@ -1475,15 +1578,13 @@ VideoDElement.addEventListener('loadeddata', () => {
       VideoDElement.muted = true;
       UnmuteBtnD.style.display = 'none';
       MuteBtnD.style.display = 'block';
-      console.log('Dミュートをクリックしました');
     }
+    console.log('Dミュートをクリックしました');
   });
 
   const stopTimerD = () => {
-    VideoDElement.addEventListener("pause", () => {
-      clearInterval(playtimerD);
-      console.log('stopTimerD');
-    });
+    clearInterval(playtimerD);
+    console.log('stopTimerD');
   };
 
   ProgressD.addEventListener('input', () => {
@@ -1545,9 +1646,6 @@ VideoDElement.addEventListener('loadeddata', () => {
       buttonJ.addEventListener("touchstart", (event) => {
         event.preventDefault();
         clickHandler_j();
-        setTimeout(() => {
-          ProgressBarD.style.display = "none";
-        }, 3000);
       });
     } else {
       buttonJ.style.display = 'none';
@@ -1586,9 +1684,6 @@ VideoDElement.addEventListener('loadeddata', () => {
       buttonK.addEventListener("touchstart", (event) => {
         event.preventDefault();
         clickHandler_k();
-        setTimeout(() => {
-          ProgressBarD.style.display = "none";
-        }, 3000);
       });
     } else {
       buttonK.style.display = 'none';
@@ -1627,9 +1722,6 @@ VideoDElement.addEventListener('loadeddata', () => {
       buttonL.addEventListener("touchstart", (event) => {
         event.preventDefault();
         clickHandler_l();
-        setTimeout(() => {
-          ProgressBarD.style.display = "none";
-        }, 3000);
       });
     } else {
       buttonL.style.display = 'none';
@@ -1668,9 +1760,6 @@ VideoDElement.addEventListener('loadeddata', () => {
       back_D_A.addEventListener("touchstart", (event) => {
         event.preventDefault();
         clickHandler_back_d_a();
-        setTimeout(() => {
-          ProgressBarD.style.display = "none";
-        }, 3000);
       });
     } else {
       back_D_A.style.display = 'none';
@@ -1727,19 +1816,60 @@ let UnmuteBtnE = ContorolsSoundE.querySelector("#unmute");
 MuteBtnE.id = "mute_e";
 UnmuteBtnE.id = "unmute_e";
 
-VideoEElement.addEventListener("mouseover", () => {
-  ProgressBarE.style.display = "block";
+let timerE = null;
+
+VideoEElement.addEventListener("mousemove", () => {
+  if (!VideoEElement.paused) {
+    clearTimeout(timerE);
+    ProgressBarE.style.display = "block";
+    timerE = setTimeout(() => {
+      ProgressBarE.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerE);
+    ProgressBarE.style.display = "block";
+  }
 });
 
-VideoEElement.addEventListener("mouseout", () => {
+PlayBtnE.addEventListener("mouseover", () => {
+  if (VideoEElement.paused) {
+    ProgressBarE.style.display = "block";
+    clearTimeout(timerE);
+  } else {
+    ProgressBarE.style.display = "none";
+  }
+});
+
+ProgressE.addEventListener("mouseover", () => {
+  if (!VideoEElement.paused) {
+    ProgressBarE.style.display = "block";
+    clearTimeout(timerE);
+  }
+});
+
+MuteBtnE.addEventListener("mouseover", () => {
+  if (VideoEElement.muted) {
+    clearTimeout(timerE);
+    ProgressBarE.style.display = "block";
+  } else {
+    ProgressBarE.style.display = "none";
+  }
+});
+
+MuteBtnE.addEventListener("mouseout", () => {
   ProgressBarE.style.display = "none";
 });
 
-ProgressBarE.addEventListener("mouseover", () => {
-  ProgressBarE.style.display = "block";
+UnmuteBtnE.addEventListener("mouseover", () => {
+  if (!VideoEElement.muted) {
+    clearTimeout(timerE);
+    ProgressBarE.style.display = "block";
+  } else {
+    ProgressBarE.style.display = "none";
+  }
 });
 
-ProgressBarE.addEventListener("mouseout", () => {
+UnmuteBtnE.addEventListener("mouseout", () => {
   ProgressBarE.style.display = "none";
 });
 
@@ -1759,55 +1889,50 @@ back_E_A.addEventListener("mouseout", () => {
   ProgressBarE.style.display = "none";
 });
 
-let progressEtimeout;
-
-function setProgressBarETimeout() {
-  progressEtimeout = setTimeout(() => {
-    ProgressBarE.style.display = "none";
-  }, 3000);
-}
+let touchTimerE = null;
 
 VideoEElement.addEventListener("touchstart", () => {
-  ProgressBarE.style.display = "block";
+  if (!VideoEElement.paused) {
+    ProgressBarE.style.display = "block";
+  } else {
+    clearTimeout(touchTimerE);
+  }
 });
 
-VideoEElement.addEventListener("touchend", () => {
-  setProgressBarETimeout();
+PauseBtnE.addEventListener("touchstart", () => {
+  ProgressBarE.style.display = "block";
+  clearTimeout(touchTimerE);
+});
+
+function setProgressBarETimeout() {
+  ProgressBarE.style.display = "none";
+}
+
+PlayBtnE.addEventListener("touchstart", () => {
+  if (VideoEElement.paused) {
+    touchTimerE = setTimeout(setProgressBarETimeout, 3000);
+  }
 });
 
 ProgressE.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressEtimeout);
-    progressEtimeout = null;
+  if (VideoEElement.paused) {
+    ProgressBarE.style.display = "block";
+    clearTimeout(touchTimerE);
   }
+});
+
+ProgressE.addEventListener("touchmove", () => {
+  ProgressBarE.style.display = "block";
+  clearTimeout(touchTimerE);
 });
 
 ProgressE.addEventListener("touchend", () => {
   if (VideoEElement.paused) {
     ProgressBarE.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressEtimeout);
-      progressEtimeout = null;
-    }
+    clearTimeout(touchTimerE);
   } else {
-    setProgressBarETimeout();
-    isTouchingprogressBar = false;
+    ProgressBarE.style.display = "none";
   }
-});
-
-PauseBtnE.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressEtimeout);
-    progressEtimeout = null;
-  }
-});
-
-PlayBtnE.addEventListener("touchstart", () => {
-  setProgressBarETimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerE = null;
@@ -1842,7 +1967,6 @@ if (isVideoBoxE) {
         stopTimerE();
         PauseBtnE.style.display = 'none';
         PlayBtnE.style.display = 'block';
-        console.log('E一時停止をクリックしました');
       }
     });
 
@@ -1852,7 +1976,7 @@ if (isVideoBoxE) {
         VideoEElement.play();
         PlayBtnE.style.display = 'none';
         PauseBtnE.style.display = 'block';
-        console.log('再生Eアイコンをクリックしました');
+        ProgressBarE.style.display = "none";
       }
     });
 
@@ -1862,7 +1986,11 @@ if (isVideoBoxE) {
         VideoEElement.muted = false;
         MuteBtnE.style.display = 'none';
         UnmuteBtnE.style.display = 'block';
-        console.log('Bミュートを解除しました');
+        if (!VideoEElement.paused) {
+          ProgressBarE.style.display = "none";
+        } else {
+          ProgressBarE.style.display = "block";
+        }
       }
     });
 
@@ -1871,15 +1999,11 @@ if (isVideoBoxE) {
         VideoEElement.muted = true;
         UnmuteBtnE.style.display = 'none';
         MuteBtnE.style.display = 'block';
-        console.log('Eミュートをクリックしました');
       }
     });
 
     const stopTimerE = () => {
-      VideoEElement.addEventListener("pause", () => {
-        clearInterval(playtimerE);
-        console.log('stopTimerE');
-      });
+      clearInterval(playtimerE);
     };
 
     ProgressE.addEventListener('input', () => {
@@ -1887,8 +2011,8 @@ if (isVideoBoxE) {
       const seekTimeE = calculateSeekTimeE(ProgressE.value);
       if (!isNaN(seekTimeE) && isFinite(seekTimeE) && seekTimeE >= 0 && seekTimeE <= VideoEElement.duration) {
         VideoEElement.currentTime = seekTimeE;
-        console.log('Eプログレスバーを操作しました');
       }
+      console.log('Eプログレスバーを操作しました');
     });
 
     ProgressE.addEventListener('change', () => {
@@ -1908,28 +2032,19 @@ if (isVideoBoxE) {
       PlayTimeE.textContent = convertTime(VideoEElement.currentTime);
       EndTimeE.textContent = convertTime(VideoEElement.duration);
 
-
       if (currentTimeE >= 256) {
         buttonE_Info.style.display = 'block';
-        const clickHandler_e_info = () => {
+        buttonE_Info.addEventListener("click", () => {
           if (isVideoVisibleE) {
-
             VideoEElement.pause();
-            PauseBtnE.style.display = "none";
-            PlayBtnE.style.display = "block";
-
-            console.log('buttonE_Infoをクリックしました');
+            if (VideoEElement.paused) {
+              PauseBtnE.style.display = "none";
+              PlayBtnE.style.display = "block";
+              ProgressBarE.style.display = "block";
+            }
           }
-        };
-        buttonE_Info.addEventListener("click", clickHandler_e_info);
-
-        buttonE_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_e_info();
-          setTimeout(() => {
-            ProgressBarE.style.display = "none";
-          }, 3000);
         });
+          console.log("e_info_クリック");
       } else {
         buttonE_Info.style.display = 'none';
       }
@@ -1967,9 +2082,7 @@ if (isVideoBoxE) {
         back_E_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_e_a();
-          setTimeout(() => {
-            ProgressBarE.style.display = "none";
-          }, 3000);
+          console.log("back_e_aタッチスタート");
         });
       } else {
         back_E_A.style.display = 'none';
@@ -2027,20 +2140,62 @@ let UnmuteBtnF = ContorolsSoundF.querySelector("#unmute");
 MuteBtnF.id = "mute_f";
 UnmuteBtnF.id = "unmute_f";
 
-VideoFElement.addEventListener("mouseover", () => {
-  ProgressBarF.style.display = "block";
+
+let timerF = null;
+
+VideoFElement.addEventListener("mousemove", () => {
+  if (!VideoFElement.paused) {
+    clearTimeout(timerF);
+    ProgressBarF.style.display = "block";
+    timerF = setTimeout(() => {
+      ProgressBarF.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerF);
+    ProgressBarF.style.display = "block";
+  }
 });
 
-VideoFElement.addEventListener("mouseout", () => {
+PlayBtnF.addEventListener("mouseover", () => {
+  if (VideoFElement.paused) {
+    ProgressBarF.style.display = "block";
+    clearTimeout(timerF);
+  } else {
+    ProgressBarF.style.display = "none";
+  }
+});
+
+ProgressF.addEventListener("mouseover", () => {
+  if (!VideoFElement.paused) {
+    ProgressBarF.style.display = "block";
+    clearTimeout(timerF);
+  }
+});
+
+MuteBtnF.addEventListener("mouseover", () => {
+  if (VideoFElement.muted) {
+    clearTimeout(timerF);
+    ProgressBarF.style.display = "block";
+  } else {
+    ProgressBarF.style.display = "none";
+  }
+});
+
+MuteBtnF.addEventListener("mouseout", () => {
   ProgressBarF.style.display = "none";
 });
 
-ProgressBarF.addEventListener("mouseover", () => {
-  ProgressBarF.style.display = "block";
+UnmuteBtnF.addEventListener("mouseover", () => {
+  if (!VideoFElement.muted) {
+    clearTimeout(timerF);
+    ProgressBarF.style.display = "block";
+  } else {
+    ProgressBarF.style.display = "none";
+  }
 });
 
-ProgressBarF.addEventListener("mouseout", () => {
-  ProgressBarF.style.display = "none";
+UnmuteBtnF.addEventListener("mouseout", () => {
+  ProgressBar.style.display = "none";
 });
 
 buttonF_Info.addEventListener("mouseover", () => {
@@ -2067,55 +2222,51 @@ back_F_B.addEventListener("mouseout", () => {
   ProgressBarF.style.display = "none";
 });
 
-let progressFtimeout;
 
-function setProgressBarFTimeout() {
-  progressFtimeout = setTimeout(() => {
-    ProgressBarF.style.display = "none";
-  }, 3000);
-}
+let touchTimerF = null;
 
 VideoFElement.addEventListener("touchstart", () => {
-  ProgressBarF.style.display = "block";
+  if (!VideoFElement.paused) {
+    ProgressBarF.style.display = "block";
+  } else {
+    clearTimeout(touchTimerF);
+  }
 });
 
-VideoFElement.addEventListener("touchend", () => {
-  setProgressBarFTimeout();
+PauseBtnF.addEventListener("touchstart", () => {
+  ProgressBarF.style.display = "block";
+  clearTimeout(touchTimerF);
+});
+
+function setProgressBarFTimeout() {
+  ProgressBarF.style.display = "none";
+}
+
+PlayBtnF.addEventListener("touchstart", () => {
+  if (VideoFElement.paused) {
+    touchTimerF = setTimeout(setProgressBarFTimeout, 3000);
+  }
 });
 
 ProgressF.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressFtimeout);
-    progressFtimeout = null;
+  if (VideoFElement.paused) {
+    ProgressBarF.style.display = "block";
+    clearTimeout(touchTimerF);
   }
+});
+
+ProgressF.addEventListener("touchmove", () => {
+  ProgressBarF.style.display = "block";
+  clearTimeout(touchTimerF);
 });
 
 ProgressF.addEventListener("touchend", () => {
   if (VideoFElement.paused) {
     ProgressBarF.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressFtimeout);
-      progressFtimeout = null;
-    }
+    clearTimeout(touchTimerF);
   } else {
-    setProgressBarFTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarF.style.display = "none";
   }
-});
-
-PauseBtnF.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressFtimeout);
-    progressFtimeout = null;
-  }
-});
-
-PlayBtnF.addEventListener("touchstart", () => {
-  setProgressBarFTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerF = null;
@@ -2154,8 +2305,8 @@ if (isVideoBoxF) {
         stopTimerF();
         PauseBtnF.style.display = 'none';
         PlayBtnF.style.display = 'block';
-        console.log('F一時停止をクリックしました');
       }
+      console.log('F一時停止をクリックしました');
     });
 
     PlayBtnF.addEventListener('click', () => {
@@ -2164,7 +2315,7 @@ if (isVideoBoxF) {
         VideoFElement.play();
         PlayBtnF.style.display = 'none';
         PauseBtnF.style.display = 'block';
-        console.log('再生Fアイコンをクリックしました');
+        ProgressBarF.style.display = "none";
       }
     });
 
@@ -2174,7 +2325,11 @@ if (isVideoBoxF) {
         VideoFElement.muted = false;
         MuteBtnF.style.display = 'none';
         UnmuteBtnF.style.display = 'block';
-        console.log('Fミュートを解除しました');
+        if (!VideoFElement.paused) {
+          ProgressBarF.style.display = "none";
+        } else {
+          ProgressBarF.style.display = "block";
+        }
       }
     });
 
@@ -2183,15 +2338,12 @@ if (isVideoBoxF) {
         VideoFElement.muted = true;
         UnmuteBtnF.style.display = 'none';
         MuteBtnF.style.display = 'block';
-        console.log('Fミュートをクリックしました');
       }
     });
 
     const stopTimerF = () => {
-      VideoFElement.addEventListener("pause", () => {
-        clearInterval(playtimerF);
-        console.log('stopTimerF一時停止');
-      });
+      clearInterval(playtimerF);
+      console.log('stopTimerF一時停止');
     };
 
     ProgressF.addEventListener('input', () => {
@@ -2222,26 +2374,16 @@ if (isVideoBoxF) {
 
       if (currentTimeF >= 338) {
         buttonF_Info.style.display = 'block';
-        const clickHandler_f_info = () => {
+        buttonF_Info.addEventListener("click", () => {
           if (isVideoVisibleF) {
-
             VideoFElement.pause();
-            if (VideoFElement.pause) {
+            if (VideoFElement.paused) {
               PauseBtnF.style.display = "none";
               PlayBtnF.style.display = "block";
+              ProgressBarF.style.display = "block";
             }
-
-            console.log('buttonF_Infoをクリックしました');
           }
-        };
-        buttonF_Info.addEventListener("click", clickHandler_f_info);
-
-        buttonF_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_f_info();
-          setTimeout(() => {
-            ProgressBarF.style.display = "none";
-          }, 3000);
+          console.log('buttonF_Infoをクリックしました');
         });
       } else {
         buttonF_Info.style.display = 'none';
@@ -2280,9 +2422,6 @@ if (isVideoBoxF) {
         opening_F_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_f_a();
-          setTimeout(() => {
-            ProgressBarF.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_F_A.style.display = 'none';
@@ -2309,10 +2448,7 @@ if (isVideoBoxF) {
               MuteBtnB.style.display = "none";
             }
 
-            VideoBElement.muted = false;
             VideoBElement.play();
-            UnmuteBtnB.style.display = "block";
-            MuteBtnB.style.display = "none";
             ClassB.style.zIndex = "290";
             ProgressBarB.style.zIndex = "291";
 
@@ -2324,9 +2460,6 @@ if (isVideoBoxF) {
         back_F_B.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_f_b();
-          setTimeout(() => {
-            ProgressBarF.style.display = "none";
-          }, 3000);
         });
       } else {
         back_F_B.style.display = 'none';
@@ -2383,19 +2516,60 @@ let UnmuteBtnG = ContorolsSoundG.querySelector("#unmute");
 MuteBtnG.id = "mute_g";
 UnmuteBtnG.id = "unmute_g";
 
-VideoGElement.addEventListener("mouseover", () => {
-  ProgressBarG.style.display = "block";
+let timerG = null;
+
+VideoGElement.addEventListener("mousemove", () => {
+  if (!VideoGElement.paused) {
+    clearTimeout(timerG);
+    ProgressBarG.style.display = "block";
+    timer = setTimeout(() => {
+      ProgressBarG.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerG);
+    ProgressBarG.style.display = "block";
+  }
 });
 
-VideoGElement.addEventListener("mouseout", () => {
+PlayBtnG.addEventListener("mouseover", () => {
+  if (VideoGElement.paused) {
+    ProgressBarG.style.display = "block";
+    clearTimeout(timerG);
+  } else {
+    ProgressBarG.style.display = "none";
+  }
+});
+
+ProgressG.addEventListener("mouseover", () => {
+  if (!VideoGElement.paused) {
+    ProgressBarG.style.display = "block";
+    clearTimeout(timerG);
+  }
+});
+
+MuteBtnG.addEventListener("mouseover", () => {
+  if (VideoGElement.muted) {
+    clearTimeout(timerG);
+    ProgressBarG.style.display = "block";
+  } else {
+    ProgressBarG.style.display = "none";
+  }
+});
+
+MuteBtnG.addEventListener("mouseout", () => {
   ProgressBarG.style.display = "none";
 });
 
-ProgressBarG.addEventListener("mouseover", () => {
-  ProgressBarG.style.display = "block";
+UnmuteBtnG.addEventListener("mouseover", () => {
+  if (!VideoGElement.muted) {
+    clearTimeout(timerG);
+    ProgressBarG.style.display = "block";
+  } else {
+    ProgressBarG.style.display = "none";
+  }
 });
 
-ProgressBarG.addEventListener("mouseout", () => {
+UnmuteBtnG.addEventListener("mouseout", () => {
   ProgressBarG.style.display = "none";
 });
 
@@ -2423,55 +2597,50 @@ back_G_B.addEventListener("mouseout", () => {
   ProgressBarG.style.display = "none";
 });
 
-let progressGtimeout;
-
-function setProgressBarGTimeout() {
-  progressGtimeout = setTimeout(() => {
-    ProgressBarG.style.display = "none";
-  }, 3000);
-}
+let touchTimerG = null;
 
 VideoGElement.addEventListener("touchstart", () => {
-  ProgressBarG.style.display = "block";
+  if (!VideoGElement.paused) {
+    ProgressBarG.style.display = "block";
+  } else {
+    clearTimeout(touchTimerG);
+  }
 });
 
-VideoGElement.addEventListener("touchend", () => {
-  setProgressBarGTimeout();
+PauseBtnG.addEventListener("touchstart", () => {
+  ProgressBarG.style.display = "block";
+  clearTimeout(touchTimerG);
+});
+
+function setProgressBarGTimeout() {
+  ProgressBarG.style.display = "none";
+}
+
+PlayBtnG.addEventListener("touchstart", () => {
+  if (VideoGElement.paused) {
+    touchTimerG = setTimeout(setProgressBarGTimeout, 3000);
+  }
 });
 
 ProgressG.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressGtimeout);
-    progressGtimeout = null;
+  if (VideoGElement.paused) {
+    ProgressBarG.style.display = "block";
+    clearTimeout(touchTimerG);
   }
+});
+
+ProgressG.addEventListener("touchmove", () => {
+  ProgressBarG.style.display = "block";
+  clearTimeout(touchTimerG);
 });
 
 ProgressG.addEventListener("touchend", () => {
   if (VideoGElement.paused) {
     ProgressBarG.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressGtimeout);
-      progressGtimeout = null;
-    }
+    clearTimeout(touchTimerG);
   } else {
-    setProgressBarGTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarG.style.display = "none";
   }
-});
-
-PauseBtnG.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressGtimeout);
-    progressGtimeout = null;
-  }
-});
-
-PlayBtnG.addEventListener("touchstart", () => {
-  setProgressBarGTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerG = null;
@@ -2510,7 +2679,6 @@ if (isVideoBoxG) {
         stopTimerG();
         PauseBtnG.style.display = 'none';
         PlayBtnG.style.display = 'block';
-        console.log('G一時停止をクリックしました');
       }
     });
 
@@ -2520,7 +2688,7 @@ if (isVideoBoxG) {
         VideoGElement.play();
         PlayBtnG.style.display = 'none';
         PauseBtnG.style.display = 'block';
-        console.log('再生Gアイコンをクリックしました');
+        ProgressBarG.style.display = "none";
       }
     });
 
@@ -2529,7 +2697,11 @@ if (isVideoBoxG) {
         VideoGElement.muted = false;
         MuteBtnG.style.display = 'none';
         UnmuteBtnG.style.display = 'block';
-        console.log('Gミュートを解除しました');
+        if (!VideoGElement.paused) {
+          ProgressBarG.style.display = "none";
+        } else {
+          ProgressBarG.style.display = "block";
+        }
       }
     });
 
@@ -2538,15 +2710,11 @@ if (isVideoBoxG) {
         VideoGElement.muted = true;
         UnmuteBtnG.style.display = 'none';
         MuteBtnG.style.display = 'block';
-        console.log('Gミュートをクリックしました');
       }
     });
 
     const stopTimerG = () => {
-      VideoGElement.addEventListener("pause", () => {
-        clearInterval(playtimerG);
-        console.log('stopTimerG一時停止');
-      });
+      clearInterval(playtimerG);
     };
 
     ProgressG.addEventListener('input', () => {
@@ -2578,26 +2746,16 @@ if (isVideoBoxG) {
 
       if (currentTimeG >= 183) {
         buttonG_Info.style.display = 'block';
-        const clickHandler_g_info = () => {
+        buttonG_Info.addEventListener("click", () => {
           if (isVideoVisibleG) {
-
             VideoGElement.pause();
-            if (VideoGElement.pause) {
+            if (VideoGElement.paused) {
               PlayBtnG.style.display = "block";
               PauseBtnG.style.display = "none";
+              ProgressBarG.style.display = "block";
             }
-
             console.log('buttonG_Infoをクリックしました');
           }
-        };
-        buttonG_Info.addEventListener("click", clickHandler_g_info);
-
-        buttonG_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_g_info();
-          setTimeout(() => {
-            ProgressBarG.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonG_Info.style.display = 'none';
@@ -2636,9 +2794,6 @@ if (isVideoBoxG) {
         opening_G_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_g_a();
-          setTimeout(() => {
-            ProgressBarG.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_G_A.style.display = 'none';
@@ -2677,9 +2832,6 @@ if (isVideoBoxG) {
         back_G_B.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_g_b();
-          setTimeout(() => {
-            ProgressBarG.style.display = "none";
-          }, 3000);
         });
       } else {
         back_G_B.style.display = 'none';
@@ -2735,20 +2887,61 @@ let UnmuteBtnH = ContorolsSoundH.querySelector("#unmute");
 MuteBtnH.id = "mute_h";
 UnmuteBtnH.id = "unmute_h";
 
-VideoHElement.addEventListener("mouseover", () => {
-  ProgressBarH.style.display = "block";
+let timerH = null;
+
+VideoHElement.addEventListener("mousemove", () => {
+  if (!VideoHElement.paused) {
+    clearTimeout(timerH);
+    ProgressBarH.style.display = "block";
+    timerH = setTimeout(() => {
+      ProgressBarH.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerH);
+    ProgressBarH.style.display = "block";
+  }
 });
 
-VideoHElement.addEventListener("mouseout", () => {
+PlayBtnH.addEventListener("mouseover", () => {
+  if (VideoHElement.paused) {
+    ProgressBarH.style.display = "block";
+    clearTimeout(timerH);
+  } else {
+    ProgressBarH.style.display = "none";
+  }
+});
+
+ProgressH.addEventListener("mouseover", () => {
+  if (!VideoHElement.paused) {
+    ProgressBarH.style.display = "block";
+    clearTimeout(timerH);
+  }
+});
+
+MuteBtnH.addEventListener("mouseover", () => {
+  if (VideoHElement.muted) {
+    clearTimeout(timerH);
+    ProgressBarH.style.display = "block";
+  } else {
+    ProgressBarH.style.display = "none";
+  }
+});
+
+MuteBtnH.addEventListener("mouseout", () => {
   ProgressBarH.style.display = "none";
 });
 
-ProgressBarH.addEventListener("mouseover", () => {
-  ProgressBarH.style.display = "block";
+UnmuteBtnH.addEventListener("mouseover", () => {
+  if (!VideoHElement.muted) {
+    clearTimeout(timerH);
+    ProgressBarH.style.display = "block";
+  } else {
+    ProgressBarH.style.display = "none";
+  }
 });
 
-ProgressBarH.addEventListener("mouseout", () => {
-  ProgressBarH.style.display = "none";
+btn_unmute.addEventListener("mouseout", () => {
+  ProgressBar.style.display = "none";
 });
 
 buttonM.addEventListener("mouseover", () => {
@@ -2775,55 +2968,50 @@ back_H_C.addEventListener("mouseout", () => {
   ProgressBarH.style.display = "none";
 });
 
-let progressHtimeout;
-
-function setProgressBarHTimeout() {
-  progressHtimeout = setTimeout(() => {
-    ProgressBarH.style.display = "none";
-  }, 3000);
-}
+let touchTimerH = null;
 
 VideoHElement.addEventListener("touchstart", () => {
-  ProgressBarH.style.display = "block";
+  if (!VideoHElement.paused) {
+    ProgressBarH.style.display = "block";
+  } else {
+    clearTimeout(touchTimerH);
+  }
 });
 
-VideoHElement.addEventListener("touchend", () => {
-  setProgressBarHTimeout();
+PauseBtnH.addEventListener("touchstart", () => {
+  ProgressBarH.style.display = "block";
+  clearTimeout(touchTimerH);
+});
+
+function setProgressBarHTimeout() {
+  ProgressBarH.style.display = "none";
+}
+
+PlayBtnH.addEventListener("touchstart", () => {
+  if (VideoHElement.paused) {
+    touchTimerH = setTimeout(setProgressBarHTimeout, 3000);
+  }
 });
 
 ProgressH.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressHtimeout);
-    progressHtimeout = null;
+  if (VideoHElement.paused) {
+    ProgressBarH.style.display = "block";
+    clearTimeout(touchTimerH);
   }
+});
+
+ProgressH.addEventListener("touchmove", () => {
+  ProgressBarH.style.display = "block";
+  clearTimeout(touchTimerH);
 });
 
 ProgressH.addEventListener("touchend", () => {
   if (VideoHElement.paused) {
     ProgressBarH.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressHtimeout);
-      progressHtimeout = null;
-    }
+    clearTimeout(touchTimerH);
   } else {
-    setProgressBarHTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarH.style.display = "none";
   }
-});
-
-PauseBtnH.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressHtimeout);
-    progressHtimeout = null;
-  }
-});
-
-PlayBtnH.addEventListener("touchstart", () => {
-  setProgressBarHTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerH = null;
@@ -2862,7 +3050,6 @@ if (isVideoBoxH) {
         stopTimerH();
         PauseBtnH.style.display = 'none';
         PlayBtnH.style.display = 'block';
-        console.log('H一時停止をクリックしました');
       }
     });
 
@@ -2872,7 +3059,7 @@ if (isVideoBoxH) {
         VideoHElement.play();
         PlayBtnH.style.display = 'none';
         PauseBtnH.style.display = 'block';
-        console.log('再生Hアイコンをクリックしました');
+        ProgressBarH.style.display = "none";
       }
     });
 
@@ -2881,7 +3068,11 @@ if (isVideoBoxH) {
         VideoHElement.muted = false;
         MuteBtnH.style.display = 'none';
         UnmuteBtnH.style.display = 'block';
-        console.log('Hミュートを解除しました');
+        if (!VideoHElement.paused) {
+          ProgressBarH.style.display = "none";
+        } else {
+          ProgressBarH.style.display = "block";
+        }
       }
     });
 
@@ -2890,15 +3081,11 @@ if (isVideoBoxH) {
         VideoHElement.muted = true;
         UnmuteBtnH.style.display = 'none';
         MuteBtnH.style.display = 'block';
-        console.log('Hミュートをクリックしました');
       }
     });
 
     const stopTimerH = () => {
-      VideoHElement.addEventListener("pause", () => {
-        clearInterval(playtimerH);
-        console.log('stopTimerH一時停止');
-      });
+      clearInterval(playtimerH);
     };
 
     ProgressH.addEventListener('input', () => {
@@ -2938,7 +3125,6 @@ if (isVideoBoxH) {
             ProgressBarH.style.zIndex = "-22";
             ProgressBarH.style.display = "none";
 
-
             if (VideoHElement.muted) {
               VideoMElement.muted = true;
               MuteBtnM.style.display = "block";
@@ -2956,14 +3142,11 @@ if (isVideoBoxH) {
             console.log('buttonMをクリックしました');
           }
         };
-        buttonH.addEventListener("click", clickHandler_m);
+        buttonM.addEventListener("click", clickHandler_m);
 
-        buttonH.addEventListener("touchstart", (event) => {
+        buttonM.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_m();
-          setTimeout(() => {
-            ProgressBarH.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonM.style.display = 'none';
@@ -3002,9 +3185,6 @@ if (isVideoBoxH) {
         buttonN.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_n();
-          setTimeout(() => {
-            ProgressBarH.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonN.style.display = 'none';
@@ -3043,9 +3223,6 @@ if (isVideoBoxH) {
         back_H_C.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_h_c();
-          setTimeout(() => {
-            ProgressBarH.style.display = "none";
-          }, 3000);
         });
       } else {
         back_H_C.style.display = 'none';
@@ -3102,20 +3279,61 @@ let UnmuteBtnI = ContorolsSoundI.querySelector("#unmute");
 MuteBtnI.id = "mute_i";
 UnmuteBtnI.id = "unmute_i";
 
-VideoIElement.addEventListener("mouseover", () => {
-  ProgressBarI.style.display = "block";
+let timerI = null;
+
+VideoIElement.addEventListener("mousemove", () => {
+  if (!VideoIElement.paused) {
+    clearTimeout(timerI);
+    ProgressBarI.style.display = "block";
+    timerI = setTimeout(() => {
+      ProgressBarI.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerI);
+    ProgressBarI.style.display = "block";
+  }
 });
 
-VideoIElement.addEventListener("mouseout", () => {
+PlayBtnI.addEventListener("mouseover", () => {
+  if (VideoIElement.paused) {
+    ProgressBarI.style.display = "block";
+    clearTimeout(timerI);
+  } else {
+    ProgressBarI.style.display = "none";
+  }
+});
+
+ProgressI.addEventListener("mouseover", () => {
+  if (!VideoIElement.paused) {
+    ProgressBarI.style.display = "block";
+    clearTimeout(timerI);
+  }
+});
+
+MuteBtnI.addEventListener("mouseover", () => {
+  if (VideoIElement.muted) {
+    clearTimeout(timerI);
+    ProgressBarI.style.display = "block";
+  } else {
+    ProgressBarI.style.display = "none";
+  }
+});
+
+MuteBtnI.addEventListener("mouseout", () => {
   ProgressBarI.style.display = "none";
 });
 
-ProgressBarI.addEventListener("mouseover", () => {
-  ProgressBarI.style.display = "block";
+UnmuteBtnI.addEventListener("mouseover", () => {
+  if (!VideoIElement.muted) {
+    clearTimeout(timerI);
+    ProgressBarI.style.display = "block";
+  } else {
+    ProgressBarI.style.display = "none";
+  }
 });
 
-ProgressBarI.addEventListener("mouseout", () => {
-  ProgressBarI.style.display = "none";
+UnmuteBtnI.addEventListener("mouseout", () => {
+  ProgressBar.style.display = "none";
 });
 
 buttonO.addEventListener("mouseover", () => {
@@ -3142,55 +3360,50 @@ back_I_C.addEventListener("mouseout", () => {
   ProgressBarI.style.display = "none";
 });
 
-let progressItimeout;
-
-function setProgressBarITimeout() {
-  progressItimeout = setTimeout(() => {
-    ProgressBarI.style.display = "none";
-  }, 3000);
-}
+let touchTimerI = null;
 
 VideoIElement.addEventListener("touchstart", () => {
-  ProgressBarI.style.display = "block";
+  if (!VideoIElement.paused) {
+    ProgressBarI.style.display = "block";
+  } else {
+    clearTimeout(touchTimerI);
+  }
 });
 
-VideoIElement.addEventListener("touchend", () => {
-  setProgressBarITimeout();
+PauseBtnI.addEventListener("touchstart", () => {
+  ProgressBarI.style.display = "block";
+  clearTimeout(touchTimerI);
+});
+
+function setProgressBarITimeout() {
+  ProgressBarI.style.display = "none";
+}
+
+PlayBtnI.addEventListener("touchstart", () => {
+  if (VideoIElement.paused) {
+    touchTimerI = setTimeout(setProgressBarITimeout, 3000);
+  }
 });
 
 ProgressI.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressItimeout);
-    progressItimeout = null;
+  if (VideoIElement.paused) {
+    ProgressBarI.style.display = "block";
+    clearTimeout(touchTimerI);
   }
+});
+
+ProgressI.addEventListener("touchmove", () => {
+  ProgressBarI.style.display = "block";
+  clearTimeout(touchTimerI);
 });
 
 ProgressI.addEventListener("touchend", () => {
   if (VideoIElement.paused) {
     ProgressBarI.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressItimeout);
-      progressItimeout = null;
-    }
+    clearTimeout(touchTimerI);
   } else {
-    setProgressBarITimeout();
-    isTouchingprogressBar = false;
+    ProgressBarI.style.display = "none";
   }
-});
-
-PauseBtnI.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressItimeout);
-    progressItimeout = null;
-  }
-});
-
-PlayBtnI.addEventListener("touchstart", () => {
-  setProgressBarITimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerI = null;
@@ -3229,7 +3442,6 @@ if (isVideoBoxI) {
         stopTimerI();
         PauseBtnI.style.display = 'none';
         PlayBtnI.style.display = 'block';
-        console.log('I一時停止をクリックしました');
       }
     });
 
@@ -3239,7 +3451,7 @@ if (isVideoBoxI) {
         VideoIElement.play();
         PlayBtnI.style.display = 'none';
         PauseBtnI.style.display = 'block';
-        console.log('再生Iアイコンをクリックしました');
+        ProgressBarI.style.display = "none";
       }
     });
 
@@ -3248,7 +3460,11 @@ if (isVideoBoxI) {
         VideoIElement.muted = false;
         MuteBtnI.style.display = 'none';
         UnmuteBtnI.style.display = 'block';
-        console.log('Iミュートを解除しました');
+        if (!VideoIElement.paused) {
+          ProgressBarI.style.display = "none";
+        } else {
+          ProgressBarI.style.display = "block";
+        }
       }
     });
 
@@ -3257,15 +3473,11 @@ if (isVideoBoxI) {
         VideoIElement.muted = true;
         UnmuteBtnI.style.display = 'none';
         MuteBtnI.style.display = 'block';
-        console.log('Iミュートをクリックしました');
       }
     });
 
     const stopTimerI = () => {
-      VideoIElement.addEventListener("pause", () => {
-        clearInterval(playtimerI);
-        console.log('stopTimerI');
-      });
+      clearInterval(playtimerI);
     };
 
     ProgressI.addEventListener('input', () => {
@@ -3328,9 +3540,6 @@ if (isVideoBoxI) {
         buttonO.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_o();
-          setTimeout(() => {
-            ProgressBarI.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonO.style.display = 'none';
@@ -3369,9 +3578,6 @@ if (isVideoBoxI) {
         buttonP.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_p();
-          setTimeout(() => {
-            ProgressBarI.style.display = "none";
-          }, 3000);
         });
       } else {
         buttonP.style.display = 'none';
@@ -3410,9 +3616,6 @@ if (isVideoBoxI) {
         back_I_C.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_i_c();
-          setTimeout(() => {
-            ProgressBarI.style.display = "none";
-          }, 3000);
         });
       } else {
         back_I_C.style.display = 'none';
@@ -3469,20 +3672,61 @@ let UnmuteBtnJ = ContorolsSoundJ.querySelector("#unmute");
 MuteBtnJ.id = "mute_j";
 UnmuteBtnJ.id = "unmute_j";
 
-VideoJElement.addEventListener("mouseover", () => {
-  ProgressBarJ.style.display = "block";
+let timerJ = null;
+
+VideoJElement.addEventListener("mousemove", () => {
+  if (!VideoJElement.paused) {
+    clearTimeout(timerJ);
+    ProgressBarJ.style.display = "block";
+    timerJ = setTimeout(() => {
+      ProgressBarJ.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerJ);
+    ProgressBarJ.style.display = "block";
+  }
 });
 
-VideoJElement.addEventListener("mouseout", () => {
+PlayBtnJ.addEventListener("mouseover", () => {
+  if (VideoJElement.paused) {
+    ProgressBarJ.style.display = "block";
+    clearTimeout(timerJ);
+  } else {
+    ProgressBarJ.style.display = "none";
+  }
+});
+
+ProgressJ.addEventListener("mouseover", () => {
+  if (!VideoJElement.paused) {
+    ProgressBarJ.style.display = "block";
+    clearTimeout(timerJ);
+  }
+});
+
+MuteBtnJ.addEventListener("mouseover", () => {
+  if (VideoJElement.muted) {
+    clearTimeout(timerJ);
+    ProgressBarJ.style.display = "block";
+  } else {
+    ProgressBarJ.style.display = "none";
+  }
+});
+
+MuteBtnJ.addEventListener("mouseout", () => {
   ProgressBarJ.style.display = "none";
 });
 
-ProgressBarJ.addEventListener("mouseover", () => {
-  ProgressBarJ.style.display = "block";
+UnmuteBtnJ.addEventListener("mouseover", () => {
+  if (!VideoJElement.muted) {
+    clearTimeout(timerJ);
+    ProgressBarJ.style.display = "block";
+  } else {
+    ProgressBarJ.style.display = "none";
+  }
 });
 
-ProgressBarJ.addEventListener("mouseout", () => {
-  ProgressBarJ.style.display = "none";
+UnmuteBtnJ.addEventListener("mouseout", () => {
+  ProgressBar.style.display = "none";
 });
 
 buttonJ_Info.addEventListener("mouseover", () => {
@@ -3509,55 +3753,50 @@ back_J_D.addEventListener("mouseout", () => {
   ProgressBarJ.style.display = "none";
 });
 
-let progressJtimeout;
-
-function setProgressBarJTimeout() {
-  progressJtimeout = setTimeout(() => {
-    ProgressBarJ.style.display = "none";
-  }, 3000);
-}
+let touchTimerJ = null;
 
 VideoJElement.addEventListener("touchstart", () => {
-  ProgressBarJ.style.display = "block";
+  if (!VideoJElement.paused) {
+    ProgressBarJ.style.display = "block";
+  } else {
+    clearTimeout(touchTimerJ);
+  }
 });
 
-VideoJElement.addEventListener("touchend", () => {
-  setProgressBarJTimeout();
+PauseBtnJ.addEventListener("touchstart", () => {
+  ProgressBarJ.style.display = "block";
+  clearTimeout(touchTimerJ);
+});
+
+function setProgressBarJTimeout() {
+  ProgressBarJ.style.display = "none";
+}
+
+PlayBtnJ.addEventListener("touchstart", () => {
+  if (VideoJElement.paused) {
+    touchTimerJ = setTimeout(setProgressBarJTimeout, 3000);
+  }
 });
 
 ProgressJ.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressJtimeout);
-    progressJtimeout = null;
+  if (VideoJElement.paused) {
+    ProgressBarJ.style.display = "block";
+    clearTimeout(touchTimerJ);
   }
+});
+
+ProgressJ.addEventListener("touchmove", () => {
+  ProgressBarJ.style.display = "block";
+  clearTimeout(touchTimerJ);
 });
 
 ProgressJ.addEventListener("touchend", () => {
   if (VideoJElement.paused) {
     ProgressBarJ.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressJtimeout);
-      progressJtimeout = null;
-    }
+    clearTimeout(touchTimerJ);
   } else {
-    setProgressBarJTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarJ.style.display = "none";
   }
-});
-
-PauseBtnJ.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressJtimeout);
-    progressJtimeout = null;
-  }
-});
-
-PlayBtnJ.addEventListener("touchstart", () => {
-  setProgressBarJTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerJ = null;
@@ -3592,7 +3831,6 @@ if (isVideoBoxJ) {
         stopTimerJ();
         PauseBtnJ.style.display = 'none';
         PlayBtnJ.style.display = 'block';
-        console.log('J一時停止をクリックしました');
       }
     });
 
@@ -3602,7 +3840,7 @@ if (isVideoBoxJ) {
         VideoJElement.play();
         PlayBtnJ.style.display = 'none';
         PauseBtnJ.style.display = 'block';
-        console.log('再生Jアイコンをクリックしました');
+        ProgressBarJ.style.display = "none";
       }
     });
 
@@ -3612,7 +3850,11 @@ if (isVideoBoxJ) {
         VideoJElement.muted = false;
         MuteBtnJ.style.display = 'none';
         UnmuteBtnJ.style.display = 'block';
-        console.log('Jミュートを解除しました');
+        if (!VideoJElement.paused) {
+          ProgressBarJ.style.display = "none";
+        } else {
+          ProgressBarJ.style.display = "block";
+        }
       }
     });
 
@@ -3621,15 +3863,11 @@ if (isVideoBoxJ) {
         VideoJElement.muted = true;
         UnmuteBtnJ.style.display = 'none';
         MuteBtnJ.style.display = 'block';
-        console.log('Jミュートをクリックしました');
       }
     });
 
     const stopTimerJ = () => {
-      VideoJElement.addEventListener("pause", () => {
-        clearInterval(playtimerJ);
-        console.log('stopTimerJ');
-      });
+      clearInterval(playtimerJ);
     };
 
     ProgressJ.addEventListener('input', () => {
@@ -3661,25 +3899,17 @@ if (isVideoBoxJ) {
 
       if (currentTimeJ >= 186) {
         buttonJ_Info.style.display = 'block';
-        const clickHandler_j_info = () => {
+        buttonJ_Info.addEventListener("click", () => {
           if (isVideoVisibleJ) {
-
             VideoJElement.pause();
-            PauseBtnJ.style.display = "none";
-            PlayBtnJ.style.display = "block";
-
-            console.log('buttonJ_Info');
+            if (VideoJElement.paused) {
+              PauseBtnJ.style.display = "none";
+              PlayBtnJ.style.display = "block";
+              ProgressBarJ.style.display = "block";
+            }
           }
-        };
-        buttonJ_Info.addEventListener("click", clickHandler_j_info);
-
-        buttonJ_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_j_info();
-          setTimeout(() => {
-            ProgressBarJ.style.display = "none";
-          }, 3000);
         });
+        console.log('buttonJ_Info');
       } else {
         buttonJ_Info.style.display = 'none';
       }
@@ -3717,9 +3947,6 @@ if (isVideoBoxJ) {
         opening_J_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_j_a();
-          setTimeout(() => {
-            ProgressBarJ.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_J_A.style.display = 'none';
@@ -3758,9 +3985,6 @@ if (isVideoBoxJ) {
         back_J_D.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_j_d();
-          setTimeout(() => {
-            ProgressBarJ.style.display = "none";
-          }, 3000);
         });
       } else {
         back_J_D.style.display = 'none';
@@ -3818,19 +4042,60 @@ let UnmuteBtnK = ContorolsSoundK.querySelector("#unmute");
 MuteBtnK.id = "mute_k";
 UnmuteBtnK.id = "unmute_k";
 
-VideoKElement.addEventListener("mouseover", () => {
-  ProgressBarK.style.display = "block";
+let timerK = null;
+
+VideoKElement.addEventListener("mousemove", () => {
+  if (!VideoKElement.paused) {
+    clearTimeout(timerK);
+    ProgressBarK.style.display = "block";
+    timerK = setTimeout(() => {
+      ProgressBarK.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerK);
+    ProgressBarK.style.display = "block";
+  }
 });
 
-VideoKElement.addEventListener("mouseout", () => {
+PlayBtnK.addEventListener("mouseover", () => {
+  if (VideoKElement.paused) {
+    ProgressBarK.style.display = "block";
+    clearTimeout(timerK);
+  } else {
+    ProgressBarK.style.display = "none";
+  }
+});
+
+ProgressK.addEventListener("mouseover", () => {
+  if (!VideoKElement.paused) {
+    ProgressBarK.style.display = "block";
+    clearTimeout(timerK);
+  }
+});
+
+MuteBtnK.addEventListener("mouseover", () => {
+  if (VideoKElement.muted) {
+    clearTimeout(timerK);
+    ProgressBarK.style.display = "block";
+  } else {
+    ProgressBarK.style.display = "none";
+  }
+});
+
+MuteBtnK.addEventListener("mouseout", () => {
   ProgressBarK.style.display = "none";
 });
 
-ProgressBarK.addEventListener("mouseover", () => {
-  ProgressBarK.style.display = "block";
+UnmuteBtnK.addEventListener("mouseover", () => {
+  if (!VideoKElement.muted) {
+    clearTimeout(timerK);
+    ProgressBarK.style.display = "block";
+  } else {
+    ProgressBarK.style.display = "none";
+  }
 });
 
-ProgressBarK.addEventListener("mouseout", () => {
+UnmuteBtnK.addEventListener("mouseout", () => {
   ProgressBarK.style.display = "none";
 });
 
@@ -3858,55 +4123,50 @@ back_K_D.addEventListener("mouseout", () => {
   ProgressBarK.style.display = "none";
 });
 
-let progressKtimeout;
-
-function setProgressBarKTimeout() {
-  progressKtimeout = setTimeout(() => {
-    ProgressBarK.style.display = "none";
-  }, 3000);
-}
+let touchTimerK = null;
 
 VideoKElement.addEventListener("touchstart", () => {
-  ProgressBarK.style.display = "block";
+  if (!VideoKElement.paused) {
+    ProgressBarK.style.display = "block";
+  } else {
+    clearTimeout(touchTimerK);
+  }
 });
 
-VideoKElement.addEventListener("touchend", () => {
-  setProgressBarKTimeout();
+PauseBtnK.addEventListener("touchstart", () => {
+  ProgressBarK.style.display = "block";
+  clearTimeout(touchTimerK);
+});
+
+function setProgressBarKTimeout() {
+  ProgressBarK.style.display = "none";
+}
+
+PlayBtnK.addEventListener("touchstart", () => {
+  if (VideoKElement.paused) {
+    touchTimerK = setTimeout(setProgressBarKTimeout, 3000);
+  }
 });
 
 ProgressK.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressKtimeout);
-    progressKtimeout = null;
+  if (VideoKElement.paused) {
+    ProgressBarK.style.display = "block";
+    clearTimeout(touchTimerK);
   }
+});
+
+ProgressK.addEventListener("touchmove", () => {
+  ProgressBarK.style.display = "block";
+  clearTimeout(touchTimerK);
 });
 
 ProgressK.addEventListener("touchend", () => {
   if (VideoKElement.paused) {
     ProgressBarK.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressKtimeout);
-      progressKtimeout = null;
-    }
+    clearTimeout(touchTimerK);
   } else {
-    setProgressBarKTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarK.style.display = "none";
   }
-});
-
-PauseBtnK.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressKtimeout);
-    progressKtimeout = null;
-  }
-});
-
-PlayBtnK.addEventListener("touchstart", () => {
-  setProgressBarKTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerK = null;
@@ -3945,7 +4205,6 @@ if (isVideoBoxK) {
         stopTimerK();
         PauseBtnK.style.display = 'none';
         PlayBtnK.style.display = 'block';
-        console.log('K一時停止をクリックしました');
       }
     });
 
@@ -3955,7 +4214,7 @@ if (isVideoBoxK) {
         VideoKElement.play();
         PlayBtnK.style.display = 'none';
         PauseBtnK.style.display = 'block';
-        console.log('再生Kアイコンをクリックしました');
+        ProgressBarK.style.display = "none";
       }
     });
 
@@ -3965,7 +4224,11 @@ if (isVideoBoxK) {
         VideoKElement.muted = false;
         MuteBtnK.style.display = 'none';
         UnmuteBtnK.style.display = 'block';
-        console.log('Kミュートを解除しました');
+        if (!VideoKElement.paused) {
+          ProgressBarK.style.display = "none";
+        } else {
+          ProgressBarK.style.display = "block";
+        }
       }
     });
 
@@ -3974,15 +4237,11 @@ if (isVideoBoxK) {
         VideoKElement.muted = true;
         UnmuteBtnK.style.display = 'none';
         MuteBtnK.style.display = 'block';
-        console.log('Kミュートをクリックしました');
       }
     });
 
     const stopTimerK = () => {
-      VideoKElement.addEventListener("pause", () => {
-        clearInterval(playtimerK);
-        console.log('stopTimerK');
-      });
+      clearInterval(playtimerK);
     };
 
     ProgressK.addEventListener('input', () => {
@@ -4014,23 +4273,16 @@ if (isVideoBoxK) {
 
       if (currentTimeK >= 152) {
         buttonK_Info.style.display = 'block';
-        const clickHandler_k_info = () => {
+        buttonK_Info.addEventListener("click", () => {
           if (isVideoVisibleK) {
-
             VideoKElement.pause();
-            PauseBtnK.style.display = "none";
-            PlayBtnK.style.display = "block";
-            console.log('buttonK_Info');
+            if (VideoKElement.paused) {
+              PauseBtnK.style.display = "none";
+              PlayBtnK.style.display = "block";
+              ProgressBarK.style.display = "block";
+            }
           }
-        };
-        buttonK_Info.addEventListener("click", clickHandler_k_info);
-
-        buttonK_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_k_info();
-          setTimeout(() => {
-            ProgressBarK.style.display = "none";
-          }, 3000);
+          console.log('buttonK_Info');
         });
       } else {
         buttonK_Info.style.display = 'none';
@@ -4069,9 +4321,6 @@ if (isVideoBoxK) {
         opening_K_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_k_a();
-          setTimeout(() => {
-            ProgressBarK.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_K_A.style.display = 'none';
@@ -4110,9 +4359,6 @@ if (isVideoBoxK) {
         back_K_D.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_K_d();
-          setTimeout(() => {
-            ProgressBarK.style.display = "none";
-          }, 3000);
         });
       } else {
         back_K_D.style.display = 'none';
@@ -4170,19 +4416,60 @@ let UnmuteBtnL = ContorolsSoundL.querySelector("#unmute");
 MuteBtnL.id = "mute_l";
 UnmuteBtnL.id = "unmute_l";
 
-VideoLElement.addEventListener("mouseover", () => {
-  ProgressBarL.style.display = "block";
+let timerL = null;
+
+VideoLElement.addEventListener("mousemove", () => {
+  if (!VideoLElement.paused) {
+    clearTimeout(timerL);
+    ProgressBarL.style.display = "block";
+    timerL = setTimeout(() => {
+      ProgressBarL.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerL);
+    ProgressBarL.style.display = "block";
+  }
 });
 
-VideoLElement.addEventListener("mouseout", () => {
+PlayBtnL.addEventListener("mouseover", () => {
+  if (VideoLElement.paused) {
+    ProgressBarL.style.display = "block";
+    clearTimeout(timerL);
+  } else {
+    ProgressBarL.style.display = "none";
+  }
+});
+
+ProgressL.addEventListener("mouseover", () => {
+  if (!VideoLElement.paused) {
+    ProgressBarL.style.display = "block";
+    clearTimeout(timerL);
+  }
+});
+
+MuteBtnL.addEventListener("mouseover", () => {
+  if (VideoLElement.muted) {
+    clearTimeout(timerL);
+    ProgressBarL.style.display = "block";
+  } else {
+    ProgressBarL.style.display = "none";
+  }
+});
+
+MuteBtnL.addEventListener("mouseout", () => {
   ProgressBarL.style.display = "none";
 });
 
-ProgressBarL.addEventListener("mouseover", () => {
-  ProgressBarL.style.display = "block";
+UnmuteBtnL.addEventListener("mouseover", () => {
+  if (!VideoLElement.muted) {
+    clearTimeout(timerL);
+    ProgressBarL.style.display = "block";
+  } else {
+    ProgressBarL.style.display = "none";
+  }
 });
 
-ProgressBarL.addEventListener("mouseout", () => {
+UnmuteBtnL.addEventListener("mouseout", () => {
   ProgressBarL.style.display = "none";
 });
 
@@ -4210,55 +4497,50 @@ back_L_D.addEventListener("mouseout", () => {
   ProgressBarL.style.display = "none";
 });
 
-let progressLtimeout;
-
-function setProgressBarLTimeout() {
-  progressLtimeout = setTimeout(() => {
-    ProgressBarL.style.display = "none";
-  }, 3000);
-}
+let touchTimerL = null;
 
 VideoLElement.addEventListener("touchstart", () => {
-  ProgressBarL.style.display = "block";
+  if (!VideoLElement.paused) {
+    ProgressBarL.style.display = "block";
+  } else {
+    clearTimeout(touchTimerL);
+  }
 });
 
-VideoLElement.addEventListener("touchend", () => {
-  setProgressBarLTimeout();
+PauseBtnL.addEventListener("touchstart", () => {
+  ProgressBarL.style.display = "block";
+  clearTimeout(touchTimerL);
+});
+
+function setProgressBarLTimeout() {
+  ProgressBarL.style.display = "none";
+}
+
+PlayBtnL.addEventListener("touchstart", () => {
+  if (VideoLElement.paused) {
+    touchTimerL = setTimeout(setProgressBarLTimeout, 3000);
+  }
 });
 
 ProgressL.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressLtimeout);
-    progressLtimeout = null;
+  if (VideoLElement.paused) {
+    ProgressBarL.style.display = "block";
+    clearTimeout(touchTimerL);
   }
+});
+
+ProgressL.addEventListener("touchmove", () => {
+  ProgressBarL.style.display = "block";
+  clearTimeout(touchTimerL);
 });
 
 ProgressL.addEventListener("touchend", () => {
   if (VideoLElement.paused) {
     ProgressBarL.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressLtimeout);
-      progressLtimeout = null;
-    }
+    clearTimeout(touchTimerL);
   } else {
-    setProgressBarLTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarL.style.display = "none";
   }
-});
-
-PauseBtnL.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressLtimeout);
-    progressLtimeout = null;
-  }
-});
-
-PlayBtnL.addEventListener("touchstart", () => {
-  setProgressBarLTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerL = null;
@@ -4275,7 +4557,6 @@ const startTimerL = () => {
     }
 
   }, 100);
-  console.log('startTimerL');
 };
 
 let isVideoBoxL = true;
@@ -4293,7 +4574,6 @@ if (isVideoBoxL) {
         stopTimerL();
         PauseBtnL.style.display = 'none';
         PlayBtnL.style.display = 'block';
-        console.log('L一時停止をクリックしました');
       }
     });
 
@@ -4303,7 +4583,7 @@ if (isVideoBoxL) {
       VideoLElement.play();
       PlayBtnL.style.display = 'none';
       PauseBtnL.style.display = 'block';
-      console.log('再生Lアイコンをクリックしました');
+      ProgressBarL.style.display = "none";
     });
 
 
@@ -4312,7 +4592,11 @@ if (isVideoBoxL) {
         VideoLElement.muted = false;
         MuteBtnL.style.display = 'none';
         UnmuteBtnL.style.display = 'block';
-        console.log('Lミュートを解除しました');
+        if (!VideoLElement.paused) {
+          ProgressBarL.style.display = "none";
+        } else {
+          ProgressBarL.style.display = "block";
+        }
       }
     });
 
@@ -4321,15 +4605,11 @@ if (isVideoBoxL) {
         VideoLElement.muted = true;
         UnmuteBtnL.style.display = 'none';
         MuteBtnL.style.display = 'block';
-        console.log('Lミュートをクリックしました');
       }
     });
 
     const stopTimerL = () => {
-      VideoLElement.addEventListener("pause", () => {
-        clearInterval(playtimerL);
-        console.log('stopTimerL');
-      });
+      clearInterval(playtimerL);
     };
 
     ProgressL.addEventListener('input', () => {
@@ -4361,23 +4641,16 @@ if (isVideoBoxL) {
 
       if (currentTimeL >= 172) {
         buttonL_Info.style.display = 'block';
-        const clickHandler_l_info = () => {
+        buttonL_Info.addEventListener("click", () => {
           if (isVideoVisibleL) {
-
             VideoLElement.pause();
-            PauseBtnL.style.display = "none";
-            PlayBtnL.style.display = "block";
-            console.log('buttonL_Info');
+            if (VideoLElement.paused) {
+              PauseBtnL.style.display = "none";
+              PlayBtnL.style.display = "block";
+              ProgressBarL.style.display = "block";
+            }
           }
-        };
-        buttonL_Info.addEventListener("click", clickHandler_l_info);
-
-        buttonL_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_l_info();
-          setTimeout(() => {
-            ProgressBarL.style.display = "none";
-          }, 3000);
+          console.log('buttonL_Info');
         });
       } else {
         buttonL_Info.style.display = 'none';
@@ -4416,9 +4689,6 @@ if (isVideoBoxL) {
         opening_L_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_l_a();
-          setTimeout(() => {
-            ProgressBarL.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_L_A.style.display = 'none';
@@ -4457,9 +4727,6 @@ if (isVideoBoxL) {
         back_L_D.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_l_d();
-          setTimeout(() => {
-            ProgressBarL.style.display = "none";
-          }, 3000);
         });
       } else {
         back_L_D.style.display = 'none';
@@ -4517,19 +4784,60 @@ let UnmuteBtnM = ContorolsSoundM.querySelector("#unmute");
 MuteBtnM.id = "mute_m";
 UnmuteBtnM.id = "unmute_m";
 
-VideoMElement.addEventListener("mouseover", () => {
-  ProgressBarM.style.display = "block";
+let timerM = null;
+
+VideoMElement.addEventListener("mousemove", () => {
+  if (!VideoMElement.paused) {
+    clearTimeout(timerM);
+    ProgressBarM.style.display = "block";
+    timerM = setTimeout(() => {
+      ProgressBarM.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerM);
+    ProgressBarM.style.display = "block";
+  }
 });
 
-VideoMElement.addEventListener("mouseout", () => {
+PlayBtnM.addEventListener("mouseover", () => {
+  if (VideoMElement.paused) {
+    ProgressBarM.style.display = "block";
+    clearTimeout(timerM);
+  } else {
+    ProgressBarM.style.display = "none";
+  }
+});
+
+ProgressM.addEventListener("mouseover", () => {
+  if (!VideoMElement.paused) {
+    ProgressBarM.style.display = "block";
+    clearTimeout(timerM);
+  }
+});
+
+MuteBtnM.addEventListener("mouseover", () => {
+  if (VideoMElement.muted) {
+    clearTimeout(timerM);
+    ProgressBarM.style.display = "block";
+  } else {
+    ProgressBarM.style.display = "none";
+  }
+});
+
+MuteBtnM.addEventListener("mouseout", () => {
   ProgressBarM.style.display = "none";
 });
 
-ProgressBarM.addEventListener("mouseover", () => {
-  ProgressBarM.style.display = "block";
+UnmuteBtnM.addEventListener("mouseover", () => {
+  if (!VideoMElement.muted) {
+    clearTimeout(timerM);
+    ProgressBarM.style.display = "block";
+  } else {
+    ProgressBarM.style.display = "none";
+  }
 });
 
-ProgressBarM.addEventListener("mouseout", () => {
+UnmuteBtnM.addEventListener("mouseout", () => {
   ProgressBarM.style.display = "none";
 });
 
@@ -4557,55 +4865,50 @@ back_M_H.addEventListener("mouseout", () => {
   ProgressBarM.style.display = "none";
 });
 
-let progressMtimeout;
-
-function setProgressBarMTimeout() {
-  progressMtimeout = setTimeout(() => {
-    ProgressBarM.style.display = "none";
-  }, 3000);
-}
+let touchTimerM = null;
 
 VideoMElement.addEventListener("touchstart", () => {
-  ProgressBarM.style.display = "block";
+  if (!VideoMElement.paused) {
+    ProgressBarM.style.display = "block";
+  } else {
+    clearTimeout(touchTimerM);
+  }
 });
 
-VideoMElement.addEventListener("touchend", () => {
-  setProgressBarMTimeout();
+PauseBtnM.addEventListener("touchstart", () => {
+  ProgressBarM.style.display = "block";
+  clearTimeout(touchTimerM);
+});
+
+function setProgressBarMTimeout() {
+  ProgressBarM.style.display = "none";
+}
+
+PlayBtnM.addEventListener("touchstart", () => {
+  if (VideoMElement.paused) {
+    touchTimer = setTimeout(setProgressBarMTimeout, 3000);
+  }
 });
 
 ProgressM.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressMtimeout);
-    progressMtimeout = null;
+  if (VideoMElement.paused) {
+    ProgressBarM.style.display = "block";
+    clearTimeout(touchTimerM);
   }
+});
+
+ProgressM.addEventListener("touchmove", () => {
+  ProgressBarM.style.display = "block";
+  clearTimeout(touchTimerM);
 });
 
 ProgressM.addEventListener("touchend", () => {
   if (VideoMElement.paused) {
     ProgressBarM.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressMtimeout);
-      progressMtimeout = null;
-    }
+    clearTimeout(touchTimerM);
   } else {
-    setProgressBarMTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarM.style.display = "none";
   }
-});
-
-PauseBtnM.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressMtimeout);
-    progressMtimeout = null;
-  }
-});
-
-PlayBtnM.addEventListener("touchstart", () => {
-  setProgressBarMTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerM = null;
@@ -4644,7 +4947,6 @@ if (isVideoBoxM) {
         stopTimerM();
         PauseBtnM.style.display = 'none';
         PlayBtnM.style.display = 'block';
-        console.log('M一時停止をクリックしました');
       }
     });
 
@@ -4654,7 +4956,7 @@ if (isVideoBoxM) {
         VideoMElement.play();
         PlayBtnM.style.display = 'none';
         PauseBtnM.style.display = 'block';
-        console.log('再生Mアイコンをクリックしました');
+        ProgressBarM.style.display = "none";
       }
     });
 
@@ -4664,7 +4966,11 @@ if (isVideoBoxM) {
         VideoMElement.muted = false;
         MuteBtnM.style.display = 'none';
         UnmuteBtnM.style.display = 'block';
-        console.log('Mミュートを解除しました');
+        if (!VideoMElement.paused) {
+          ProgressBarM.style.display = "none";
+        } else {
+          ProgressBarM.style.display = "block";
+        }
       }
     });
 
@@ -4673,15 +4979,11 @@ if (isVideoBoxM) {
         VideoMElement.muted = true;
         UnmuteBtnM.style.display = 'none';
         MuteBtnM.style.display = 'block';
-        console.log('Mミュートをクリックしました');
       }
     });
 
     const stopTimerM = () => {
-      VideoMElement.addEventListener("pause", () => {
-        clearInterval(playtimerM);
-        console.log('stopTimerM');
-      });
+      clearInterval(playtimerM);
     };
 
     ProgressM.addEventListener('input', () => {
@@ -4713,24 +5015,17 @@ if (isVideoBoxM) {
 
       if (currentTimeM >= 267) {
         buttonM_Info.style.display = 'block';
-        const clickHandler_m_info = () => {
+        buttonM_Info.addEventListener("click", () => {
           if (isVideoVisibleM) {
-
             VideoMElement.pause();
-            PauseBtnM.style.display = "none";
-            PlayBtnM.style.display = "block";
-            console.log('buttonM_Info');
+            if (VideoMElement.paused) {
+              PauseBtnM.style.display = "none";
+              PlayBtnM.style.display = "block";
+              ProgressBarM.style.display = "block";
+            }
           }
-        };
-        buttonM_Info.addEventListener("click", clickHandler_m_info);
-
-        buttonM_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_m_info();
-          setTimeout(() => {
-            ProgressBarM.style.display = "none";
-          }, 3000);
-        });
+          console.log('buttonM_Info');
+        }); 
       } else {
         buttonM_Info.style.display = 'none';
       }
@@ -4768,9 +5063,6 @@ if (isVideoBoxM) {
         opening_M_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_m_a();
-          setTimeout(() => {
-            ProgressBarM.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_M_A.style.display = 'none';
@@ -4809,9 +5101,6 @@ if (isVideoBoxM) {
         back_M_H.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_m_h();
-          setTimeout(() => {
-            ProgressBarM.style.display = "none";
-          }, 3000);
         });
       } else {
         back_M_H.style.display = 'none';
@@ -4869,19 +5158,60 @@ let UnmuteBtnN = ContorolsSoundN.querySelector("#unmute");
 MuteBtnN.id = "mute_n";
 UnmuteBtnN.id = "unmute_n";
 
-VideoNElement.addEventListener("mouseover", () => {
-  ProgressBarN.style.display = "block";
+let timerN = null;
+
+VideoNElement.addEventListener("mousemove", () => {
+  if (!VideoNElement.paused) {
+    clearTimeout(timerN);
+    ProgressBarN.style.display = "block";
+    timerN = setTimeout(() => {
+      ProgressBarN.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerN);
+    ProgressBarN.style.display = "block";
+  }
 });
 
-VideoNElement.addEventListener("mouseout", () => {
+PlayBtnN.addEventListener("mouseover", () => {
+  if (VideoNElement.paused) {
+    ProgressBarN.style.display = "block";
+    clearTimeout(timerN);
+  } else {
+    ProgressBarN.style.display = "none";
+  }
+});
+
+ProgressN.addEventListener("mouseover", () => {
+  if (!VideoNElement.paused) {
+    ProgressBarN.style.display = "block";
+    clearTimeout(timerN);
+  }
+});
+
+MuteBtnN.addEventListener("mouseover", () => {
+  if (VideoNElement.muted) {
+    clearTimeout(timerN);
+    ProgressBarN.style.display = "block";
+  } else {
+    ProgressBarN.style.display = "none";
+  }
+});
+
+MuteBtnN.addEventListener("mouseout", () => {
   ProgressBarN.style.display = "none";
 });
 
-ProgressBarN.addEventListener("mouseover", () => {
-  ProgressBarN.style.display = "block";
+UnmuteBtnN.addEventListener("mouseover", () => {
+  if (!VideoNElement.muted) {
+    clearTimeout(timerN);
+    ProgressBarN.style.display = "block";
+  } else {
+    ProgressBarN.style.display = "none";
+  }
 });
 
-ProgressBarN.addEventListener("mouseout", () => {
+UnmuteBtnN.addEventListener("mouseout", () => {
   ProgressBarN.style.display = "none";
 });
 
@@ -4909,55 +5239,50 @@ back_N_H.addEventListener("mouseout", () => {
   ProgressBarN.style.display = "none";
 });
 
-let progressNtimeout;
-
-function setProgressBarNTimeout() {
-  progressNtimeout = setTimeout(() => {
-    ProgressBarN.style.display = "none";
-  }, 3000);
-}
+let touchTimerN = null;
 
 VideoNElement.addEventListener("touchstart", () => {
-  ProgressBarN.style.display = "block";
+  if (!VideoNElement.paused) {
+    ProgressBarN.style.display = "block";
+  } else {
+    clearTimeout(touchTimerN);
+  }
 });
 
-VideoNElement.addEventListener("touchend", () => {
-  setProgressBarNTimeout();
+PauseBtnN.addEventListener("touchstart", () => {
+  ProgressBarN.style.display = "block";
+  clearTimeout(touchTimerN);
+});
+
+function setProgressBarNTimeout() {
+  ProgressBarN.style.display = "none";
+}
+
+PlayBtnN.addEventListener("touchstart", () => {
+  if (VideoNElement.paused) {
+    touchTimerN = setTimeout(setProgressBarNTimeout, 3000);
+  }
 });
 
 ProgressN.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressNtimeout);
-    progressNtimeout = null;
+  if (VideoNElement.paused) {
+    ProgressBarN.style.display = "block";
+    clearTimeout(touchTimerN);
   }
+});
+
+ProgressN.addEventListener("touchmove", () => {
+  ProgressBarN.style.display = "block";
+  clearTimeout(touchTimerN);
 });
 
 ProgressN.addEventListener("touchend", () => {
   if (VideoNElement.paused) {
     ProgressBarN.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressNtimeout);
-      progressNtimeout = null;
-    }
+    clearTimeout(touchTimerN);
   } else {
-    setProgressBarNTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarN.style.display = "none";
   }
-});
-
-PauseBtnN.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressNtimeout);
-    progressNtimeout = null;
-  }
-});
-
-PlayBtnN.addEventListener("touchstart", () => {
-  setProgressBarNTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerN = null;
@@ -4996,7 +5321,6 @@ if (isVideoBoxN) {
         stopTimerN();
         PauseBtnN.style.display = 'none';
         PlayBtnN.style.display = 'block';
-        console.log('N一時停止をクリックしました');
       }
     });
 
@@ -5006,7 +5330,7 @@ if (isVideoBoxN) {
         VideoNElement.play();
         PlayBtnN.style.display = 'none';
         PauseBtnN.style.display = 'block';
-        console.log('再生Nアイコンをクリックしました');
+        ProgressBarN.style.display = "none";
       }
     });
 
@@ -5016,7 +5340,11 @@ if (isVideoBoxN) {
         VideoNElement.muted = false;
         MuteBtnN.style.display = 'none';
         UnmuteBtnN.style.display = 'block';
-        console.log('Nミュートを解除しました');
+        if (!VideoNElement.paused) {
+          ProgressBarN.style.display = "none";
+        } else {
+          ProgressBarN.style.display = "block";
+        }
       }
     });
 
@@ -5025,15 +5353,11 @@ if (isVideoBoxN) {
         VideoNElement.muted = true;
         UnmuteBtnN.style.display = 'none';
         MuteBtnN.style.display = 'block';
-        console.log('Nミュートをクリックしました');
       }
     });
 
     const stopTimerN = () => {
-      VideoNElement.addEventListener("pause", () => {
-        clearInterval(playtimerN);
-        console.log('stopTimerN');
-      });
+      clearInterval(playtimerN);
     };
 
     ProgressN.addEventListener('input', () => {
@@ -5065,23 +5389,16 @@ if (isVideoBoxN) {
 
       if (currentTimeN >= 278) {
         buttonN_Info.style.display = 'block';
-        const clickHandler_n_info = () => {
+        buttonN_Info.addEventListener("click", () => {
           if (isVideoVisibleN) {
-
             VideoNElement.pause();
-            PauseBtnN.style.display = "none";
-            PlayBtnN.style.display = "block";
-            console.log('buttonN_Info');
+            if (VideoNElement.paused) {
+              PauseBtnN.style.display = "none";
+              PlayBtnN.style.display = "block";
+              ProgressBarN.style.display = "block";
+            }
           }
-        };
-        buttonN_Info.addEventListener("click", clickHandler_n_info);
-
-        buttonN_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_n_info();
-          setTimeout(() => {
-            ProgressBarN.style.display = "none";
-          }, 3000);
+          console.log('buttonN_Info');
         });
       } else {
         buttonN_Info.style.display = 'none';
@@ -5120,9 +5437,6 @@ if (isVideoBoxN) {
         opening_N_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_n_a();
-          setTimeout(() => {
-            ProgressBarN.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_N_A.style.display = 'none';
@@ -5161,9 +5475,6 @@ if (isVideoBoxN) {
         back_N_H.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_n_h();
-          setTimeout(() => {
-            ProgressBarN.style.display = "none";
-          }, 3000);
         });
       } else {
         back_N_H.style.display = 'none';
@@ -5221,19 +5532,60 @@ let UnmuteBtnO = ContorolsSoundO.querySelector("#unmute");
 MuteBtnO.id = "mute_o";
 UnmuteBtnO.id = "unmute_o";
 
-VideoOElement.addEventListener("mouseover", () => {
-  ProgressBarO.style.display = "block";
+let timerO = null;
+
+VideoOElement.addEventListener("mousemove", () => {
+  if (!VideoOElement.paused) {
+    clearTimeout(timerO);
+    ProgressBarO.style.display = "block";
+    timerO = setTimeout(() => {
+      ProgressBarO.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerO);
+    ProgressBarO.style.display = "block";
+  }
 });
 
-VideoOElement.addEventListener("mouseout", () => {
+PlayBtnO.addEventListener("mouseover", () => {
+  if (VideoOElement.paused) {
+    ProgressBarO.style.display = "block";
+    clearTimeout(timerO);
+  } else {
+    ProgressBarO.style.display = "none";
+  }
+});
+
+ProgressO.addEventListener("mouseover", () => {
+  if (!VideoOElement.paused) {
+    ProgressBarO.style.display = "block";
+    clearTimeout(timerO);
+  }
+});
+
+MuteBtnO.addEventListener("mouseover", () => {
+  if (VideoOElement.muted) {
+    clearTimeout(timerO);
+    ProgressBarO.style.display = "block";
+  } else {
+    ProgressBarO.style.display = "none";
+  }
+});
+
+MuteBtnO.addEventListener("mouseout", () => {
   ProgressBarO.style.display = "none";
 });
 
-ProgressBarO.addEventListener("mouseover", () => {
-  ProgressBarO.style.display = "block";
+UnmuteBtnO.addEventListener("mouseover", () => {
+  if (!VideoOElement.muted) {
+    clearTimeout(timerO);
+    ProgressBarO.style.display = "block";
+  } else {
+    ProgressBarO.style.display = "none";
+  }
 });
 
-ProgressBarO.addEventListener("mouseout", () => {
+UnmuteBtnO.addEventListener("mouseout", () => {
   ProgressBarO.style.display = "none";
 });
 
@@ -5261,55 +5613,50 @@ back_O_I.addEventListener("mouseout", () => {
   ProgressBarO.style.display = "none";
 });
 
-let progressOtimeout;
-
-function setProgressBarOTimeout() {
-  progressOtimeout = setTimeout(() => {
-    ProgressBarO.style.display = "none";
-  }, 3000);
-}
+let touchTimerO = null;
 
 VideoOElement.addEventListener("touchstart", () => {
-  ProgressBarO.style.display = "block";
+  if (!VideoOElement.paused) {
+    ProgressBarO.style.display = "block";
+  } else {
+    clearTimeout(touchTimerO);
+  }
 });
 
-VideoOElement.addEventListener("touchend", () => {
-  setProgressBarOTimeout();
+PauseBtnO.addEventListener("touchstart", () => {
+  ProgressBarO.style.display = "block";
+  clearTimeout(touchTimerO);
+});
+
+function setProgressBarOTimeout() {
+  ProgressBarO.style.display = "none";
+}
+
+PlayBtnO.addEventListener("touchstart", () => {
+  if (VideoOElement.paused) {
+    touchTimerO = setTimeout(setProgressBarOTimeout, 3000);
+  }
 });
 
 ProgressO.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressOtimeout);
-    progressOtimeout = null;
+  if (VideoOElement.paused) {
+    ProgressBarO.style.display = "block";
+    clearTimeout(touchTimerO);
   }
+});
+
+ProgressO.addEventListener("touchmove", () => {
+  ProgressBarO.style.display = "block";
+  clearTimeout(touchTimerO);
 });
 
 ProgressO.addEventListener("touchend", () => {
   if (VideoOElement.paused) {
     ProgressBarO.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressOtimeout);
-      progressOtimeout = null;
-    }
+    clearTimeout(touchTimerO);
   } else {
-    setProgressBarOTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarO.style.display = "none";
   }
-});
-
-PauseBtnO.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressOtimeout);
-    progressOtimeout = null;
-  }
-});
-
-PlayBtnO.addEventListener("touchstart", () => {
-  setProgressBarOTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerO = null;
@@ -5348,7 +5695,6 @@ if (isVideoBoxO) {
         stopTimerO();
         PauseBtnO.style.display = 'none';
         PlayBtnO.style.display = 'block';
-        console.log('O一時停止をクリックしました');
       }
     });
 
@@ -5358,7 +5704,7 @@ if (isVideoBoxO) {
         VideoOElement.play();
         PlayBtnO.style.display = 'none';
         PauseBtnO.style.display = 'block';
-        console.log('再生Oアイコンをクリックしました');
+        ProgressBarO.style.display = "none";
       }
     });
 
@@ -5367,8 +5713,11 @@ if (isVideoBoxO) {
       if (VideoOElement.muted) {
         VideoOElement.muted = false;
         MuteBtnO.style.display = 'none';
-        UnmuteBtnO.style.display = 'block';
-        console.log('Oミュートを解除しました');
+        UnmuteBtnO.style.display = 'block'; if (!VideoOElement.paused) {
+          ProgressBarO.style.display = "none";
+        } else {
+          ProgressBarO.style.display = "block";
+        }
       }
     });
 
@@ -5377,15 +5726,11 @@ if (isVideoBoxO) {
         VideoOElement.muted = true;
         UnmuteBtnO.style.display = 'none';
         MuteBtnO.style.display = 'block';
-        console.log('Oミュートをクリックしました');
       }
     });
 
     const stopTimerO = () => {
-      VideoOElement.addEventListener("pause", () => {
-        clearInterval(playtimerO);
-        console.log('stopTimerO');
-      });
+      clearInterval(playtimerO);
     };
 
     ProgressO.addEventListener('input', () => {
@@ -5417,23 +5762,16 @@ if (isVideoBoxO) {
 
       if (currentTimeO >= 146) {
         buttonO_Info.style.display = 'block';
-        const clickHandler_o_info = () => {
+        buttonO_Info.addEventListener("click", () => {
           if (isVideoVisibleO) {
-
             VideoOElement.pause();
-            PauseBtnO.style.display = "none";
-            PlayBtnO.style.display = "block";
-            console.log('buttonO_Info');
+            if (VideoOElement.paused) {
+              PauseBtnO.style.display = "none";
+              PlayBtnO.style.display = "block";
+              ProgressBarO.style.display = "block";
+            }
           }
-        };
-        buttonO_Info.addEventListener("click", clickHandler_o_info);
-
-        buttonO_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_o_info();
-          setTimeout(() => {
-            ProgressBarO.style.display = "none";
-          }, 3000);
+          console.log('buttonO_Info');
         });
       } else {
         buttonO_Info.style.display = 'none';
@@ -5472,9 +5810,6 @@ if (isVideoBoxO) {
         opening_O_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_o_a();
-          setTimeout(() => {
-            ProgressBarO.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_O_A.style.display = 'none';
@@ -5513,9 +5848,6 @@ if (isVideoBoxO) {
         back_O_I.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_o_i();
-          setTimeout(() => {
-            ProgressBarO.style.display = "none";
-          }, 3000);
         });
       } else {
         back_O_I.style.display = 'none';
@@ -5573,19 +5905,60 @@ let UnmuteBtnP = ContorolsSoundP.querySelector("#unmute");
 MuteBtnP.id = "mute_p";
 UnmuteBtnP.id = "unmute_p";
 
-VideoPElement.addEventListener("mouseover", () => {
-  ProgressBarP.style.display = "block";
+let timerP = null;
+
+VideoPElement.addEventListener("mousemove", () => {
+  if (!VideoPElement.paused) {
+    clearTimeout(timerP);
+    ProgressBarP.style.display = "block";
+    timerP = setTimeout(() => {
+      ProgressBarP.style.display = "none";
+    }, 3000);
+  } else {
+    clearTimeout(timerP);
+    ProgressBarP.style.display = "block";
+  }
 });
 
-VideoPElement.addEventListener("mouseout", () => {
+PlayBtnP.addEventListener("mouseover", () => {
+  if (VideoPElement.paused) {
+    ProgressBarP.style.display = "block";
+    clearTimeout(timerP);
+  } else {
+    ProgressBarP.style.display = "none";
+  }
+});
+
+ProgressP.addEventListener("mouseover", () => {
+  if (!VideoPElement.paused) {
+    ProgressBarP.style.display = "block";
+    clearTimeout(timerP);
+  }
+});
+
+MuteBtnP.addEventListener("mouseover", () => {
+  if (VideoPElement.muted) {
+    clearTimeout(timerP);
+    ProgressBarP.style.display = "block";
+  } else {
+    ProgressBarP.style.display = "none";
+  }
+});
+
+MuteBtnP.addEventListener("mouseout", () => {
   ProgressBarP.style.display = "none";
 });
 
-ProgressBarP.addEventListener("mouseover", () => {
-  ProgressBarP.style.display = "block";
+UnmuteBtnP.addEventListener("mouseover", () => {
+  if (!VideoPElement.muted) {
+    clearTimeout(timerP);
+    ProgressBarP.style.display = "block";
+  } else {
+    ProgressBarP.style.display = "none";
+  }
 });
 
-ProgressBarP.addEventListener("mouseout", () => {
+UnmuteBtnP.addEventListener("mouseout", () => {
   ProgressBarP.style.display = "none";
 });
 
@@ -5613,55 +5986,50 @@ back_P_I.addEventListener("mouseout", () => {
   ProgressBarP.style.display = "none";
 });
 
-let progressPtimeout;
-
-function setProgressBarPTimeout() {
-  progressPtimeout = setTimeout(() => {
-    ProgressBarP.style.display = "none";
-  }, 3000);
-}
+let touchTimerP = null;
 
 VideoPElement.addEventListener("touchstart", () => {
-  ProgressBarP.style.display = "block";
+  if (!VideoPElement.paused) {
+    ProgressBarP.style.display = "block";
+  } else {
+    clearTimeout(touchTimerP);
+  }
 });
 
-VideoPElement.addEventListener("touchend", () => {
-  setProgressBarPTimeout();
+PauseBtnP.addEventListener("touchstart", () => {
+  ProgressBarP.style.display = "block";
+  clearTimeout(touchTimerP);
+});
+
+function setProgressBarPTimeout() {
+  ProgressBarP.style.display = "none";
+}
+
+PlayBtnP.addEventListener("touchstart", () => {
+  if (VideoPElement.paused) {
+    touchTimerP = setTimeout(setProgressBarPTimeout, 3000);
+  }
 });
 
 ProgressP.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressPtimeout);
-    progressPtimeout = null;
+  if (VideoPElement.paused) {
+    ProgressBarP.style.display = "block";
+    clearTimeout(touchTimerP);
   }
+});
+
+ProgressP.addEventListener("touchmove", () => {
+  ProgressBarP.style.display = "block";
+  clearTimeout(touchTimerP);
 });
 
 ProgressP.addEventListener("touchend", () => {
   if (VideoPElement.paused) {
     ProgressBarP.style.display = "block";
-    isTouchingprogressBar = true;
-    if (isTouchingprogressBar) {
-      clearTimeout(progressPtimeout);
-      progressPtimeout = null;
-    }
+    clearTimeout(touchTimerP);
   } else {
-    setProgressBarPTimeout();
-    isTouchingprogressBar = false;
+    ProgressBarP.style.display = "none";
   }
-});
-
-PauseBtnP.addEventListener("touchstart", () => {
-  isTouchingprogressBar = true;
-  if (isTouchingprogressBar) {
-    clearTimeout(progressPtimeout);
-    progressPtimeout = null;
-  }
-});
-
-PlayBtnP.addEventListener("touchstart", () => {
-  setProgressBarPTimeout();
-  isTouchingprogressBar = false;
 });
 
 let playtimerP = null;
@@ -5700,7 +6068,6 @@ if (isVideoBoxP) {
         stopTimerP();
         PauseBtnP.style.display = 'none';
         PlayBtnP.style.display = 'block';
-        console.log('P一時停止をクリックしました');
       }
     });
 
@@ -5710,7 +6077,7 @@ if (isVideoBoxP) {
         VideoPElement.play();
         PlayBtnP.style.display = 'none';
         PauseBtnP.style.display = 'block';
-        console.log('再生Pアイコンをクリックしました');
+        ProgressBarP.style.display = "none";
       }
     });
 
@@ -5720,7 +6087,11 @@ if (isVideoBoxP) {
         VideoPElement.muted = false;
         MuteBtnP.style.display = 'none';
         UnmuteBtnP.style.display = 'block';
-        console.log('Pミュートを解除しました');
+        if (!VideoPElement.paused) {
+          ProgressBarP.style.display = "none";
+        } else {
+          ProgressBarP.style.display = "block";
+        }
       }
     });
 
@@ -5729,15 +6100,11 @@ if (isVideoBoxP) {
         VideoPElement.muted = true;
         UnmuteBtnP.style.display = 'none';
         MuteBtnP.style.display = 'block';
-        console.log('Pミュートをクリックしました');
       }
     });
 
     const stopTimerP = () => {
-      VideoPElement.addEventListener("pause", () => {
-        clearInterval(playtimerP);
-        console.log('stopTimerP');
-      });
+      clearInterval(playtimerP);
     };
 
     ProgressP.addEventListener('input', () => {
@@ -5745,13 +6112,11 @@ if (isVideoBoxP) {
       const seekTimeP = calculateSeekTimeP(ProgressP.value);
       if (!isNaN(seekTimeP) && isFinite(seekTimeP) && seekTimeP >= 0 && seekTimeP <= VideoPElement.duration) {
         VideoPElement.currentTime = seekTimeP;
-        console.log('Pプログレスバーを操作しました');
       }
     });
 
     ProgressP.addEventListener('change', () => {
       startTimerP();
-      console.log('Pプログレスバーの操作が完了しました');
     });
 
     const calculateSeekTimeP = (progressValue) => {
@@ -5769,23 +6134,16 @@ if (isVideoBoxP) {
 
       if (currentTimeP >= 240) {
         buttonP_Info.style.display = 'block';
-        const clickHandler_p_info = () => {
+        buttonP_Info.addEventListener("click", () => {
           if (isVideoVisibleP) {
-
             VideoPElement.pause();
-            PauseBtnP.style.display = "none";
-            PlayBtnP.style.display = "block";
-            console.log('buttonP_Info');
+            if (VideoPElement.paused) {
+              PauseBtnP.style.display = "none";
+              PlayBtnP.style.display = "block";
+              ProgressBarP.style.display = "block";
+            }
           }
-        };
-        buttonP_Info.addEventListener("click", clickHandler_p_info);
-
-        buttonP_Info.addEventListener("touchstart", (event) => {
-          event.preventDefault();
-          clickHandler_p_info();
-          setTimeout(() => {
-            ProgressBarP.style.display = "none";
-          }, 3000);
+          console.log('buttonP_Info');
         });
       } else {
         buttonP_Info.style.display = 'none';
@@ -5824,9 +6182,6 @@ if (isVideoBoxP) {
         opening_P_A.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_opening_p_a();
-          setTimeout(() => {
-            ProgressBarP.style.display = "none";
-          }, 3000);
         });
       } else {
         opening_P_A.style.display = 'none';
@@ -5865,9 +6220,6 @@ if (isVideoBoxP) {
         back_P_I.addEventListener("touchstart", (event) => {
           event.preventDefault();
           clickHandler_back_p_i();
-          setTimeout(() => {
-            ProgressBarP.style.display = "none";
-          }, 3000);
         });
       } else {
         back_P_I.style.display = 'none';
